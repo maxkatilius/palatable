@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.site-container {
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.color-selector {
+    display: flex;
+    gap: 1em;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.color-container {
+    padding: 0 2em;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    gap: 1em;
+}
+
+.color-details {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/**************
+    icons
+**************/
+
+.color-icons {
+    display: flex;
+    align-items: center;
+}
+
+.copy-icon,
+.lock-open-icon {
+    cursor: pointer;
+    font-size: 2.3rem;
+}
+
+/* copy icon */
+
+.copy-icon {
+    margin: auto auto;
+    padding-right: 3px;
+}
+
+.copy-icon-container {
+    margin-right: 0.75em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.copy-icon-container:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Tooltip styling */
+.copy-icon:hover::before {
+    content: 'Copy Hex to Clipboard';
+    position: absolute;
+    bottom: 100%; /* above the icon */
+    left: 50%; /* centered horizontally */
+    transform: translateX(-50%); /* to ensure it's perfectly centered */
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap; /* keep the text in a single line */
+    pointer-events: none; /* ignore mouse events on tooltip */
+}
+
+/* lock icon */
+
+.lock-open-icon:hover,
+.lock-open-icon:active {
+    animation: lock-big-jiggle 500ms ease-in-out;
+}
+
+@keyframes lock-big-jiggle {
+    0% { transform: rotate(0) scale(1)
+    }
+
+    20%{
+        transform: rotate(20deg) scale(1.05)
+    }
+    
+    35% {
+        transform: rotate(0) scale(1.08)
+    }
+    
+    50% {
+        transform: rotate(-20deg) scale(1.1)
+    }
+
+    70% {
+        transform: rotate(0) scale(1.08)
+    }
+    
+    85% {
+        transform: rotate(20deg) scale(1.05)
+    }
+    100% {
+        transform: rotate(0) scale(1)
+    }
+}
+
+@keyframes lock-lil-jiggle {
+    0% {
+        transform: rotate(0) scale(1)
+    }
+
+    25% {
+        transform: rotate(20deg) scale(1.05)
+    }
+
+    50% {
+        transform: rotate(0) scale(1.075)
+    }
+
+    75% {
+        transform: rotate(-20deg) scale(1.05)
+    }
+
+    100% {
+        transform: rotate(0) scale(1)
+    }
+}
+
+/* styles for Modal */
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.modal-content {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+}

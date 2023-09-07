@@ -1,0 +1,56 @@
+- add a undo button for individual colors / whole palette
+
+
+- add nanoid() for adding an id to the color for the return object 
+{ 
+    hex: ...,
+    isLocked: false,
+    nanoid()
+}
+
+-maybe map over colors that is returned from fetch 
+to create this return object to then fill a new arry
+ with the newly created objects
+
+ function newColors
+ if (!fullLock)
+ setColors((prevColor) =>
+ prevColor.map((color)=>{
+    return color.isSelected ? color : newColor()
+ }))
+
+ function lockColor(id) {
+    setColor((color)=> 
+        prevColor.map((color)=> {
+            return id === color.id ? {...color, isHeld: !color.isHeld }
+        })
+    )
+ }
+
+
+ const colorElements = colors.map((color)=> {
+    return (
+        <Color
+            key={color.id}
+            hex={color.hex}
+            isSelected={color.isSelected}
+            lockColor={()=> lockColor(color.id)}
+        />
+    )
+ })
+
+
+ Color.jsx
+
+ const Color = (props) => {
+    const styles = {
+        backgroundColor: `#${props.hex}`
+    }
+    return (
+        <div className="color-container" style={styles}>
+            <h2>{props.name}</h2>
+            ...
+            <button onClick={props.lockColor}
+        </div>
+    )
+ }
