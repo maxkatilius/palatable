@@ -22,7 +22,29 @@ header {
 
 .color-selector {
     display: flex;
+    width: 30%;
     gap: 1em;
+}
+
+.color-selector select {
+    width: 70%;
+    transition: 200ms transform ease-in-out;
+}
+.color-selector input {
+    /* border:  none */
+    width: 30%;
+    transition: 200ms transform ease-in-out;
+}
+
+.color-selector select:hover,
+.color-selector input:hover {
+    transform: scale(1.1)
+}
+
+.palette-btn {
+    padding: 0.8em 2em;
+    border: none;
+    border-radius: 0.2em;
 }
 
 main {

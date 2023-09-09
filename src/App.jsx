@@ -1,84 +1,47 @@
 import React from "react";
-import { nanoid } from "nanoid";
+import { generatePalette, getRandomColors } from "./utils.js";
 import Header from "./components/Header";
 import Color from "./components/Color";
 
 const App = () => {
-	const [colors, setColors] = React.useState([]);
-	const [seedColor, setSeedColor] = React.useState("FAA0A0");
-	const [seedHsl, setSeedHsl] = React.useState({
-		hue: 30,
-		saturation: 50,
-		lightness: 50,
+	const [seedColor, setSeedColor] = React.useState({
+		hue: Math.floor(Math.random() * 360),
+		saturation: Math.floor(Math.random() * 100),
+		lightness: Math.floor(Math.random() * 100),
 	});
-	const [mode, setMode] = React.useState("");
+	const [mode, setMode] = React.useState("Random");
 	const [count, setCount] = React.useState("5");
-
-	const baseApiUrl = "https://www.thecolorapi.com";
-
-	const getComplimentaryColors = (hsl, count) => {
-		const complimentaryColors = [];
-		for (i = 0; i < count; i++) {
-			const complimentaryHue = hsl.hue + 180 + i * 10;
-			const complimentarySaturation = hsl.saturation - 10 * i;
-			const complimentaryLightness = hsl.lightness - 10 * i;
-			const complimentaryColor = {
-				hue: complimentaryHue,
-				saturation: complimentarySaturation,
-				lightness: complimentaryLightness,
-			};
-			complimentaryColors.push(complimentaryColor);
-			console.log(complimentaryColors);
-		}
-	};
-
-	const getAnalogicColor = (hsl) => {
-		const complimentaryHue = hsl.hue + 30;
-		const complimentaryColor = {
-			...hsl,
-			hue: complimentaryHue,
-		};
-	};
-
-	async function getColors() {
-		const res = await fetch(
-			`${baseApiUrl}/scheme?hex=${seedColor}&mode=${mode}&count=${count}`
-		);
-		const data = await res.json();
-		setColors(
-			data.colors.map((color) => {
-				return {
-					key: nanoid(),
-					hex: color.hex.clean,
-					name: color.name.value,
-					isLocked: false,
-				};
-			})
-		);
-		console.log(colors);
-	}
-
-	// getColors();
-
-	async function getColorInfo(hex) {
-		const res = await fetch(`${baseApiUrl}/id?hex=${hex}`);
-		const data = await res.json();
-		console.log(data);
-	}
-
-	// getColorInfo("FAA0A0");
-
-	const colorEls = colors.map((color) => {
-		return <Color key={color.key} hex={color.hex} name={color.name} />;
+	const [colors, setColors] = React.useState(getRandomColors(count));
+	const colorEls = colors.map((color, index) => {
+		return <Color key={color.id} color={color} />;
 	});
+
+	React.useEffect(() => {
+		const handleKeyDown = (event) => {
+			if (event.code === "Space") {
+				event.preventDefault(); // prevent default spacebar actions (like scrolling)
+				setColors(generatePalette(seedColor, mode, count));
+			}
+		};
+
+		document.addEventListener("keydown", handleKeyDown);
+
+		// Cleanup: remove the event listener when the component is unmounted
+		return () => {
+			document.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [seedColor, mode, count]);
 
 	return (
 		<div className="site-container">
 			<Header
+				mode={mode}
 				setMode={setMode}
+				count={count}
 				setCount={setCount}
+				seedColor={seedColor}
 				setSeedColor={setSeedColor}
-				getColors={getColors}
+				setColors={setColors}
 			/>
 			<main>{colorEls}</main>
 		</div>

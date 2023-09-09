@@ -1,41 +1,65 @@
 import React from "react";
+import { generatePalette } from "../utils.js";
 
-const Header = ({ setMode, setCount, setSeedColor, getColors }) => {
+const Header = ({
+	seedColor,
+	setSeedColor,
+	mode,
+	setMode,
+	count,
+	setCount,
+	setColors,
+}) => {
+	/**********************
+	 *** Event Handlers ***
+	 **********************/
+
 	const handleModeChange = (e) => {
-		const modeToStr = e.target.value.toLowerCase().replace(/\s/g, "-");
+		// This puts the mode in a corresponding format to the functions that use the mode
+		const modeToStr = e.target.value.split(" ").join("");
 		setMode(modeToStr);
 		console.log(modeToStr);
 	};
 
 	const handleSeedColorChange = (e) => {
-		console.log(e.target.value);
-		const cleanHex = e.target.value.replace("#", "");
-		setSeedColor(cleanHex);
+		const hexColor = e.target.value;
+		const [h, s, l] = hexToHSL(hexColor);
+		setSeedColor({ hue: h, saturation: s, lightness: l });
+		console.log([h, s, l]);
+		// 	const hslColor = `hsl(${h}, ${s}%, ${l}%)`;
+
+		// 	setSeedColor(hslColor);
+		// 	console.log(hslColor);
 	};
 
 	return (
 		<header>
 			<h1>Colour Splash</h1>
 			<div className="color-selector">
-				<label htmlFor="color-picker">Choose your seed color</label>
-				<input
-					type="color"
-					name="color-picker"
-					defaultValue="#FAA0A0"
-					onChange={handleSeedColorChange}
-				/>
+				<input type="color" onChange={handleSeedColorChange} />
 				<select defaultValue={"Select"} onChange={handleModeChange}>
+					<option>Random</option>
+					<option>Vibrant</option>
+					<option>Pastel</option>
 					<option>Monochrome</option>
-					<option>Monochrome Dark</option>
-					<option>Monochrome Light</option>
-					<option>Analogic</option>
-					<option>Complement</option>
-					<option>Analogic Complement</option>
-					<option>Triad</option>
-					<option>Quad</option>
+					<option>Dark Monochrome</option>
+					<option>Light Monochrome</option>
+					<option>Analogous</option>
+					<option>Analogous Complementary</option>
+					<option>Complementary</option>
+					<option>Split Complementary</option>
+					<option>Triadic</option>
+					<option>Tetradic</option>
 				</select>
-				<button onClick={getColors}>Generate palette!</button>
 			</div>
+			<button
+				className="palette-btn"
+				onClick={() => {
+					setColors(generatePalette(seedColor, mode, count));
+				}}
+			>
+				Generate palette!
+			</button>
 		</header>
 	);
 };
