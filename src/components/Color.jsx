@@ -1,5 +1,5 @@
 import React from "react";
-import { copyToClipboard, generateColors } from "../utils";
+import { copyToClipboard, getLuminance } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 
@@ -43,6 +43,15 @@ const Color = ({ color, onAdd, onRemove, setIsModalVisible, setColors }) => {
 		);
 	};
 
+	const textColor =
+		getLuminance(
+			color.hsl.hue / 360,
+			color.hsl.saturation / 100,
+			color.hsl.lightness / 100
+		) > 0.5
+			? "#030202"
+			: "#F0F0F0";
+
 	return (
 		<div
 			className="color-container"
@@ -51,7 +60,7 @@ const Color = ({ color, onAdd, onRemove, setIsModalVisible, setColors }) => {
 			}}
 		>
 			<div className="color-details">
-				<div className="color-text">
+				<div className="color-text" style={{ color: textColor }}>
 					<h2>{color.hex}</h2>
 					<p>{color.name}</p>
 				</div>
