@@ -1,10 +1,10 @@
 import json
 
 # Step 1: Load both JSON files
-with open('./colors.json', 'r') as f1:
+with open('./hex2.json', 'r') as f1:
     data1 = json.load(f1)
 
-with open('./colors2.json', 'r') as f2:
+with open('./output.json', 'r') as f2:
     data2 = json.load(f2)
 
 # Step 2: Combine the data. If there's a duplicate hex value, the value from file2 will overwrite the one from file1.

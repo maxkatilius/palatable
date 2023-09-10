@@ -1,5 +1,5 @@
 import React from "react";
-import { generatePalette } from "../utils.js";
+import { generatePalette, hexToHSL } from "../utils.js";
 
 const Header = ({
 	seedColor,

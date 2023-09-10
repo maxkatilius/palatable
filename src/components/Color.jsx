@@ -34,6 +34,8 @@ const Color = ({ color }) => {
 					<BiSolidLockOpenAlt className="lock-open-icon" />
 				</div>
 			</div>
+			<div className="add-color-top">+</div>
+			<div className="add-color-btm">+</div>
 			{isModalVisible && (
 				<HexModal
 					message="Hex code copied to clipboard!"

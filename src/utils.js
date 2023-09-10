@@ -82,7 +82,7 @@ function hslToHex(h, s, l) {
     return rgbToHex(r, g, b);
 }
 
-const hexToHSL = (hex) => {
+export const hexToHSL = (hex) => {
     // Convert hex to RGB first
     let r = 0, g = 0, b = 0;
     if (hex.length === 4) {
