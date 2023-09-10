@@ -140,7 +140,6 @@ export function copyToClipboard(text) {
 **************************/
 
 export const generatePalette = (seedColor, mode, count) => {
-  console.log("Palette generated!");
   if (colorFunctions[mode] === getRandomColors) {
     return getRandomColors(count)
   } else if (colorFunctions[mode]) {
@@ -154,7 +153,6 @@ export const getRandomColors = (count) => {
   const randomColors = [];
   for (let i = 0; i < count; i++) {
     const randomHue = randomNumBetween(0, 360);
-    console.log(randomHue);
     const randomSaturation = Math.min(Math.max(randomNumBetween(0, 100), 20), 80);
     const randomLightness = Math.min(Math.max(randomNumBetween(0, 100), 10), 90);
     const hexValue = hslToHex(randomHue, randomSaturation, randomLightness)
@@ -171,7 +169,6 @@ export const getRandomColors = (count) => {
     };
     randomColors.push(randomColor);
   }
-  console.log(randomColors);
   return randomColors
 }
 
@@ -195,7 +192,6 @@ export const getVibrantColors = (hsl, count) => {
     };
     vibrantColors.push(vibrantColor);
   }
-  console.log(vibrantColors);
   return vibrantColors
 }
 
@@ -219,7 +215,6 @@ export const getPastelColors = (hsl, count) => {
     };
     pastelColors.push(pastelColor);
   }
-  console.log(pastelColors);
   return pastelColors
 }
 
@@ -268,8 +263,6 @@ export const getAnalogousColors = (hsl, count) => {
 
     analogicColors.push(color);
   }
-
-  console.log(analogicColors);
   return analogicColors;
 };
 
@@ -323,8 +316,6 @@ export const getAnalogousComplementaryColors = (hsl, count) => {
 
     analogicComplementaryColors.push(color);
   }
-
-  console.log(analogicComplementaryColors);
   return analogicComplementaryColors;
 };
 
@@ -359,8 +350,6 @@ export const getComplementaryColors = (hsl, count) => {
 
     previousHue = complementaryHue; // Set the hue for the next iteration
   }
-
-  console.log(complementaryColors);
   return complementaryColors;
 };
 
@@ -407,11 +396,8 @@ export const getSplitComplementaryColors = (hsl, count) => {
     
     splitComplementaryColors.push(splitComplementaryColor);
   }
-
-  console.log(splitComplementaryColors);
   return splitComplementaryColors;
 };
-
 
 export const getMonochromeColors = (hsl, count) => {
   const monochromeColors = [];
@@ -441,7 +427,6 @@ export const getMonochromeColors = (hsl, count) => {
 
     monochromeColors.push(monochromeColor);
   }
-  console.log(monochromeColors);
   return monochromeColors
 };
 
@@ -475,7 +460,6 @@ export const getDarkMonochromeColors = (hsl, count) => {
     };
     monochromeDarkColors.push(monochromeDarkColor);
   }
-  console.log(monochromeDarkColors);
   return monochromeDarkColors
 };
 
@@ -509,7 +493,6 @@ export const getLightMonochromeColors = (hsl, count) => {
     };
     monochromeLightColors.push(monochromeLightColor);
   }
-  console.log(monochromeLightColors);
   return monochromeLightColors
 };
 
@@ -553,7 +536,6 @@ export const getTriadicColors = (hsl, count) => {
     triadicColors.push(color);
   }
 
-  console.log(triadicColors);
   return triadicColors;
 };
 
@@ -599,8 +581,6 @@ export const getTetradicColors = (hsl, count) => {
 
     tetradicColors.push(color);
   }
-
-  console.log(tetradicColors);
   return tetradicColors;
 };
 

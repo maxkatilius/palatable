@@ -14,6 +14,10 @@ make variation customizable / on / off
 
 dark and light mode
 
+update color naming program
+
+black/white text based on contrast
+
 
 Code Reusability:
 

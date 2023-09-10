@@ -1,10 +1,10 @@
 import React from "react";
-
 import { copyToClipboard } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
+import { VscChromeClose } from "react-icons/vsc";
 import HexModal from "./HexModal";
 
-const Color = ({ color }) => {
+const Color = ({ color, colors, setColor, setCount }) => {
 	const [isModalVisible, setIsModalVisible] = React.useState(false);
 
 	const handleCopyClick = () => {
@@ -27,15 +27,34 @@ const Color = ({ color }) => {
 					<h2>{color.hex}</h2>
 					<p>{color.name}</p>
 				</div>
-				<div className="color-icons">
-					<div className="copy-icon-container">
-						<BiCopy className="copy-icon" />
+				<div className="color-icons-container">
+					<div className="x-icon-container">
+						<VscChromeClose
+							className="icon x-icon"
+							onClick={() => {
+								setCount((prevCount) => prevCount - 1);
+							}}
+						/>
 					</div>
-					<BiSolidLockOpenAlt className="lock-open-icon" />
+					<div className="copy-icon-container">
+						<BiCopy className="icon copy-icon" />
+					</div>
+					<BiSolidLockOpenAlt className="icon lock-open-icon" />
 				</div>
 			</div>
-			<div className="add-color-top">+</div>
-			<div className="add-color-btm">+</div>
+			<div className="add-color-overlay">
+				<div className="add-color-container">
+					<div
+						className="add-color"
+						onClick={() => {
+							setCount((prevCount) => prevCount + 1);
+							console.log("Count increased!");
+						}}
+					>
+						<span>+</span>
+					</div>
+				</div>
+			</div>
 			{isModalVisible && (
 				<HexModal
 					message="Hex code copied to clipboard!"

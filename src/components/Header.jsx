@@ -18,18 +18,12 @@ const Header = ({
 		// This puts the mode in a corresponding format to the functions that use the mode
 		const modeToStr = e.target.value.split(" ").join("");
 		setMode(modeToStr);
-		console.log(modeToStr);
 	};
 
 	const handleSeedColorChange = (e) => {
 		const hexColor = e.target.value;
 		const [h, s, l] = hexToHSL(hexColor);
 		setSeedColor({ hue: h, saturation: s, lightness: l });
-		console.log([h, s, l]);
-		// 	const hslColor = `hsl(${h}, ${s}%, ${l}%)`;
-
-		// 	setSeedColor(hslColor);
-		// 	console.log(hslColor);
 	};
 
 	return (
@@ -53,7 +47,7 @@ const Header = ({
 				</select>
 			</div>
 			<button
-				className="palette-btn"
+				className="generate-palette-btn"
 				onClick={() => {
 					setColors(generatePalette(seedColor, mode, count));
 				}}
