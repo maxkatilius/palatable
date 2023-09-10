@@ -1,9 +1,9 @@
 import React from "react";
-import { copyToClipboard } from "../utils";
+import { copyToClipboard, generateColors } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 
-const Color = ({ color, colors, setColors, setCount, setIsModalVisible }) => {
+const Color = ({ color, onAdd, onRemove, setIsModalVisible, setColors }) => {
 	const [isLocked, setIsLocked] = React.useState(false);
 	const copyHexToClipboard = () => {
 		copyToClipboard(color.hex);
@@ -60,11 +60,7 @@ const Color = ({ color, colors, setColors, setCount, setIsModalVisible }) => {
 						<VscChromeClose
 							className="icon x-icon"
 							onClick={() => {
-								setColors((prevColors) =>
-									prevColors.filter(
-										(prevColor) => prevColor.id !== color.id
-									)
-								);
+								onRemove();
 							}}
 						/>
 					</div>
@@ -93,8 +89,7 @@ const Color = ({ color, colors, setColors, setCount, setIsModalVisible }) => {
 					<div
 						className="add-color"
 						onClick={() => {
-							setCount((prevCount) => prevCount + 1);
-							console.log("Count increased!");
+							onAdd();
 						}}
 					>
 						<span>+</span>

@@ -45,7 +45,7 @@ const Header = ({
 					}}
 				>
 					<option>Random</option>
-					<option selected>Vibrant</option>
+					<option>Vibrant</option>
 					<option>Pastel</option>
 					<option>Monochrome</option>
 					<option>Dark Monochrome</option>
@@ -58,7 +58,10 @@ const Header = ({
 					<option>Tetradic</option>
 				</select>
 			</div>
-			<button className="generate-palette-btn" onClick={() => generatePalette()}>
+			<button
+				className="generate-palette-btn"
+				onClick={() => generatePalette()}
+			>
 				Generate palette!
 			</button>
 		</header>

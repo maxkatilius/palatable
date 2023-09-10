@@ -31,10 +31,10 @@ const Layout = () => {
 	};
 
 	console.log(colors);
-	// Whenever 'count' changes, regenerate the colors array
+	// Initially populate the colors array
 	React.useEffect(() => {
 		setColors(generateColors(seedColor, mode, count));
-	}, [count]);
+	}, []);
 
 	// UseEffect for to update the unlocked and locked colors state whenever colors is changed
 	React.useEffect(() => {
@@ -65,18 +65,51 @@ const Layout = () => {
 		};
 	}, [seedColor, mode, count, generatePalette]); // Include generatePalette as a dependency
 
+	const addColor = (colorId) => {
+		setCount((prevCount) => prevCount + 1);
+		const newColor = generateColors(seedColor, mode, 1)[0];
+		const index = colors.findIndex((col) => col.id === colorId);
+		const newColorsArray = [
+			...colors.slice(0, index),
+			newColor,
+			...colors.slice(index),
+		];
+		setColors(newColorsArray);
+	};
+
+	const removeColor = (colorId) => {
+		setCount((prevCount) => prevCount - 1);
+		setColors((prevColors) =>
+			prevColors.filter((prevColor) => prevColor.id !== colorId)
+		);
+	};
+
 	const colorEls = colors.map((color) => {
 		return (
 			<Color
 				key={color.id}
 				color={color}
-				colors={colors}
 				setColors={setColors}
-				setCount={setCount}
+				onAdd={() => addColor(color.id)}
+				onRemove={() => removeColor(color.id)}
 				setIsModalVisible={setIsModalVisible}
 			/>
 		);
 	});
+
+	// const colorEls = colors.map((color) => {
+	// 	return (
+	// 		<Color
+	// 			key={color.id}
+	// 			color={color}
+	// 			colors={colors}
+	// 			setColors={setColors}
+	// 			setCount={setCount}
+	// 			setIsModalVisible={setIsModalVisible}
+	// 		/>
+	// 	);
+	// });
+
 	return (
 		<div className="site-container">
 			<Header
