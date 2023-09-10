@@ -154,86 +154,57 @@ const createColor = (hue, saturation, lightness) => {
   };
 };
 
-export const generateColors = (seedColor, mode, count) => {
-  if (colorFunctions[mode] === getRandomColors) {
-    return getRandomColors(count)
-  } else if (colorFunctions[mode]) {
-    return colorFunctions[mode](seedColor, count);
-  } else {
-    console.error(`${mode} is not an accepted color mode!`);
+const generateColors = (count, colorFunc) => {
+  const colors = [];
+  for (let i = 0; i < count; i++) {
+    colors.push(colorFunc());
   }
+  return colors;
 };
 
-export const getRandomColors = (count) => {
-  const randomColors = [];
-  for (let i = 0; i < count; i++) {
-    const randomHue = randomNumBetween(0, 360);
-    const randomSaturation = Math.min(Math.max(randomNumBetween(0, 100), 20), 80);
-    const randomLightness = Math.min(Math.max(randomNumBetween(0, 100), 10), 90);
-    randomColors.push(createColor(randomHue, randomSaturation, randomLightness));
-  }
-  return randomColors
-}
+const generateColor = (colorFunc) => {
+  return colorFunc();
+};
 
-export const getRandomColor = () => {
-    const randomHue = randomNumBetween(0, 360);
-    const randomSaturation = Math.min(Math.max(randomNumBetween(0, 100), 20), 80);
-    const randomLightness = Math.min(Math.max(randomNumBetween(0, 100), 10), 90);
-    return createColor(randomHue, randomSaturation, randomLightness)
-}
+const randomColorFunc = () => {
+  const hue = randomNumBetween(0, 360);
+  const saturation = Math.min(Math.max(randomNumBetween(0, 100), 20), 80);
+  const lightness = Math.min(Math.max(randomNumBetween(0, 100), 10), 90);
+  return createColor(hue, saturation, lightness);
+};
 
-export const getVibrantColors = (hsl, count) => {
-  const vibrantColors = [];
-  for (let i = 0; i < count; i++) {
-    const vibrantHue = randomNumBetween(0, 360);
-    const vibrantSaturation = randomNumBetween(70, 100); 
-    const vibrantLightness = randomNumBetween(40, 60); 
-    vibrantColors.push(createColor(vibrantHue, vibrantSaturation, vibrantLightness));
-  }
-  return vibrantColors
-}
-
-export const getVibrantColor = () => {
-    const vibrantHue = randomNumBetween(0, 360);
-    const vibrantSaturation = randomNumBetween(70, 100); 
-    const vibrantLightness = randomNumBetween(40, 60); 
-    return vibrantColor(vibrantHue, vibrantSaturation, vibrantLightness)
-}
+const vibrantColorFunc = () => {
+  const hue = randomNumBetween(0, 360);
+  const saturation = randomNumBetween(70, 100);
+  const lightness = randomNumBetween(40, 60);
+  return createColor(hue, saturation, lightness);
+};
 
 // update the distribution of randomness between 20 and 50
 
-export const getPastelColors = (hsl, count) => {
-    const pastelColors = [];
-
-    for (let i = 0; i < count; i++) {
-
-        const pastelHue = randomNumBetween(0, 360);
-        const pastelSaturation = Math.min(Math.max(randomNumBetween(0, 100), 20), 50);
-        const pastelLightness = Math.min(Math.max(randomNumBetween(0, 100), 70), 90);
-
-        pastelColors.push(createColor(pastelHue, pastelSaturation, pastelLightness));
-  }
-  return pastelColors
-}
-
-export const getPastelColor = () => {
-
+const pastelColorFunc = () => {
   const pastelHue = randomNumBetween(0, 360);
   const pastelSaturation = Math.min(Math.max(randomNumBetween(0, 100), 20), 50);
   const pastelLightness = Math.min(Math.max(randomNumBetween(0, 100), 70), 90);
+  return createColor(pastelHue, pastelSaturation, pastelLightness);
+};
 
-  return createColor(pastelHue, pastelSaturation, pastelLightness)
-}
+const vibrantColorFunc = () => {
+  const vibrantHue = randomNumBetween(0, 360);
+  const vibrantSaturation = Math.min(Math.max(randomNumBetween(0, 100), 20), 50);
+  const vibrantLightness = Math.min(Math.max(randomNumBetween(0, 100), 70), 90);
+  return createColor(vibrantHue, vibrantSaturation, vibrantLightness);
+};
 
 export const getAnalogousColors = (hsl, count) => {
   const analogicColors = [];
   const variationRange = 10;
 
   for (let i = 0; i < count; i++) {
+    let analogousHue;
     const saturationVariation = randomNumBetween(-variationRange, variationRange)
     const lightnessVariation = randomNumBetween(-variationRange, variationRange)
-    
-    let analogousHue;
+
     switch (i % 5) {
       case 0: // Base color
         analogousHue = hsl.hue + randomNumBetween(-variationRange, variationRange)
@@ -255,7 +226,20 @@ export const getAnalogousColors = (hsl, count) => {
     const analogousSaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80);
     const analogousLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);
 
-    analogicColors.push(createColor(analogousHue, analogousSaturation, analogousLightness));
+    const hexValue = hslToHex(analogousHue, analogousSaturation, analogousLightness)
+    const color = {
+      id: nanoid(),
+      hsl: {
+        hue: analogousHue,
+        saturation: analogousSaturation,
+        lightness: analogousLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+
+    analogicColors.push(color);
   }
   return analogicColors;
 };
@@ -269,7 +253,19 @@ export const getAnalogousColor = (hsl) => {
     const analogousSaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80);
     const analogousLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);
 
-    return createColor(analogousHue, analogousSaturation, analogousLightness)
+    const hexValue = hslToHex(analogousHue, analogousSaturation, analogousLightness)
+    const analogousColor = {
+      id: nanoid(),
+      hsl: {
+        hue: analogousHue,
+        saturation: analogousSaturation,
+        lightness: analogousLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+    return analogousColor
 };
 
 export const getAnalogousComplementaryColors = (hsl, count) => {
@@ -277,11 +273,11 @@ export const getAnalogousComplementaryColors = (hsl, count) => {
   const variationRange = 10;
 
   for (let i = 0; i < count; i++) {
+    let analogousComplementaryHue;
     const saturationVariation = randomNumBetween(-variationRange, variationRange);
     const lightnessVariation = randomNumBetween(-variationRange, variationRange);
-    
+
     // Maybe add some random variation here rather than just having directly analogic colors to the complementary
-    let analogousComplementaryHue;
     switch (i % 6) {
       case 0: // Base color
         analogousComplementaryHue = hsl.hue + randomNumBetween(-variationRange, variationRange);
@@ -306,7 +302,20 @@ export const getAnalogousComplementaryColors = (hsl, count) => {
     const analogousComplementarySaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80);
     const analogousComplementaryLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);
 
-    analogicComplementaryColors.push(createColor(analogousComplementaryHue, analogousComplementarySaturation, analogousComplementaryLightness));
+    const hexValue = hslToHex(analogousComplementaryHue, analogousComplementarySaturation, analogousComplementaryLightness)
+    const color = {
+      id: nanoid(),
+      hsl: {
+        hue: analogousComplementaryHue,
+        saturation: analogousComplementarySaturation,
+        lightness: analogousComplementaryLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+
+    analogicComplementaryColors.push(color);
   }
   return analogicComplementaryColors;
 };
@@ -317,10 +326,22 @@ export const getAnalogousComplementaryColor = (hsl) => {
   const lightnessVariation = randomNumBetween(-variationRange, variationRange);
   
   const analogousComplementaryHue = hsl.hue + 180 + randomNumBetween(-variationRange, variationRange);
-  const analogousComplementarySaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80);
-  const analogousComplementaryLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);
+    const analogousComplementarySaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80);
+    const analogousComplementaryLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);
 
-  return  createColor(analogousComplementaryHue, analogousComplementarySaturation, analogousComplementaryLightness)
+    const hexValue = hslToHex(analogousComplementaryHue, analogousComplementarySaturation, analogousComplementaryLightness)
+    const analogousComplementaryColor = {
+      id: nanoid(),
+      hsl: {
+        hue: analogousComplementaryHue,
+        saturation: analogousComplementarySaturation,
+        lightness: analogousComplementaryLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+        }
+        return analogousComplementaryColor
 };
 
 export const getComplementaryColors = (hsl, count) => {
@@ -337,7 +358,20 @@ export const getComplementaryColors = (hsl, count) => {
     const complementaryHue = (previousHue + 180 + hueVariation) % 360; // Find the complementary hue and add random variation
     const complementarySaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80); // Ensure saturation doesn't get too low or too high
     const complementaryLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);  // Maintain a pleasing range for lightness
-    complementaryColors.push(createColor(complementaryHue, complementarySaturation, complementaryLightness));
+
+    const hexValue = hslToHex(complementaryHue, complementarySaturation, complementaryLightness)
+    const complementaryColor = {
+      id: nanoid(),
+      hsl: {
+        hue: complementaryHue,
+        saturation: complementarySaturation,
+        lightness: complementaryLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+    complementaryColors.push(complementaryColor);
 
     previousHue = complementaryHue; // Set the hue for the next iteration
   }
@@ -354,7 +388,19 @@ export const getComplementaryColor = (hsl) => {
     const complementarySaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80); // Ensure saturation doesn't get too low or too high
     const complementaryLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);  // Maintain a pleasing range for lightness
 
-    return createColor(complementaryHue, complementarySaturation, complementaryLightness)
+    const hexValue = hslToHex(complementaryHue, complementarySaturation, complementaryLightness)
+    const complementaryColor = {
+      id: nanoid(),
+      hsl: {
+        hue: complementaryHue,
+        saturation: complementarySaturation,
+        lightness: complementaryLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+    return complementaryColor
 };
 
 export const getSplitComplementaryColors = (hsl, count) => {
@@ -385,7 +431,20 @@ export const getSplitComplementaryColors = (hsl, count) => {
     const splitComplementarySaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80);
     const splitComplementaryLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);
 
-    splitComplementaryColors.push(createColor(splitComplementaryHue, splitComplementarySaturation, splitComplementaryLightness));
+    const hexValue = hslToHex(splitComplementaryHue, splitComplementarySaturation, splitComplementaryLightness)
+    const splitComplementaryColor = {
+      id: nanoid(),
+      hsl: {
+        hue: splitComplementaryHue,
+        saturation: splitComplementarySaturation,
+        lightness: splitComplementaryLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+    
+    splitComplementaryColors.push(splitComplementaryColor);
   }
   return splitComplementaryColors;
 };
@@ -403,7 +462,19 @@ export const getSplitComplementaryColor = (hsl) => {Z
   const splitComplementarySaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80);
   const splitComplementaryLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);
 
-  return createColor(splitComplementaryHue, splitComplementarySaturation, splitComplementaryLightness)
+  const hexValue = hslToHex(splitComplementaryHue, splitComplementarySaturation, splitComplementaryLightness)
+  const splitComplementaryColor = {
+      id: nanoid(),
+      hsl: {
+        hue: splitComplementaryHue,
+        saturation: splitComplementarySaturation,
+        lightness: splitComplementaryLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+  return splitComplementaryColor
 };
 
 export const getMonochromeColors = (hsl, count) => {
@@ -418,7 +489,21 @@ export const getMonochromeColors = (hsl, count) => {
     const monochromeHue = (hsl.hue + hueVariation) % 360;  // Ensuring hue remains within 0-360 range
     const monochromeSaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 0), 100);  // Clamping between 0 and 100
     const monochromeLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 0), 100);  // Clamping between 0 and 100
-    monochromeColors.push(createColor(monochromeHue, monochromeSaturation, monochromeLightness));
+
+    const hexValue = hslToHex(monochromeHue, monochromeSaturation, monochromeLightness)
+    const monochromeColor = {
+      id: nanoid(),
+      hsl: {
+        hue: monochromeHue,
+        saturation: monochromeSaturation,
+        lightness: monochromeLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+
+    monochromeColors.push(monochromeColor);
   }
   return monochromeColors
 };
@@ -439,7 +524,19 @@ export const getDarkMonochromeColors = (hsl, count) => {
     const monochromeDarkSaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80); // Ensure saturation doesn't get too low or too high
     const monochromeDarkLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 5), 70);  // Biasing towards darker values
 
-    monochromeDarkColors.push(createColor(monochromeDarkHue, monochromeDarkSaturation, monochromeDarkLightness));
+    const hexValue = hslToHex(monochromeDarkHue, monochromeDarkSaturation, monochromeDarkLightness)
+    const monochromeDarkColor = {
+      id: nanoid(),
+      hsl: {
+        hue: monochromeDarkHue,
+        saturation: monochromeDarkSaturation,
+        lightness: monochromeDarkLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+    monochromeDarkColors.push(monochromeDarkColor);
   }
   return monochromeDarkColors
 };
@@ -460,7 +557,19 @@ export const getLightMonochromeColors = (hsl, count) => {
     const monochromeLightSaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80); // Ensure saturation doesn't get too low or too high
     const monochromeLightLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 30), 95);  // Biasing towards lighter values
 
-    monochromeLightColors.push(createColor(monochromeLightHue, monochromeLightSaturation, monochromeLightLightness));
+    const hexValue = hslToHex(monochromeLightHue, monochromeLightSaturation, monochromeLightLightness)
+    const monochromeLightColor = {
+      id: nanoid(),
+      hsl: {
+        hue: monochromeLightHue,
+        saturation: monochromeLightSaturation,
+        lightness: monochromeLightLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+    monochromeLightColors.push(monochromeLightColor);
   }
   return monochromeLightColors
 };
@@ -470,10 +579,10 @@ export const getTriadicColors = (hsl, count) => {
   const variationRange = 10;
 
   for (let i = 0; i < count; i++) {
+    let TriadicHue;
     let saturationVariation = randomNumBetween(-variationRange, variationRange);
     let lightnessVariation = randomNumBetween(-variationRange, variationRange);
-    
-    let triadicHue;
+
     switch (i % 3) {
       case 0: // Base color
         triadicHue = hsl.hue + randomNumBetween(-variationRange, variationRange);
@@ -488,10 +597,25 @@ export const getTriadicColors = (hsl, count) => {
 
     const triadicSaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80);
     const triadicLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);
-    triadicColors.push(createColor(triadicHue, triadicSaturation, triadicLightness))
-  };
-  return triadicColors
-}
+
+    const hexValue = hslToHex(triadicHue, triadicSaturation, triadicLightness)
+    const color = {
+      id: nanoid(),
+      hsl: {
+        hue: triadicHue,
+        saturation: triadicSaturation,
+        lightness: triadicLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+
+    triadicColors.push(color);
+  }
+
+  return triadicColors;
+};
 
 export const getTetradicColors = (hsl, count) => {
   const tetradicColors = [];
@@ -520,7 +644,20 @@ export const getTetradicColors = (hsl, count) => {
     const tetradicSaturation = Math.min(Math.max(hsl.saturation + saturationVariation, 20), 80);
     const tetradicLightness = Math.min(Math.max(hsl.lightness + lightnessVariation, 10), 90);
 
-    tetradicColors.push(createColor(tetradicHue, tetradicSaturation, tetradicLightness));
+    const hexValue = hslToHex(tetradicHue, tetradicSaturation, tetradicLightness)
+    const color = {
+      id: nanoid(),
+      hsl: {
+        hue: tetradicHue,
+        saturation: tetradicSaturation,
+        lightness: tetradicLightness,
+      },
+      hex: hexValue,
+      name: getColorName(hexValue),
+      isLocked: false,
+    };
+
+    tetradicColors.push(color);
   }
   return tetradicColors;
 };

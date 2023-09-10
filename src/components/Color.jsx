@@ -3,14 +3,7 @@ import { copyToClipboard } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 
-const Color = ({
-	color,
-	colors,
-	setColors,
-	setColor,
-	setCount,
-	setIsModalVisible,
-}) => {
+const Color = ({ color, colors, setColors, setCount, setIsModalVisible }) => {
 	const [isLocked, setIsLocked] = React.useState(false);
 	const copyHexToClipboard = () => {
 		copyToClipboard(color.hex);
@@ -25,7 +18,6 @@ const Color = ({
 		setIsLocked(true);
 		setColors((prevColors) =>
 			prevColors.map((prevColor) => {
-				console.log(prevColor);
 				return prevColor.id === id
 					? {
 							...prevColor,
@@ -41,7 +33,6 @@ const Color = ({
 		setIsLocked(false);
 		setColors((prevColors) =>
 			prevColors.map((prevColor) => {
-				console.log(prevColor);
 				return prevColor.id === id
 					? {
 							...prevColor,
@@ -69,7 +60,11 @@ const Color = ({
 						<VscChromeClose
 							className="icon x-icon"
 							onClick={() => {
-								setCount((prevCount) => prevCount - 1);
+								setColors((prevColors) =>
+									prevColors.filter(
+										(prevColor) => prevColor.id !== color.id
+									)
+								);
 							}}
 						/>
 					</div>

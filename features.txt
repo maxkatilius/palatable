@@ -18,6 +18,8 @@ update color naming program
 
 black/white text based on contrast
 
+make all components controlled
+
 websafe colors
 
 
