@@ -2,17 +2,54 @@ import React from "react";
 import { copyToClipboard } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
-import HexModal from "./HexModal";
 
-const Color = ({ color, colors, setColor, setCount }) => {
-	const [isModalVisible, setIsModalVisible] = React.useState(false);
-
-	const handleCopyClick = () => {
-		copyToClipboard(hsl);
+const Color = ({
+	color,
+	colors,
+	setColors,
+	setColor,
+	setCount,
+	setIsModalVisible,
+}) => {
+	const [isLocked, setIsLocked] = React.useState(false);
+	const copyHexToClipboard = () => {
+		copyToClipboard(color.hex);
 		setIsModalVisible(true);
 		setTimeout(() => {
 			setIsModalVisible(false); // auto-hide modal after 2 seconds
-		}, 2500);
+		}, 2000);
+	};
+
+	const lockColor = (id) => {
+		console.log("Color locked!");
+		setIsLocked(true);
+		setColors((prevColors) =>
+			prevColors.map((prevColor) => {
+				console.log(prevColor);
+				return prevColor.id === id
+					? {
+							...prevColor,
+							isLocked: true,
+					  }
+					: prevColor;
+			})
+		);
+	};
+
+	const unlockColor = (id) => {
+		console.log("Color unlocked!");
+		setIsLocked(false);
+		setColors((prevColors) =>
+			prevColors.map((prevColor) => {
+				console.log(prevColor);
+				return prevColor.id === id
+					? {
+							...prevColor,
+							isLocked: false,
+					  }
+					: { ...prevColor };
+			})
+		);
 	};
 
 	return (
@@ -37,9 +74,23 @@ const Color = ({ color, colors, setColor, setCount }) => {
 						/>
 					</div>
 					<div className="copy-icon-container">
-						<BiCopy className="icon copy-icon" />
+						<BiCopy
+							className="icon copy-icon"
+							onClick={() => copyHexToClipboard()}
+						/>
 					</div>
-					<BiSolidLockOpenAlt className="icon lock-open-icon" />
+					{!isLocked && (
+						<BiSolidLockOpenAlt
+							className="icon lock-open-icon"
+							onClick={() => lockColor(color.id)}
+						/>
+					)}
+					{isLocked && (
+						<BiSolidLockAlt
+							className="icon lock-closed-icon"
+							onClick={() => unlockColor(color.id)}
+						/>
+					)}
 				</div>
 			</div>
 			<div className="add-color-overlay">
@@ -55,12 +106,6 @@ const Color = ({ color, colors, setColor, setCount }) => {
 					</div>
 				</div>
 			</div>
-			{isModalVisible && (
-				<HexModal
-					message="Hex code copied to clipboard!"
-					onClose={() => setIsModalVisible(false)}
-				/>
-			)}
 		</div>
 	);
 };

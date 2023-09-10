@@ -1,9 +1,11 @@
 import React from "react";
 import Header from "./Header";
 import Color from "./Color";
+import Modal from "./Modal";
 import { generatePalette, getRandomColors } from "../utils.js";
 
 const Layout = () => {
+	const [isModalVisible, setIsModalVisible] = React.useState(false);
 	const [seedColor, setSeedColor] = React.useState({
 		hue: Math.floor(Math.random() * 360),
 		saturation: Math.floor(Math.random() * 100),
@@ -36,8 +38,6 @@ const Layout = () => {
 	}, [seedColor, mode, count]);
 
 	const colorEls = colors.map((color) => {
-		console.log(colors);
-
 		return (
 			<Color
 				key={color.id}
@@ -45,6 +45,7 @@ const Layout = () => {
 				colors={colors}
 				setColors={setColors}
 				setCount={setCount}
+				setIsModalVisible={setIsModalVisible}
 			/>
 		);
 	});
@@ -59,7 +60,15 @@ const Layout = () => {
 				setSeedColor={setSeedColor}
 				setColors={setColors}
 			/>
-			<main>{colorEls}</main>
+			<main>
+				{colorEls}
+				{isModalVisible && (
+					<Modal
+						message="Hex code copied to clipboard!"
+						onClose={() => setIsModalVisible(false)}
+					/>
+				)}
+			</main>
 		</div>
 	);
 };

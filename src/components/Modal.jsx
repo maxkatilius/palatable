@@ -1,6 +1,6 @@
 import React from "react";
 
-const HexModal = ({ message, onClose }) => {
+const Modal = ({ message, onClose }) => {
 	return (
 		<div className="modal-background">
 			<div className="modal-content" onClick={onClose}>
@@ -10,4 +10,4 @@ const HexModal = ({ message, onClose }) => {
 	);
 };
 
-export default HexModal;
+export default Modal;
