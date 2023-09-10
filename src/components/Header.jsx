@@ -1,15 +1,21 @@
 import React from "react";
-import { generatePalette, hexToHSL } from "../utils.js";
+import { generateColors, hexToHSL } from "../utils.js";
 
 const Header = ({
+	generatePalette,
 	seedColor,
 	setSeedColor,
 	mode,
 	setMode,
 	count,
 	setCount,
+	colors,
 	setColors,
+	unlockedColors,
+	lockedColors,
 }) => {
+	const [selectedMode, setSelectedMode] = React.useState("Vibrant");
+
 	/**********************
 	 *** Event Handlers ***
 	 **********************/
@@ -31,7 +37,13 @@ const Header = ({
 			<h1>Colour Splash</h1>
 			<div className="color-selector">
 				<input type="color" onChange={handleSeedColorChange} />
-				<select defaultValue={"Select"} onChange={handleModeChange}>
+				<select
+					value={selectedMode}
+					onChange={(e) => {
+						setSelectedMode(e.target.value);
+						handleModeChange(e); // you can still call this function to handle other logic
+					}}
+				>
 					<option>Random</option>
 					<option>Vibrant</option>
 					<option>Pastel</option>
@@ -48,9 +60,7 @@ const Header = ({
 			</div>
 			<button
 				className="generate-palette-btn"
-				onClick={() => {
-					setColors(generatePalette(seedColor, mode, count));
-				}}
+				onClick={() => generatePalette()}
 			>
 				Generate palette!
 			</button>

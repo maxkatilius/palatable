@@ -18,6 +18,10 @@ update color naming program
 
 black/white text based on contrast
 
+maybe add in a useRef to see if its the first render and if so populate the unlocked colors and colors array
+
+make all components controlled
+
 websafe colors
 
 

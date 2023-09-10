@@ -1,16 +1,9 @@
 import React from "react";
-import { copyToClipboard } from "../utils";
+import { copyToClipboard, getLuminance } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 
-const Color = ({
-	color,
-	colors,
-	setColors,
-	setColor,
-	setCount,
-	setIsModalVisible,
-}) => {
+const Color = ({ color, onAdd, onRemove, setIsModalVisible, setColors }) => {
 	const [isLocked, setIsLocked] = React.useState(false);
 	const copyHexToClipboard = () => {
 		copyToClipboard(color.hex);
@@ -25,7 +18,6 @@ const Color = ({
 		setIsLocked(true);
 		setColors((prevColors) =>
 			prevColors.map((prevColor) => {
-				console.log(prevColor);
 				return prevColor.id === id
 					? {
 							...prevColor,
@@ -41,7 +33,6 @@ const Color = ({
 		setIsLocked(false);
 		setColors((prevColors) =>
 			prevColors.map((prevColor) => {
-				console.log(prevColor);
 				return prevColor.id === id
 					? {
 							...prevColor,
@@ -52,6 +43,15 @@ const Color = ({
 		);
 	};
 
+	const textColor =
+		getLuminance(
+			color.hsl.hue / 360,
+			color.hsl.saturation / 100,
+			color.hsl.lightness / 100
+		) > 0.5
+			? "#030202"
+			: "#F0F0F0";
+
 	return (
 		<div
 			className="color-container"
@@ -60,7 +60,7 @@ const Color = ({
 			}}
 		>
 			<div className="color-details">
-				<div className="color-text">
+				<div className="color-text" style={{ color: textColor }}>
 					<h2>{color.hex}</h2>
 					<p>{color.name}</p>
 				</div>
@@ -69,7 +69,7 @@ const Color = ({
 						<VscChromeClose
 							className="icon x-icon"
 							onClick={() => {
-								setCount((prevCount) => prevCount - 1);
+								onRemove();
 							}}
 						/>
 					</div>
@@ -98,8 +98,7 @@ const Color = ({
 					<div
 						className="add-color"
 						onClick={() => {
-							setCount((prevCount) => prevCount + 1);
-							console.log("Count increased!");
+							onAdd();
 						}}
 					>
 						<span>+</span>
