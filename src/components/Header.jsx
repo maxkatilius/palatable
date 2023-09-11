@@ -34,9 +34,10 @@ const Header = ({
 
 	return (
 		<header>
-			<h1>Colour Splash</h1>
-			<div className="color-selector">
-				<input type="color" onChange={handleSeedColorChange} />
+			<h1>
+				Palette <span>Palooza</span>
+			</h1>
+			<div className="header-btns">
 				<select
 					value={selectedMode}
 					onChange={(e) => {
@@ -57,13 +58,14 @@ const Header = ({
 					<option>Triadic</option>
 					<option>Tetradic</option>
 				</select>
+				{/* <input type="color" onChange={handleSeedColorChange} /> */}
+				<button
+					className="generate-palette-btn"
+					onClick={() => generatePalette()}
+				>
+					Colors!
+				</button>
 			</div>
-			<button
-				className="generate-palette-btn"
-				onClick={() => generatePalette()}
-			>
-				Generate palette!
-			</button>
 		</header>
 	);
 };
