@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import Footer from "./Footer";
 import Color from "./Color";
 import Modal from "./Modal";
 import { generateColors } from "../utils.js";
@@ -97,34 +98,9 @@ const Layout = () => {
 		);
 	});
 
-	// const colorEls = colors.map((color) => {
-	// 	return (
-	// 		<Color
-	// 			key={color.id}
-	// 			color={color}
-	// 			colors={colors}
-	// 			setColors={setColors}
-	// 			setCount={setCount}
-	// 			setIsModalVisible={setIsModalVisible}
-	// 		/>
-	// 	);
-	// });
-
 	return (
 		<div className="site-container">
-			<Header
-				generatePalette={generatePalette}
-				mode={mode}
-				setMode={setMode}
-				count={count}
-				setCount={setCount}
-				seedColor={seedColor}
-				setSeedColor={setSeedColor}
-				colors={setColors}
-				setColors={setColors}
-				unLockedColors={unLockedColors}
-				lockedColors={lockedColors}
-			/>
+			<Header count={count} setCount={setCount} />
 			<main>
 				{colorEls}
 				{isModalVisible && (
@@ -134,6 +110,13 @@ const Layout = () => {
 					/>
 				)}
 			</main>
+			<Footer
+				generatePalette={generatePalette}
+				count={count}
+				colors={colors}
+				onAdd={addColor}
+				onRemove={removeColor}
+			/>
 		</div>
 	);
 };

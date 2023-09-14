@@ -1,71 +1,16 @@
 import React from "react";
-import { generateColors, hexToHSL } from "../utils.js";
+import Nav from "./Nav";
+import { Link } from "react-router-dom";
 
-const Header = ({
-	generatePalette,
-	seedColor,
-	setSeedColor,
-	mode,
-	setMode,
-	count,
-	setCount,
-	colors,
-	setColors,
-	unlockedColors,
-	lockedColors,
-}) => {
-	const [selectedMode, setSelectedMode] = React.useState("Vibrant");
-
-	/**********************
-	 *** Event Handlers ***
-	 **********************/
-
-	const handleModeChange = (e) => {
-		// This puts the mode in a corresponding format to the functions that use the mode
-		const modeToStr = e.target.value.split(" ").join("");
-		setMode(modeToStr);
-	};
-
-	const handleSeedColorChange = (e) => {
-		const hexColor = e.target.value;
-		const [h, s, l] = hexToHSL(hexColor);
-		setSeedColor({ hue: h, saturation: s, lightness: l });
-	};
-
+const Header = () => {
 	return (
 		<header>
-			<h1>
-				Palette <span>Palooza</span>
-			</h1>
-			<div className="header-btns">
-				<select
-					value={selectedMode}
-					onChange={(e) => {
-						setSelectedMode(e.target.value);
-						handleModeChange(e); // you can still call this function to handle other logic
-					}}
-				>
-					<option>Random</option>
-					<option>Vibrant</option>
-					<option>Pastel</option>
-					<option>Monochrome</option>
-					<option>Dark Monochrome</option>
-					<option>Light Monochrome</option>
-					<option>Analogous</option>
-					<option>Analogous Complementary</option>
-					<option>Complementary</option>
-					<option>Split Complementary</option>
-					<option>Triadic</option>
-					<option>Tetradic</option>
-				</select>
-				{/* <input type="color" onChange={handleSeedColorChange} /> */}
-				<button
-					className="generate-palette-btn"
-					onClick={() => generatePalette()}
-				>
-					Colors!
-				</button>
-			</div>
+			<Link to="/">
+				<h1>
+					Palette <span>Palooza</span>
+				</h1>
+			</Link>
+			<Nav />
 		</header>
 	);
 };
