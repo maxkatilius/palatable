@@ -569,4 +569,3 @@ const colorFunctions = {
 		Tetradic: getTetradicColors,
 	};
 
-

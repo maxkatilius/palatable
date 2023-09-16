@@ -2,8 +2,12 @@ import React from "react";
 import { copyToClipboard, getLuminance } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
+import { useColorContext } from "../context/ColorContext";
+import { generateColors } from "../utils";
 
-const Color = ({ color, onAdd, onRemove, setIsModalVisible, setColors }) => {
+const Color = ({ color }) => {
+	const { setIsModalVisible, setCount, setColors, colors, mode, seedColor } =
+		useColorContext();
 	const [isLocked, setIsLocked] = React.useState(false);
 	const copyHexToClipboard = () => {
 		copyToClipboard(color.hex);
@@ -11,6 +15,25 @@ const Color = ({ color, onAdd, onRemove, setIsModalVisible, setColors }) => {
 		setTimeout(() => {
 			setIsModalVisible(false); // auto-hide modal after 2 seconds
 		}, 2000);
+	};
+
+	const addColor = (colorId) => {
+		setCount((prevCount) => prevCount + 1);
+		const newColor = generateColors(seedColor, mode, 1)[0];
+		const index = colors.findIndex((col) => col.id === colorId);
+		const newColorsArray = [
+			...colors.slice(0, index),
+			newColor,
+			...colors.slice(index),
+		];
+		setColors(newColorsArray);
+	};
+
+	const removeColor = (colorId) => {
+		setCount((prevCount) => prevCount - 1);
+		setColors((prevColors) =>
+			prevColors.filter((prevColor) => prevColor.id !== colorId)
+		);
 	};
 
 	const lockColor = (id) => {
@@ -69,7 +92,7 @@ const Color = ({ color, onAdd, onRemove, setIsModalVisible, setColors }) => {
 						<VscChromeClose
 							className="icon x-icon"
 							onClick={() => {
-								onRemove();
+								removeColor(color.id);
 							}}
 						/>
 					</div>
@@ -98,7 +121,7 @@ const Color = ({ color, onAdd, onRemove, setIsModalVisible, setColors }) => {
 					<div
 						className="add-color"
 						onClick={() => {
-							onAdd();
+							addColor(color.id);
 						}}
 					>
 						<span>+</span>

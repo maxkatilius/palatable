@@ -1,24 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useOverlayContext } from "../context/OverlayContext";
 
 const Nav = () => {
-	const [navOpen, setNavOpen] = React.useState(false);
+	const { navOpen, setNavOpen, settingsOpen } = useOverlayContext();
 
 	const toggleNav = () => {
 		setNavOpen((prevState) => !prevState);
 	};
+
 	return (
 		<nav className={`nav ${navOpen ? "open" : "closed"}`}>
-			<div className="hamburger-container" onClick={toggleNav}>
+			<div
+				className={`hamburger-container ${
+					settingsOpen ? "behind" : ""
+				}`}
+				onClick={toggleNav}
+			>
 				<div
-					className={`hamburger ${navOpen ? "open" : "closed"}`}
+					className={`hamburger ${settingsOpen ? "behind" : ""}`}
 				></div>
 			</div>
-			<div className={`nav--links ${navOpen ? "open" : "closed"}`}>
-				<Link to="/home" className="nav--home">
-					Home
+			<div className="nav--links">
+				<Link to="/generator" className="nav--generator">
+					palette Generator
 				</Link>
-				<Link to="/mypalettes" className="nav--mypalettes">
+				<Link to="/my-palettes" className="nav--mypalettes">
 					My Palettes
 				</Link>
 				<Link to="/popular" className="nav--popular">

@@ -1,6 +1,7 @@
 import React from "react";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
+import { OverlayContextProvider } from "../context/OverlayContext";
 
 const Header = () => {
 	return (
