@@ -22,7 +22,7 @@ const Nav = () => {
 				></div>
 			</div>
 			<div className="nav--links">
-				<Link to="/generator" className="nav--generator">
+				<Link to="/" className="nav--generator">
 					palette Generator
 				</Link>
 				<Link to="/my-palettes" className="nav--mypalettes">
