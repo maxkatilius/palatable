@@ -6,7 +6,7 @@
 }
 
 html, body {
-    height: 100vh;
+    height: 100%;
 }
 
 body {
@@ -22,13 +22,19 @@ body {
 
 .site-container {
     position: relative;
-    /* css only workaround for mobile browser header space issue - may require js */
-    height: calc(100vh - (100vh - 100%));
-    min-height: 100%; 
+    height: 100vh;
+    /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
     overflow-y: hidden;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /*****************
@@ -393,7 +399,7 @@ footer {
 ***** Colors *****
 ******************/
 
-main {
+section {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -598,7 +604,7 @@ main {
     background-color: rgb(230, 230, 230);
 }
 
-main .color-container:first-child .add-color-overlay {
+section .color-container:first-child .add-color-overlay {
     display: none;
 }
 

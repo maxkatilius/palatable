@@ -40,8 +40,8 @@ const Generator = () => {
 	}, [seedColor, mode, count, generatePalette]); // Include generatePalette as a dependency
 
 	return (
-		<>
-			<main>
+		<main>
+			<section>
 				{colorEls}
 				{isModalVisible && (
 					<Modal
@@ -49,9 +49,9 @@ const Generator = () => {
 						onClose={() => setIsModalVisible(false)}
 					/>
 				)}
-			</main>
+			</section>
 			<Footer />
-		</>
+		</main>
 	);
 };
 
