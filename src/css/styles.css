@@ -22,8 +22,9 @@ body {
 
 .site-container {
     position: relative;
-    height: 100vh;
-    min-height: 100vh; 
+    /* css only workaround for mobile browser header space issue - may require js */
+    height: calc(100vh - (100vh - 100%));
+    min-height: 100%; 
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
