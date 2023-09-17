@@ -47,7 +47,7 @@ const getColorName = (hex) => {
 *** Color Conversion ***
 ************************/
 
-function hslToRgb(h, s, l) {
+export function hslToRgb(h, s, l) {
     let r, g, b;
 
     if (s === 0) {
@@ -73,11 +73,11 @@ function hslToRgb(h, s, l) {
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
 
-function rgbToHex(r, g, b) {
+export function rgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
 }
 
-function hslToHex(h, s, l) {
+export function hslToHex(h, s, l) {
     const [r, g, b] = hslToRgb(h / 360, s / 100, l / 100);
     return rgbToHex(r, g, b);
 }

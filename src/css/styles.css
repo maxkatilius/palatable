@@ -28,7 +28,6 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    overflow-y: hidden;
 }
 
 main {
@@ -188,7 +187,7 @@ header a {
 } */
 
 .nav.open .nav--links a.nav--generator {
-    transition-delay: 300ms;
+    transition-delay: 200ms;
 }
 
 .nav.closed .nav--links a.nav--generator {
@@ -196,7 +195,7 @@ header a {
 }
 
 .nav.open .nav--links a.nav--mypalettes {
-    transition-delay: 500ms;
+    transition-delay: 400ms;
 }
 
 .nav.closed .nav--links a.nav--mypalettes {
@@ -204,7 +203,7 @@ header a {
 }
 
 .nav.open .nav--links a.nav--popular {
-    transition-delay: 700ms;
+    transition-delay: 600ms;
 }
 
 .nav.closed .nav--links a.nav--popular {
@@ -212,7 +211,7 @@ header a {
 }
 
 .nav.open .nav--links a.nav--trending {
-    transition-delay: 900ms;
+    transition-delay: 800ms;
 }
 
 .nav.closed .nav--links a.nav--trending {
@@ -226,35 +225,38 @@ header a {
 footer { 
     display: flex;
     justify-content: space-between;
-    padding: 1em 1.4em;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0.4em 0.6em;
     background-color: #FBFBFF;
 }
 
 .btn  {
+    color: white;
+    background-color: #161D27;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    border: none;
+    border-radius: 0.6em;
     cursor: pointer;
 }
 
-.generate-palette-btn {
+.generate-btn {
     padding: 0.8em 1em;
-    background-color: #161D27;
-    color: white;
-    font-size: 1.1rem;
     font-weight: 500;
-    letter-spacing: 0.15rem;
-    text-transform: uppercase;
-    border-radius: 0.6em;
-    border: none;
 }
 
 .add-color-btn, 
-.remove-color-btn {
+.remove-color-btn,
+.save-btn {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
+    color: #161D27;
     font-size: 3rem;
     font-weight: bold;
-    border: none;
-    background-color: transparent;
 }
 
 /***** Settings *****/
@@ -569,25 +571,57 @@ section {
     opacity: 1;
 }
 
-.add-color {
-    background-color: white;
-    border-radius: 50%;
-    width: 3em;
-    height: 3em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 300ms ease-in-out;
-    pointer-events: auto;
+.add-color {/* styles for Modal */
+    .copy-modal-container {
+        z-index: 1;
+
+        position: fixed;
+        width: 100%;
+        bottom: 0%;
+        left: 50%;
+        transform: translate(-50%, 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: slideUpBounce 0.75s forwards;
+    }
+
+    .copy-modal-content {
+        background: #060504;
+        color: #F7F7F7;
+        padding: 0.8em 1.2em;
+        border-radius: 1.4em;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes slideUpBounce {
+        0% {
+            transform: translate(-50%, 100%);
+        }
+
+        50% {
+            transform: translate(-50%, -55%);
+            /* goes a bit above the center */
+        }
+
+        75% {
+            transform: translate(-50%, -45%);
+            /* bounces down a little */
+        }
+
+        100% {
+            transform: translate(-50%, -50%);
+            /* centers perfectly */
+        }
+    }
+
 }
 
 .add-color:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     transform: scale(1.05);
 }
-
+        /* background-color: red; */
 .add-color span {
     font-size: 2rem;
     display: flex;
@@ -608,46 +642,91 @@ section .color-container:first-child .add-color-overlay {
     display: none;
 }
 
-/* styles for Modal */
-.modal-background {
-    z-index: 1;
+/**************
+    Modals
+**************/
 
+.copy-modal-container {
+    z-index: 1;
     position: fixed;
-    bottom: 0%;
-    left: 50%;
-    transform: translate(-50%, 100%);
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: slideUpBounce 0.75s forwards;
+    width: 100%;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    animation: modalSlideUpBounce 0.75s forwards;
 }
 
-.modal-content {
+.copy-modal-content {
+    padding: 1em 1.4em;
     background: #060504;
     color: #F7F7F7;
-    padding: 0.8em 1.2em;
+    font-weight: bold;
+    font-size: 1.2rem;
     border-radius: 1.4em;
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
 }
 
-@keyframes slideUpBounce {
+@keyframes modalSlideUpBounce {
     0% {
         transform: translate(-50%, 100%);
     }
 
     50% {
-        transform: translate(-50%, -55%);
-        /* goes a bit above the center */
+        transform: translate(-50%, -210%);
     }
 
     75% {
-        transform: translate(-50%, -45%);
-        /* bounces down a little */
+        transform: translate(-50%, -190%);
     }
 
     100% {
-        transform: translate(-50%, -50%);
-        /* centers perfectly */
+        transform: translate(-50%, -200%);
     }
 }
 
+.save-modal-container {
+    z-index: 1;
+    position: fixed;
+    bottom: 30%;
+    left: 20%;
+    right: 20%;
+    padding: 1em;
+    background-color: #F7F7F7;
+    border-radius: 1.2em;
+}
+
+.save-modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.palette-preview {
+    display: flex;
+    height: 10em;
+    margin-bottom: 1em;
+    border-radius: 1.2em;
+    overflow: hidden;
+}
+
+.palette-preview-color {
+    flex-grow: 1;
+    height: 100%;
+}
+
+.save-modal-content input {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.save-modal-content textarea {
+    margin: 1em 0 1.4em 0;
+}
+
+.save-palette-btn {
+    padding: 0.4em 0;
+    font-size: 1.2rem;
+}

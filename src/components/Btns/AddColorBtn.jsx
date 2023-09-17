@@ -1,7 +1,7 @@
 import React from "react";
 import { BiPlus } from "react-icons/bi";
-import { useColorContext } from "../context/ColorContext";
-import { generateColors } from "../utils";
+import { useColorContext } from "../../context/ColorContext";
+import { generateColors } from "../../utils";
 
 const AddColorBtn = () => {
 	const { seedColor, mode, setCount, colors, setColors, lastColorId } =
@@ -20,15 +20,13 @@ const AddColorBtn = () => {
 	};
 
 	return (
-		<button
+		<BiPlus
 			className="btn add-color-btn"
 			onClick={() => {
 				console.log("color added!");
 				if (lastColorId !== null) addColor(lastColorId);
 			}}
-		>
-			<BiPlus />
-		</button>
+		/>
 	);
 };
 

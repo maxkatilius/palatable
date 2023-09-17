@@ -22,16 +22,40 @@ const Nav = () => {
 				></div>
 			</div>
 			<div className="nav--links">
-				<Link to="/" className="nav--generator">
+				<Link
+					to="/"
+					className="nav--generator"
+					onClick={() => {
+						toggleNav();
+					}}
+				>
 					palette Generator
 				</Link>
-				<Link to="/my-palettes" className="nav--mypalettes">
+				<Link
+					to="/my-palettes"
+					className="nav--mypalettes"
+					onClick={() => {
+						toggleNav();
+					}}
+				>
 					My Palettes
 				</Link>
-				<Link to="/popular" className="nav--popular">
+				<Link
+					to="/popular"
+					className="nav--popular"
+					onClick={() => {
+						toggleNav();
+					}}
+				>
 					Popular Palettes
 				</Link>
-				<Link to="/trending" className="nav--trending">
+				<Link
+					to="/trending"
+					className="nav--trending"
+					onClick={() => {
+						toggleNav();
+					}}
+				>
 					Trending Palettes
 				</Link>
 			</div>

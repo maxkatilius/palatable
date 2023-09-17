@@ -2,12 +2,20 @@ import React from "react";
 import { FiSettings } from "react-icons/fi";
 import { useColorContext } from "../context/ColorContext";
 import { useOverlayContext } from "../context/OverlayContext";
+import { hexToHSL } from "../utils";
 
 const Settings = () => {
 	const { settingsOpen, setSettingsOpen } = useOverlayContext();
 	const { mode, setMode, seedColor, setSeedColor } = useColorContext();
 
-	const [selectedSeedColor, setSelectedSeedColor] = React.useState(seedColor);
+	const [selectedSeedColor, setSelectedSeedColor] = React.useState(
+		seedColor.hex
+	);
+
+	React.useEffect(() => {
+		setSelectedSeedColor(seedColor.hex);
+	}, [seedColor]);
+
 	const [selectedMode, setSelectedMode] = React.useState(mode);
 
 	const settingsStatus = settingsOpen ? "open" : "closed";
@@ -24,13 +32,13 @@ const Settings = () => {
 		// This puts the mode in a corresponding format to the functions that use the mode
 		const modeToStr = e.target.value.split(" ").join("");
 		setMode(modeToStr);
-		console.log(mode);
 	};
 
 	const handleSeedColorChange = (e) => {
 		const hexColor = e.target.value;
+		setSelectedSeedColor(hexColor);
 		const [h, s, l] = hexToHSL(hexColor);
-		setSeedColor({ hue: h, saturation: s, lightness: l });
+		setSeedColor({ hue: h, saturation: s, lightness: l, hex: hexColor });
 	};
 
 	return (

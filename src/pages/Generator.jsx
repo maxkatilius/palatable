@@ -1,7 +1,11 @@
 import React from "react";
-import Color from "../components/Color";
-import Footer from "../components/Footer";
+
 import { useColorContext } from "../context/ColorContext";
+
+import Color from "../components/Color";
+import GeneratorFooter from "../components/GeneratorFooter";
+import CopyModal from "../components/Modals/CopyModal";
+import SaveModal from "../components/Modals/SaveModal";
 
 const Generator = () => {
 	const {
@@ -11,13 +15,20 @@ const Generator = () => {
 		colors,
 		setColors,
 		isModalVisible,
-		setIsModalVisible,
+		isSaveModalVisible,
 		generatePalette,
+		lockedColors,
 	} = useColorContext();
 
 	const colorEls = colors.map((color) => {
 		return <Color key={color.id} color={color} setColors={setColors} />;
 	});
+
+	const savePalette = (data) => {
+		console.log(lockedColors);
+		const paletteId = nanoid();
+		localStorage.setItem(paletteId, { ...lockedColors });
+	};
 
 	// UseEffects
 
@@ -43,14 +54,12 @@ const Generator = () => {
 		<main>
 			<section>
 				{colorEls}
-				{isModalVisible && (
-					<Modal
-						message="Hex code copied to clipboard!"
-						onClose={() => setIsModalVisible(false)}
-					/>
+				{isModalVisible && <CopyModal />}
+				{isSaveModalVisible && (
+					<SaveModal onClose={() => setIsSaveModalVisible(false)} />
 				)}
 			</section>
-			<Footer />
+			<GeneratorFooter />
 		</main>
 	);
 };

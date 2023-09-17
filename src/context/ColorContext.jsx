@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { generateColors } from "../utils";
+import { generateColors, hslToHex } from "../utils";
 
 const ColorContext = createContext();
 
@@ -10,10 +10,16 @@ const useColorContext = () => {
 const ColorContextProvider = ({ children }) => {
 	// Internal state
 
+	const randomHue = Math.floor(Math.random() * 360);
+	const randomSaturation = Math.floor(Math.random() * 100);
+	const randomLightness = Math.floor(Math.random() * 100);
+	const randomHex = hslToHex(randomHue, randomSaturation, randomLightness);
+
 	const [seedColor, setSeedColor] = React.useState({
-		hue: Math.floor(Math.random() * 360),
-		saturation: Math.floor(Math.random() * 100),
-		lightness: Math.floor(Math.random() * 100),
+		hue: randomHue,
+		saturation: randomSaturation,
+		lightness: randomLightness,
+		hex: randomHex,
 	});
 	const [mode, setMode] = React.useState("Vibrant");
 	const [count, setCount] = React.useState(5);
@@ -28,6 +34,7 @@ const ColorContextProvider = ({ children }) => {
 	const [navOpen, setNavOpen] = useState(false);
 	const [settingsOpen, setSettingsOpen] = useState(false);
 	const [isModalVisible, setIsModalVisible] = React.useState(false);
+	const [isSaveModalVisible, setIsSaveModalVisible] = useState(false);
 
 	// Helper functions
 
@@ -54,7 +61,6 @@ const ColorContextProvider = ({ children }) => {
 		if (colors.length > 0) {
 			setLastColorId(colors[colors.length - 1].id);
 		}
-		console.log(lastColorId);
 	}, [colors]);
 
 	return (
@@ -79,6 +85,8 @@ const ColorContextProvider = ({ children }) => {
 				setSettingsOpen,
 				isModalVisible,
 				setIsModalVisible,
+				isSaveModalVisible,
+				setIsSaveModalVisible,
 				generatePalette,
 			}}
 		>
