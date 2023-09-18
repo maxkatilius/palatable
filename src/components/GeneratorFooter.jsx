@@ -8,13 +8,13 @@ import GenerateBtn from "./Btns/GenerateBtn";
 
 const GeneratorFooter = () => {
 	return (
-		<footer>
+		<div className="generator-footer">
 			<Settings />
 			<RemoveColorBtn />
 			<AddColorBtn />
 			<SaveBtn />
 			<GenerateBtn />
-		</footer>
+		</div>
 	);
 };
 

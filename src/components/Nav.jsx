@@ -21,7 +21,7 @@ const Nav = () => {
 					className={`hamburger ${settingsOpen ? "behind" : ""}`}
 				></div>
 			</div>
-			<div className="nav--links">
+			<div className="nav--links flex-col">
 				<Link
 					to="/"
 					className="nav--generator"

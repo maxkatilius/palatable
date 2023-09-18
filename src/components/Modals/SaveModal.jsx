@@ -22,8 +22,20 @@ const SaveModal = () => {
 	const handleSave = () => {
 		console.log(lockedColors);
 		const paletteId = nanoid();
-		// Save to local storage or any other action
-		localStorage.setItem(paletteId, JSON.stringify(lockedColors));
+		const newPalette = {
+			id: paletteId,
+			name: name,
+			description: description,
+			colors: lockedColors,
+		};
+
+		const existingPalettes =
+			JSON.parse(localStorage.getItem("my-palettes")) || [];
+
+		existingPalettes.push(newPalette);
+
+		localStorage.setItem("my-palettes", JSON.stringify(existingPalettes));
+
 		setIsSaveModalVisible(false);
 	};
 
@@ -48,7 +60,7 @@ const SaveModal = () => {
 
 	return (
 		<div className="modal-container save-modal-container">
-			<div className="modal-content save-modal-content">
+			<div className="modal-content flex-col">
 				<div className="palette-preview">{palettePreviewEls()}</div>
 				<input
 					type="text"

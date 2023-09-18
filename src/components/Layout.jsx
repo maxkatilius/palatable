@@ -9,9 +9,11 @@ const Layout = () => {
 	});
 
 	return (
-		<div className="site-container">
+		<div className="site-container flex-col">
 			<Header />
-			<Outlet />
+			<main className="flex-col">
+				<Outlet />
+			</main>
 		</div>
 	);
 };

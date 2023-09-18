@@ -24,6 +24,8 @@ make all components controlled
 
 websafe colors
 
+in generator footer - add little biuttons section for undo redo reset save
+
 
 Code Reusability:
 

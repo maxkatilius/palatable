@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Croissant+One&family=Quicksand:wght@400;500;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -11,9 +12,18 @@ html, body {
 
 body {
     font-family: 'Quicksand', sans-serif;
-    color: #080708;
-    background-color: #FBFBFF;
+    color: #161D27;
+    background-color: #EBE7E1;
     overflow-x: hidden;
+}
+
+/*****************
+** Util Classes **
+******************/
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
 }
 
 /*****************
@@ -25,15 +35,13 @@ body {
     height: 100vh;
     /* Fallback for browsers that do not support Custom Properties */
     height: calc(var(--vh, 1vh) * 100);
-    display: flex;
-    flex-direction: column;
     overflow-x: hidden;
 }
 
-main {
+main,
+section,
+.generator-container {
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
 }
 
 /*****************
@@ -52,8 +60,12 @@ header {
 header a {
     font-family: 'Bungee Shade', 'Quicksand', sans-serif;
     font-size: 1.35rem;
-    text-decoration: none;
     color: #161D27;
+    text-decoration: none;
+}
+
+header h1 span {
+    display: block;
 }
 
 /*****************
@@ -64,13 +76,13 @@ header a {
 
 .hamburger-container {
     z-index: 1001;
-
+    
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 5em;
-    margin-right: 0.7em;
+    margin-right: 0.5em;
     cursor: pointer;
     transition: transform 800ms ease-in-out;
 }
@@ -79,28 +91,26 @@ header a {
     transition-delay: 200ms;
 }
 
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    height: 0.3em;
+    background-color: #2e3949;
+    border-radius: 1em;
+}
+
 .hamburger {
     z-index: 1001;
 
     width: 3.3em;
-    height: 0.3em;
-    background-color: #2e3949;
-    border-radius: 1em;
     transition: transform 800ms ease-in-out 50ms, background-color 1000ms ease-in-out;
 }
 
-.behind {
-    z-index: -1;
-}
-    
 .hamburger:before,
 .hamburger:after {
     content: '';
     position: absolute;
     width: 100%;
-    height: 0.3em;
-    background-color: #2e3949;
-    border-radius: 1em;
     opacity: 1;
     transition: transform 800ms ease-in-out 50ms, background-color 800ms ease-in-out 100ms;
 }
@@ -116,7 +126,6 @@ header a {
 
 .nav.open .hamburger-container {
     transform: translateX(-500%);
-    /* margin-left: auto; */
 }
  
 .nav.open .hamburger {
@@ -132,59 +141,43 @@ header a {
 .nav.open .hamburger:after {
     opacity: 0;
     transition: opacity 800ms ease-in-out;
-    /* transform-origin: center; */
 }
 
 /***** Nav Links Overlay *****/
 
 .nav--links {
     z-index: 1000;
-
-    display: flex;
-    flex-direction: column;
-    background-color: hsla(0, 0%, 5%, 0.6);
-    backdrop-filter: blur(0.4rem);
-    gap: 3em;
-    
     position: fixed;
     inset: 0 0 0 0%;
-    
     padding: 8em 2em;
+    gap: 3em;
+
+    background-color: hsla(0, 0%, 5%, 0.6);
+    backdrop-filter: blur(0.4rem);
     
     transform: translateX(100%);
-    transition: transform 600ms ease-in 300ms; /* 350ms */
+    transition: transform 600ms ease-in 300ms; 
 }
 
 .nav.open .nav--links {
     transform: translateX(0%);
-    transition: transform 600ms ease-in 100ms; /* 350ms */
+    transition: transform 600ms ease-in 100ms; 
 }
 
 .nav--links a {
     font-size: 2.5rem;
     font-family: 'Bungee Shade', sans-serif;
-    text-decoration: none;
     font-weight: 600;
-    letter-spacing: 0.1rem;
+    text-decoration: none;
+    letter-spacing: 0.15rem;
     color: #DBD4D3;
     transition: transform 800ms ease-out;
-}
-
-.nav.closed .nav--links a {
     transform: translateX(100%);
 }
 
 .nav.open .nav--links a {
-    font-weight: 600;
-    color: #DBD4D3;
-    text-decoration: none;
-
     transform: translateX(0%);
 }
-/* 
-.nav.closed .nav--links {
-    transform: translateX(100%);
-} */
 
 .nav.open .nav--links a.nav--generator {
     transition-delay: 200ms;
@@ -218,200 +211,19 @@ header a {
     transition-delay: 0ms;
 } 
 
-/*****************
-***** Footer *****
-******************/
-
-footer { 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0.4em 0.6em;
-    background-color: #FBFBFF;
+.behind {
+    z-index: -1;
 }
 
-.btn  {
-    color: white;
-    background-color: #161D27;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    border: none;
-    border-radius: 0.6em;
-    cursor: pointer;
-}
-
-.generate-btn {
-    padding: 0.8em 1em;
-    font-weight: 500;
-}
-
-.add-color-btn, 
-.remove-color-btn,
-.save-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    color: #161D27;
-    font-size: 3rem;
-    font-weight: bold;
-}
-
-/***** Settings *****/
-
-.settings-icon-container {
-    z-index: 101;
-
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 4em;
-    width: 4em;
-    cursor: pointer;
-
-    transition: transform 1000ms cubic-bezier(.72, .57, .25, 2);
-}
-
-.settings-icon-container.open {
-    transform: rotate(120deg) scale(1.4);
-}
-
-.settings-icon {
-    z-index: 101;
-    
-    font-size: 3rem;
-    color: #161D27;
-}
-
-.settings-icon.open {
-    color: #DBD4D3;
-    transition: color 600ms ease-in;
-}
-
-.settings-icon.closed {
-    transition: color 1000ms ease-in;
-}
-
-/***** settings selectors overlay *****/
-
-.settings-selectors {
-    z-index: 100;
-    
-    position: fixed;
-    inset: 0 0 0 0%;
-
-    display: flex;
-    flex-direction: column;
-    gap: 3em;
-
-    padding: 2em 2em;
-    color: #DBD4D3;
-    background-color: hsla(0, 0%, 5%, 0.65);
-    backdrop-filter: blur(0.4rem);
-
-    transform: translateY(100%);
-    transition: transform 600ms ease-in 100ms;
-}
-
-.settings.open .settings-selectors {
-    transform: translateY(0%);
-    transition: transform 600ms ease-in 100ms;
-}
-
-.settings-selectors h1 {
-    font-family: 'Bungee Shade', 'Quicksand', sans-serif;
-    letter-spacing: 0.1rem;
-    font-size: 3rem;
-    transform: translateY(200%);
-    transition: transform 900ms ease-out 300ms;
-}
-
-.settings-selectors.open h1 {
-    transform: translateY(0%);
-}
-
-.settings-selector {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    letter-spacing: 0.05rem;
-    opacity: 0;
-
-    /* Add this line to hide the element initially. */
-    transform: translateY(200%);
-    /* Slightly push it down so it'll "rise" when displayed. */
-    transition: opacity 600ms ease-in, transform 600ms ease-in;
-}
-
-.settings label {
-    width: 40%;
-    font-size: 1.1rem;
-}
-
-.settings-mode select {
-    width: 40%;
-    padding: 1em;
-
-    background-color: #DBD4D3;
-    text-align: center;
-    font-weight: bold;
-    letter-spacing: 0.05rem;
-
-    border: none;
-    border-radius: 1em;
-}  
-
-.settings-selector form {
-    width: 30%;
-}
-
-.form-element {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-/* Settings Transitions */
-
-.settings.open .settings-selector {
-    opacity: 1;
-    /* Make it fully visible */
-    transform: translateY(0);
-    /* Reset its position */
-}
-
-.settings.open .settings-seed {
-    transition-delay: 500ms;
-}
-
-.settings.open .settings-form {
-    transition-delay: 800ms;
-}
-
-.settings.open .settings-mode {
-    transition-delay: 1100ms;
-}
 
 /*****************
-***** Colors *****
+*** Generator ****
 ******************/
-
-section {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
 
 .color-container {
     position: relative;
     padding: 1.2em;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     flex-grow: 1;
@@ -456,16 +268,6 @@ section {
     font-size: 1.9em;
 }
 
-/* copy icon */
-/* potentially add hover text bubble that indicates copy hex
-/* .copy-icon-container {
-    position: relative;
-} */
-
-.copy-icon {
-    margin: auto auto;
-}
-
 .x-icon-container,
 .copy-icon-container {
     display: flex;
@@ -473,7 +275,7 @@ section {
     align-items: center;
     padding: 0.5em;
     border-radius: 50%;
-    transition: background-color 0.3s;
+    transition: background-color 300ms;
 }
 
 .x-icon-container:hover,
@@ -482,6 +284,10 @@ section {
 }
 
 /* lock icon */
+
+.lock-closed-icon {
+    font-size: 2.3rem;
+}
 
 .lock-open-icon,
 .lock-closed-icon {
@@ -565,55 +371,14 @@ section {
     opacity: 0;
     transition: opacity 300ms ease-in-out;
     pointer-events: auto;
-}  
+}
 
 .add-color-container:hover {
     opacity: 1;
 }
 
-.add-color {/* styles for Modal */
-    .copy-modal-container {
-        z-index: 1;
-
-        position: fixed;
-        width: 100%;
-        bottom: 0%;
-        left: 50%;
-        transform: translate(-50%, 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        animation: slideUpBounce 0.75s forwards;
-    }
-
-    .copy-modal-content {
-        background: #060504;
-        color: #F7F7F7;
-        padding: 0.8em 1.2em;
-        border-radius: 1.4em;
-        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
-    }
-
-    @keyframes slideUpBounce {
-        0% {
-            transform: translate(-50%, 100%);
-        }
-
-        50% {
-            transform: translate(-50%, -55%);
-            /* goes a bit above the center */
-        }
-
-        75% {
-            transform: translate(-50%, -45%);
-            /* bounces down a little */
-        }
-
-        100% {
-            transform: translate(-50%, -50%);
-            /* centers perfectly */
-        }
-    }
+/* needs work - removed some code at some point accidentally */
+.add-color {
 
 }
 
@@ -621,7 +386,7 @@ section {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     transform: scale(1.05);
 }
-        /* background-color: red; */
+
 .add-color span {
     font-size: 2rem;
     display: flex;
@@ -640,6 +405,169 @@ section {
 
 section .color-container:first-child .add-color-overlay {
     display: none;
+}
+.generator-footer { 
+    padding: 0.6em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn  {
+    color: white;
+    background-color: #161D27;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    border: none;
+    border-radius: 0.6em;
+    cursor: pointer;
+}
+
+.generate-btn {
+    padding: 0.8em 1em;
+    font-weight: 500;
+}
+
+.add-color-btn, 
+.remove-color-btn,
+.save-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.8rem;
+    color: #161D27;
+    background-color: transparent;
+}
+
+/***** Settings *****/
+
+.settings-icon-container {
+    z-index: 101;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4em;
+    width: 4em;
+    cursor: pointer;
+    transition: transform 1000ms cubic-bezier(.72, .57, .25, 2);
+}
+
+.settings-icon-container.open {
+    transform: rotate(120deg) scale(1.4);
+}
+
+.settings-icon {
+    z-index: 101;
+    
+    font-size: 2.7rem;
+    color: #161D27;
+}
+
+.settings-icon.open {
+    color: #DBD4D3;
+    transition: color 600ms ease-in;
+}
+
+.settings-icon.closed {
+    transition: color 1000ms ease-in;
+}
+
+/***** settings selectors overlay *****/
+
+.settings-selectors {
+    z-index: 100;
+    
+    position: fixed;
+    inset: 0 0 0 0%;
+    gap: 3em;
+
+    padding: 2em;
+    color: #DBD4D3;
+    background-color: hsla(0, 0%, 5%, 0.65);
+    backdrop-filter: blur(0.4rem);
+
+    transform: translateY(100%);
+    transition: transform 600ms ease-in 100ms;
+}
+
+.settings.open .settings-selectors {
+    transform: translateY(0%);
+    transition: transform 600ms ease-in 100ms;
+}
+
+.settings-selectors h1 {
+    font-family: 'Bungee Shade', 'Quicksand', sans-serif;
+    letter-spacing: 0.1rem;
+    font-size: 3rem;
+    transform: translateY(200%);
+    transition: transform 900ms ease-out 100ms;
+}
+
+.settings-selectors.open h1 {
+    transform: translateY(0%);
+}
+
+.settings-selector {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    opacity: 0;
+
+    transform: translateY(200%);
+    transition: opacity 600ms ease-in, transform 600ms ease-in;
+}
+
+.settings label {
+    width: 40%;
+    font-size: 1.2rem;
+}
+
+.settings-mode select {
+    width: 40%;
+    padding: 1em;
+
+    background-color: #DBD4D3;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+
+    border: none;
+    border-radius: 1em;
+}  
+
+.settings-selector form {
+    width: 30%;
+}
+
+.form-element {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Settings Transitions */
+
+.settings.open .settings-selector {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.settings.open .settings-seed {
+    transition-delay: 300ms;
+}
+
+.settings.open .settings-form {
+    transition-delay: 500ms;
+}
+
+.settings.open .settings-mode {
+    transition-delay: 700ms;
 }
 
 /**************
@@ -699,11 +627,6 @@ section .color-container:first-child .add-color-overlay {
     border-radius: 1.2em;
 }
 
-.save-modal-content {
-    display: flex;
-    flex-direction: column;
-}
-
 .palette-preview {
     display: flex;
     height: 10em;
@@ -729,4 +652,49 @@ section .color-container:first-child .add-color-overlay {
 .save-palette-btn {
     padding: 0.4em 0;
     font-size: 1.2rem;
+}
+
+/* My Palettes */
+
+.my-palettes {
+    padding: 0.8em 2em;
+}
+
+.my-palettes h1 {
+    font-family: "Croissant One";
+    font-size: 2.4rem;
+    /* text-decoration: underline; */
+}
+
+.saved-palette {
+    position: relative;
+    padding: 1em 0;
+}
+
+.unsave-palette-icon {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+
+    font-size: 2rem;
+}
+
+.saved-palette-colors {
+    height: 10em;
+    display: flex;
+    border-radius: 1.1em;
+    overflow: hidden;
+}
+
+.saved-palette-color {
+    flex-grow: 1;
+    height: 100%;
+}
+
+.palette-info {
+    padding: 0.5em;
+}
+
+.palette-info p {
+    font-size: 1.25rem;
 }

@@ -49,7 +49,7 @@ const Settings = () => {
 			>
 				<FiSettings className={`settings-icon ${settingsStatus}`} />
 			</div>
-			<div className={`settings-selectors ${settingsStatus}`}>
+			<div className={`settings-selectors flex-col ${settingsStatus}`}>
 				<h1>Settings</h1>
 				<div
 					className={`settings-selector settings-seed ${settingsStatus}`}

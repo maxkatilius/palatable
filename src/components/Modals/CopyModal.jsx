@@ -1,7 +1,7 @@
 import React from "react";
 import { useColorContext } from "../../context/ColorContext";
 
-const CopyModal = ({ message, onClose }) => {
+const CopyModal = () => {
 	const { setIsModalVisible } = useColorContext();
 	return (
 		<div className="copy-modal-container">

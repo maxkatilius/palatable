@@ -36,6 +36,9 @@ const Generator = () => {
 	// so that when the user hits the spacebar, it triggers palette generation
 	React.useEffect(() => {
 		const handleKeyDown = (event) => {
+			if (isSaveModalVisible) {
+				return;
+			}
 			if (event.code === "Space") {
 				event.preventDefault();
 				generatePalette();
@@ -51,16 +54,16 @@ const Generator = () => {
 	}, [seedColor, mode, count, generatePalette]); // Include generatePalette as a dependency
 
 	return (
-		<main>
-			<section>
+		<section className="flex-col">
+			<div className="generator-container flex-col">
 				{colorEls}
 				{isModalVisible && <CopyModal />}
 				{isSaveModalVisible && (
 					<SaveModal onClose={() => setIsSaveModalVisible(false)} />
 				)}
-			</section>
+			</div>
 			<GeneratorFooter />
-		</main>
+		</section>
 	);
 };
 

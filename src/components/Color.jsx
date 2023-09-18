@@ -10,7 +10,7 @@ const Color = ({ color }) => {
 		useColorContext();
 	const [isLocked, setIsLocked] = React.useState(false);
 	const copyHexToClipboard = () => {
-		copyToClipboard(color.hex);
+		copyToClipboard(`${color.hex.slice(1)}`);
 		setIsModalVisible(true);
 		setTimeout(() => {
 			setIsModalVisible(false); // auto-hide modal after 2 seconds
