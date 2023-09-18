@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { VscChromeClose } from "react-icons/vsc";
+import { GiBottomRight3DArrow } from "react-icons/gi";
 
 const MyPalettes = () => {
 	const [savedPalettes, setSavedPalettes] = React.useState([]);
@@ -46,11 +48,18 @@ const MyPalettes = () => {
 			</div>
 		);
 	});
-	return (
+	return savedPalettes.length > 0 ? (
 		<section className="my-palettes flex-col">
 			<h1>My Palettes</h1>
 			{paletteEls}
 		</section>
+	) : (
+		<div className="link--blank-my-palettes">
+			<Link to="/">Go create some funky palettes!</Link>
+			<Link to="/">
+				<GiBottomRight3DArrow className="arrow-icon" />
+			</Link>
+		</div>
 	);
 };
 
