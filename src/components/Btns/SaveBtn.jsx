@@ -1,17 +1,18 @@
 import React from "react";
 import { useColorContext } from "../../context/ColorContext";
-import { nanoid } from "nanoid";
 
 import { BiSave } from "react-icons/bi";
 
 const SaveBtn = () => {
-	const { setIsSaveModalVisible } = useColorContext();
+	const { setIsSaveModalVisible, lockedColors } = useColorContext();
 
 	return (
 		<BiSave
 			className="btn save-btn"
 			onClick={() => {
-				setIsSaveModalVisible(true);
+				if (lockedColors.length) {
+					setIsSaveModalVisible(true);
+				}
 			}}
 		/>
 	);

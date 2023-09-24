@@ -2,6 +2,7 @@ import React from "react";
 import { nanoid } from "nanoid";
 import { useColorContext } from "../../context/ColorContext";
 import { randomPaletteNames } from "./randomPaletteNames";
+import { VscChromeClose } from "react-icons/vsc";
 
 const SaveModal = () => {
 	const { isSaveModalVisible, setIsSaveModalVisible, lockedColors } =
@@ -59,8 +60,18 @@ const SaveModal = () => {
 	};
 
 	return (
-		<div className="modal-container save-modal-container">
-			<div className="modal-content flex-col">
+		<div
+			className={`modal-container save-modal-container ${
+				isSaveModalVisible ? "slide-in" : "slide-out"
+			}`}
+		>
+			<div className="save-modal-content flex-col">
+				<VscChromeClose
+					className="icon cancel-save-icon"
+					onClick={() => {
+						setIsSaveModalVisible(false);
+					}}
+				/>
 				<div className="palette-preview">{palettePreviewEls()}</div>
 				<input
 					type="text"

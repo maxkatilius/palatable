@@ -5,3 +5,10 @@ const Popular = () => {
 };
 
 export default Popular;
+
+// const newPalette = {
+// 	id: paletteId,
+// 	name: name,
+// 	description: description,
+// 	colors: lockedColors,
+// };

@@ -1,8 +1,11 @@
+import { nanoid } from "nanoid";
+import DeltaE from "delta-e";
+import chroma from "chroma-js"
+
 /***********************
 *** Helper Functions ***
 ************************/
 
-import { nanoid } from "nanoid";
 
 function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -12,39 +15,77 @@ function randomNumBetween(min, max) {
 ***** Color Naming *****
 ************************/
 
-import DeltaE from "delta-e";
-import hexNames from "./hex_names.json";
 
-const getColorName = (hex) => {
-	let closestColor = null;
-	let smallestDistance = Infinity;
+import hexNames from "./hexNames.json";
 
-	for (const dbColor in hexNames) {
-		const color1 = {
-			L: parseInt(hex.slice(1, 3), 16),
-			A: parseInt(hex.slice(3, 5), 16),
-			B: parseInt(hex.slice(5, 7), 16),
-		};
+const findClosestColorName = (hexValue) => {
+    let low = 0,
+        high = hexNames.length - 1
+    let closestMatch = Number.MAX_SAFE_INTEGER,
+        closestName = ""
+    while (low <= high) {
+        const mid = Math.floor((low + high) / 2)
+        const colorDifference = chroma.deltaE(hexValue, hexNames[mid].hex)
+        if (colorDifference < closestMatch) {
+            closestMatch = colorDifference
+            closestName = hexNames[mid].name
+        }
+        if (colorDifference === 0) {
+            break
+        }
+        if (hexValue > hexNames[mid].hex) {
+            low = mid + 1
+        } else {
+            high = mid - 1
+        }
+    }
+    return closestName
+}
 
-		const color2 = {
-			L: parseInt(dbColor.slice(1, 3), 16),
-			A: parseInt(dbColor.slice(3, 5), 16),
-			B: parseInt(dbColor.slice(5, 7), 16),
-		};
+// const getColorNameFromLAB = (l, a, b) => {
+//   console.log("1")
+//   let closestColor = null;
+//   let smallestDistance = Infinity;
+  
+//   for (const dbColor in hexNames) {
+//     const labOfDbColor = chroma(dbColor).lab()
+//       console.log("2")
 
-		const distance = DeltaE.getDeltaE94(color1, color2);
+    
+//     const color1 = { L: l, A: a, B: b };
+//     const color2 = { L: labOfDbColor[0], A: labOfDbColor[1], B: labOfDbColor[2] };
+    
+//     const distance = DeltaE.getDeltaE94(color1, color2);
+    
+//     if (distance < smallestDistance) {
+//       smallestDistance = distance;
+//       closestColor = dbColor;
+//     }
+//   }
 
-		if (distance < smallestDistance) {
-			smallestDistance = distance;
-			closestColor = dbColor;
-		}
-	}
+//   console.log(closestColor)
+  
+//   return hexNames[closestColor];
+// };
 
-	return hexNames[closestColor];
+
+
+const Chroma = (colorInput) => {
+    if (!chroma.valid(colorInput)) {
+      console.log("invalid")
+        return "Invalid Color";
+    }
+
+    const labColor = chroma(colorInput).lab();
+    const name = getColorNameFromLAB(labColor[0], labColor[1], labColor[2]);
+
+    return name;
 };
 
+export default Chroma;
+
 /***********************
-*** Color Conversion ***
+ *** Color Conversion ***
 ************************/
 
 export function hslToRgb(h, s, l) {
@@ -164,6 +205,7 @@ export function copyToClipboard(text) {
   });
 }
 
+
 /*************************
 *** Palette Generation ***
 **************************/
@@ -178,7 +220,7 @@ const createColor = (hue, saturation, lightness) => {
       lightness
     },
     hex: hexValue,
-    name: getColorName(hexValue),
+    name: findClosestColorName(hexValue),
     isLocked: false
   };
 };

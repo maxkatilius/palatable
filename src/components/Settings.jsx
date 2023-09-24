@@ -29,12 +29,14 @@ const Settings = () => {
 	};
 
 	const handleModeChange = (e) => {
+		e.stopPropagation(); // Stop the event from propagating up to the parent div
 		// This puts the mode in a corresponding format to the functions that use the mode
 		const modeToStr = e.target.value.split(" ").join("");
 		setMode(modeToStr);
 	};
 
 	const handleSeedColorChange = (e) => {
+		e.stopPropagation(); // Stop the event from propagating up to the parent div
 		const hexColor = e.target.value;
 		setSelectedSeedColor(hexColor);
 		const [h, s, l] = hexToHSL(hexColor);
@@ -49,10 +51,13 @@ const Settings = () => {
 			>
 				<FiSettings className={`settings-icon ${settingsStatus}`} />
 			</div>
-			<div className={`settings-selectors flex-col ${settingsStatus}`}>
+			<div
+				className={`settings-overlay flex-col ${settingsStatus}`}
+				onClick={toggleSettings}
+			>
 				<h1>Settings</h1>
 				<div
-					className={`settings-selector settings-seed ${settingsStatus}`}
+					className={`settings-item settings-seed ${settingsStatus}`}
 				>
 					<label htmlFor="seed-color">Change the seed color!</label>
 					<input
@@ -63,7 +68,7 @@ const Settings = () => {
 					/>
 				</div>
 				<div
-					className={`settings-selector settings-form ${settingsStatus}`}
+					className={`settings-item settings-form ${settingsStatus}`}
 				>
 					<label htmlFor="form-filters">Add filters!</label>
 					<form
@@ -77,7 +82,7 @@ const Settings = () => {
 							<input
 								type="radio"
 								id="pastel"
-								name="pastel"
+								name="filter"
 								value="Pastel"
 							/>
 						</div>
@@ -86,14 +91,14 @@ const Settings = () => {
 							<input
 								type="radio"
 								id="vibrant"
-								name="vibrant"
+								name="filter"
 								value="Vibrant"
 							/>
 						</div>
 					</form>
 				</div>
 				<div
-					className={`settings-selector settings-mode ${settingsStatus}`}
+					className={`settings-item settings-mode ${settingsStatus}`}
 				>
 					<label htmlFor="select-mode">
 						Change the palette type!
@@ -103,6 +108,7 @@ const Settings = () => {
 						className="select-mode"
 						value={selectedMode}
 						onChange={(e) => {
+							e.stopPropagation(); // Stop the event from propagating up to the parent div
 							setSelectedMode(e.target.value);
 							handleModeChange(e); // you can still call this function to handle other logic
 						}}
