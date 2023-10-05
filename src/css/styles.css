@@ -26,6 +26,11 @@ body {
     flex-direction: column;
 }
 
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
 /*****************
 ***** Layout *****
 ******************/
@@ -42,6 +47,15 @@ main,
 section,
 .generator-container {
     flex-grow: 1;
+}
+
+section {
+    padding: 0.8em 2em;
+}
+
+section h1 {
+    font-family: "Croissant One";
+    font-size: 2.2rem;
 }
 
 /*****************
@@ -82,13 +96,14 @@ header h1 span {
     justify-content: center;
     align-items: center;
     height: 5em;
-    margin-right: 0.5em;
+    margin-right: 1.4em;
     cursor: pointer;
-    transition: transform 800ms ease-in-out;
+    transition: all 600ms ease-in-out;
 }
 
 .nav.closed .hamburger-container {
-    transition-delay: 200ms;
+    margin-right: 0.4em;
+    transition-delay: 100ms;
 }
 
 .hamburger,
@@ -103,7 +118,7 @@ header h1 span {
     z-index: 1001;
 
     width: 3.3em;
-    transition: transform 800ms ease-in-out 50ms, background-color 1000ms ease-in-out;
+    transition: transform 700ms ease-in-out 50ms, background-color 1000ms ease-in-out;
 }
 
 .hamburger:before,
@@ -112,7 +127,7 @@ header h1 span {
     position: absolute;
     width: 100%;
     opacity: 1;
-    transition: transform 800ms ease-in-out 50ms, background-color 800ms ease-in-out 100ms;
+    transition: transform 700ms ease-in-out 50ms, background-color 800ms ease-in-out 100ms;
 }
 
 .hamburger:before {
@@ -156,12 +171,12 @@ header h1 span {
     backdrop-filter: blur(0.4rem);
     
     transform: translateX(100%);
-    transition: transform 600ms ease-in 300ms; 
+    transition: transform 500ms ease-in 100ms; 
 }
 
 .nav.open .nav--links {
     transform: translateX(0%);
-    transition: transform 600ms ease-in 100ms; 
+    transition: transform 400ms ease-in 100ms; 
 }
 
 .nav--links a {
@@ -179,32 +194,28 @@ header h1 span {
     transform: translateX(0%);
 }
 
-.nav.open .nav--links a.nav--generator {
-    transition-delay: 200ms;
-}
-
-.nav.closed .nav--links a.nav--generator {
-    transition-delay: 600ms;
-}
-
 .nav.open .nav--links a.nav--mypalettes {
-    transition-delay: 400ms;
+    transition-delay: 100ms;
 }
 
-.nav.closed .nav--links a.nav--mypalettes {
-    transition-delay: 400ms;
-}
-
-.nav.open .nav--links a.nav--popular {
-    transition-delay: 600ms;
-}
-
-.nav.closed .nav--links a.nav--popular {
+.nav.open .nav--links a.nav--famous {
     transition-delay: 200ms;
 }
 
 .nav.open .nav--links a.nav--trending {
-    transition-delay: 800ms;
+    transition-delay: 300ms;
+}
+
+.nav.closed .nav--links a.nav--generator {
+    transition-delay: 300ms;
+}
+
+.nav.closed .nav--links a.nav--mypalettes {
+    transition-delay: 200ms;
+}
+
+.nav.closed .nav--links a.nav--famous {
+    transition-delay: 100ms;
 }
 
 .nav.closed .nav--links a.nav--trending {
@@ -220,19 +231,19 @@ header h1 span {
 *** Generator ****
 ******************/
 
+.generator {
+    padding: 0;
+}
+
 .color-container {
     position: relative;
     padding: 1.2em;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-grow: 1;
 }
 
 .color-details {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     font-weight: 600;
 }
@@ -406,10 +417,9 @@ header h1 span {
 section .color-container:first-child .add-color-overlay {
     display: none;
 }
+
 .generator-footer { 
     padding: 0.6em;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -457,7 +467,7 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .settings-icon-container.open {
-    transform: rotate(120deg) scale(1.4);
+    transform: rotate(120deg) scale(1.5);
 }
 
 .settings-icon {
@@ -478,7 +488,7 @@ section .color-container:first-child .add-color-overlay {
 
 /***** settings selectors overlay *****/
 
-.settings-selectors {
+.settings-overlay {
     z-index: 100;
     
     position: fixed;
@@ -494,27 +504,27 @@ section .color-container:first-child .add-color-overlay {
     transition: transform 600ms ease-in 100ms;
 }
 
-.settings.open .settings-selectors {
+.settings.open .settings-overlay {
     transform: translateY(0%);
     transition: transform 600ms ease-in 100ms;
 }
 
-.settings-selectors h1 {
+.settings-overlay h1 {
     font-family: 'Bungee Shade', 'Quicksand', sans-serif;
     letter-spacing: 0.1rem;
+    margin: 0 auto;
     font-size: 3rem;
     transform: translateY(200%);
     transition: transform 900ms ease-out 100ms;
 }
 
-.settings-selectors.open h1 {
+.settings-overlay.open h1 {
     transform: translateY(0%);
 }
 
-.settings-selector {
+.settings-item {
+    z-index: 101;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     font-weight: bold;
     letter-spacing: 0.05rem;
@@ -542,18 +552,13 @@ section .color-container:first-child .add-color-overlay {
     border-radius: 1em;
 }  
 
-.settings-selector form {
+.settings-item form {
     width: 30%;
-}
-
-.form-element {
-    display: flex;
-    justify-content: space-between;
 }
 
 /* Settings Transitions */
 
-.settings.open .settings-selector {
+.settings.open .settings-item {
     opacity: 1;
     transform: translateY(0);
 }
@@ -574,7 +579,7 @@ section .color-container:first-child .add-color-overlay {
     Modals
 **************/
 
-.copy-modal-container {
+.copy-modal-container, .save-disabled-modal-container {
     z-index: 1;
     position: fixed;
     
@@ -588,7 +593,7 @@ section .color-container:first-child .add-color-overlay {
     animation: modalSlideUpBounce 0.75s forwards;
 }
 
-.copy-modal-content {
+.copy-modal-content, .save-disabled-modal-content {
     padding: 1em 1.4em;
     background: #060504;
     color: #F7F7F7;
@@ -625,6 +630,21 @@ section .color-container:first-child .add-color-overlay {
     padding: 1em;
     background-color: #F7F7F7;
     border-radius: 1.2em;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.save-modal-container.slide-in {
+    animation: slideIn 1100ms ease-in-out;
+}
+
+.save-modal-container.slide-out {
+    animation: slideOut 1100ms ease-in-out;
+}
+
+.cancel-save-icon {
+    position: absolute;
+    right: 0.6em;
+    top: 0.6em;
 }
 
 .palette-preview {
@@ -641,7 +661,8 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .save-modal-content input {
-    font-size: 1.2rem;
+    margin: 0.2em 0;
+    font-size: 1.1rem;
     font-weight: bold;
 }
 
@@ -654,16 +675,37 @@ section .color-container:first-child .add-color-overlay {
     font-size: 1.2rem;
 }
 
-/* My Palettes */
-
-.my-palettes {
-    padding: 0.8em 2em;
+@keyframes slideIn {
+    0% {
+        transform: translateX(-500%);
+    }
+    70% {
+        transform: translateX(8%);
+    }
+    85% {
+        tranform: translateX(5%);
+    }
+    100% {
+        tranform: translateX(0);
+    }
 }
 
-.my-palettes h1 {
-    font-family: "Croissant One";
-    font-size: 2.4rem;
-    /* text-decoration: underline; */
+@keyframes slideOut {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(500%);
+    }
+}
+
+/*****************
+*** My Palettes ***
+******************/
+
+.my-palettes p {
+    font-size: 1.2rem;
 }
 
 .saved-palette {
@@ -671,15 +713,8 @@ section .color-container:first-child .add-color-overlay {
     padding: 1em 0;
 }
 
-.unsave-palette-icon {
-    position: absolute;
-    top: 10%;
-    right: 5%;
-
-    font-size: 2rem;
-}
-
 .saved-palette-colors {
+    position: relative;
     height: 10em;
     display: flex;
     border-radius: 1.1em;
@@ -689,14 +724,45 @@ section .color-container:first-child .add-color-overlay {
 .saved-palette-color {
     flex-grow: 1;
     height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }
 
-.palette-info {
+.saved-palette-color p {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+}
+
+.unsave-palette-icon {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    opacity: 0.95;
+    
+    font-size: 2rem;
+}
+
+.unsave-palette-icon:hover,
+.unsave-palette-icon:focus {
+    opacity: 1;
+}
+
+.saved-palette-info {
     padding: 0.5em;
 }
 
-.palette-info p {
+.saved-palette-name {
+    margin: 0.5em 0 0.8em 0;
+    align-items: center;
+}
+
+.saved-palette-info p {
     font-size: 1.25rem;
+    width: 100%;
+    overflow-x: scroll;
 }
 
 .link--blank-my-palettes {
@@ -719,7 +785,94 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .arrow-icon {
-    /* margin-top: 1em; */
+    display: inline-block;
     font-size: 2.4em;
-    transform: rotate(-45deg)
+    transform: rotate(-45deg);
+    animation: bounceNgrow 2s infinite;
+}
+
+@keyframes bounceNgrow {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(0) rotate(-45deg) scale(1);
+    }
+    5% {
+        transform: translate(2px) rotate(-45deg) scale(1.02);
+    }
+    10% {
+        transform: translate(4px) rotate(-45deg) scale(1.04);
+    }
+    15% {
+        transform: translate(6px) rotate(-45deg) scale(1.06);;
+    }
+    20% {
+        transform: translate(6px) rotate(-45deg) scale(1.08);
+    }
+    25% {
+        transform: translate(6px) rotate(-45deg) scale(1.08);
+    }
+    30% {
+        transform: translate(5px) rotate(-45deg) scale(1.07);
+    }
+    35% {
+        transform: translate(4px) rotate(-45deg) scale(1.06);
+    }
+}
+
+/*****************
+***** Famous ******
+******************/
+
+.famous h1 {
+    font-family: "Croissant One";
+    margin-bottom: 0.6em;
+}
+
+.famous p {
+    margin-bottom: 1em;
+}
+
+.famous-palette-container {
+    padding: 1em 0.6em 1.2em 0;
+}
+
+.famous-palette-info {
+    margin-right: 0.9em;
+    width: 100%;
+}
+
+.famous-palette-info h3 {
+    font-size: 1.2rem;
+}
+
+.famous-palette-info p {
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03rem;
+}
+
+.famous-palette-colors {
+    gap: 0.6em;
+}
+
+.famous-palette-color {
+    font-weight: bold;
+    padding: 0.1em 0.2em;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.famous-palette-container img {
+    width: 80%;
+    max-width: 600px;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+/*****************
+**** Trending ****
+******************/
+
+.trending-placeholder {
+    margin-top: 5em;
 }

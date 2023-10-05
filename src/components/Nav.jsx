@@ -41,13 +41,13 @@ const Nav = () => {
 					My Palettes
 				</Link>
 				<Link
-					to="/popular"
-					className="nav--popular"
+					to="/famous"
+					className="nav--famous"
 					onClick={() => {
 						toggleNav();
 					}}
 				>
-					Popular Palettes
+					Famous Palettes
 				</Link>
 				<Link
 					to="/trending"

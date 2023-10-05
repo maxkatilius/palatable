@@ -9,7 +9,7 @@ import Layout from "./components/Layout";
 // Pages
 import Generator from "./pages/Generator";
 import MyPalettes from "./pages/MyPalettes";
-import Popular from "./pages/Popular";
+import Famous from "./pages/Famous";
 import Trending from "./pages/Trending";
 
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
 								path="/my-palettes"
 								element={<MyPalettes />}
 							/>
-							<Route path="/popular" element={<Popular />} />
+							<Route path="/famous" element={<Famous />} />
 							<Route path="/trending" element={<Trending />} />
 						</Route>
 					</Routes>

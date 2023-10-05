@@ -1,17 +1,27 @@
 import React from "react";
 import { useColorContext } from "../../context/ColorContext";
-import { nanoid } from "nanoid";
 
 import { BiSave } from "react-icons/bi";
 
 const SaveBtn = () => {
-	const { setIsSaveModalVisible } = useColorContext();
+	const {
+		setIsSaveModalVisible,
+		setIsSaveDisabledModalVisible,
+		lockedColors,
+	} = useColorContext();
 
 	return (
 		<BiSave
 			className="btn save-btn"
 			onClick={() => {
-				setIsSaveModalVisible(true);
+				if (lockedColors.length) {
+					setIsSaveModalVisible(true);
+				} else {
+					setIsSaveDisabledModalVisible(true);
+					setTimeout(() => {
+						setIsSaveDisabledModalVisible(false); // auto-hide modal after 2 seconds
+					}, 2000);
+				}
 			}}
 		/>
 	);

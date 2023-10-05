@@ -14,9 +14,7 @@ make variation customizable / on / off
 
 dark and light mode
 
-update color naming program
-
-black/white text based on contrast
+update color names issues - 0101 0001 etc...
 
 maybe add in a useRef to see if its the first render and if so populate the unlocked colors and colors array
 

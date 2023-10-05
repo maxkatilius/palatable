@@ -8,7 +8,7 @@ import GenerateBtn from "./Btns/GenerateBtn";
 
 const GeneratorFooter = () => {
 	return (
-		<div className="generator-footer">
+		<div className="generator-footer flex-between">
 			<Settings />
 			<RemoveColorBtn />
 			<AddColorBtn />
