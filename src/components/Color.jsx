@@ -1,19 +1,25 @@
 import React from "react";
-import { copyToClipboard, getLuminance } from "../utils";
+import { copyToClipboard, getContrastingTextColor } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 import { useColorContext } from "../context/ColorContext";
 import { generateColors } from "../utils";
 
 const Color = ({ color }) => {
-	const { setIsModalVisible, setCount, setColors, colors, mode, seedColor } =
-		useColorContext();
-	const [isLocked, setIsLocked] = React.useState(false);
+	const {
+		setIsCopyModalVisible,
+		setCount,
+		setColors,
+		colors,
+		mode,
+		seedColor,
+	} = useColorContext();
+	const isLocked = color.isLocked;
 	const copyHexToClipboard = () => {
 		copyToClipboard(`${color.hex.slice(1)}`);
-		setIsModalVisible(true);
+		setIsCopyModalVisible(true);
 		setTimeout(() => {
-			setIsModalVisible(false); // auto-hide modal after 2 seconds
+			setIsCopyModalVisible(false); // auto-hide modal after 2 seconds
 		}, 2000);
 	};
 
@@ -38,7 +44,6 @@ const Color = ({ color }) => {
 
 	const lockColor = (id) => {
 		console.log("Color locked!");
-		setIsLocked(true);
 		setColors((prevColors) =>
 			prevColors.map((prevColor) => {
 				return prevColor.id === id
@@ -53,7 +58,6 @@ const Color = ({ color }) => {
 
 	const unlockColor = (id) => {
 		console.log("Color unlocked!");
-		setIsLocked(false);
 		setColors((prevColors) =>
 			prevColors.map((prevColor) => {
 				return prevColor.id === id
@@ -66,24 +70,15 @@ const Color = ({ color }) => {
 		);
 	};
 
-	const textColor =
-		getLuminance(
-			color.hsl.hue / 360,
-			color.hsl.saturation / 100,
-			color.hsl.lightness / 100
-		) > 0.5
-			? "#030202"
-			: "#F0F0F0";
-
 	return (
 		<div
-			className="color-container"
+			className="color-container flex-between"
 			style={{
 				backgroundColor: `hsl(${color.hsl.hue}, ${color.hsl.saturation}%, ${color.hsl.lightness}%)`,
 			}}
 		>
-			<div className="color-details">
-				<div className="color-text" style={{ color: textColor }}>
+			<div className="color-details flex-between">
+				<div className="color-text" style={{ color: color.textColor }}>
 					<h2>{color.hex}</h2>
 					<p>{color.name}</p>
 				</div>

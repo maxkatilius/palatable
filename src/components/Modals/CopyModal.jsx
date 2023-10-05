@@ -2,12 +2,12 @@ import React from "react";
 import { useColorContext } from "../../context/ColorContext";
 
 const CopyModal = () => {
-	const { setIsModalVisible } = useColorContext();
+	const { setIsCopyModalVisible } = useColorContext();
 	return (
 		<div className="copy-modal-container">
 			<div
 				className="copy-modal-content"
-				onClick={() => setIsModalVisible(false)}
+				onClick={() => setIsCopyModalVisible(false)}
 			>
 				<p>Hex copied to clipboard!</p>
 			</div>

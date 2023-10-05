@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { generateColors, hslToHex } from "../utils";
 
 const ColorContext = createContext();
@@ -31,12 +31,29 @@ const ColorContextProvider = ({ children }) => {
 		colors.filter((color) => !color.isLocked)
 	);
 	const [lastColorId, setLastColorId] = React.useState(null);
-	const [navOpen, setNavOpen] = useState(false);
-	const [settingsOpen, setSettingsOpen] = useState(false);
-	const [isModalVisible, setIsModalVisible] = React.useState(false);
-	const [isSaveModalVisible, setIsSaveModalVisible] = useState(false);
+	const [navOpen, setNavOpen] = React.useState(false);
+	const [settingsOpen, setSettingsOpen] = React.useState(false);
+	const [isCopyModalVisible, setIsCopyModalVisible] = React.useState(false);
+	const [isSaveModalVisible, setIsSaveModalVisible] = React.useState(false);
+	const [isSaveDisabledModalVisible, setIsSaveDisabledModalVisible] =
+		React.useState(false);
 
 	// Helper functions
+
+	const resetPalette = () => {
+		setColors(
+			generateColors(
+				{
+					hue: randomHue,
+					saturation: randomSaturation,
+					lightness: randomLightness,
+				},
+				mode,
+				count
+			)
+		);
+		setLockedColors([]);
+	};
 
 	const generatePalette = () => {
 		const newColors = generateColors(
@@ -83,11 +100,14 @@ const ColorContextProvider = ({ children }) => {
 				setNavOpen,
 				settingsOpen,
 				setSettingsOpen,
-				isModalVisible,
-				setIsModalVisible,
+				isCopyModalVisible,
+				setIsCopyModalVisible,
 				isSaveModalVisible,
 				setIsSaveModalVisible,
+				isSaveDisabledModalVisible,
+				setIsSaveDisabledModalVisible,
 				generatePalette,
+				resetPalette,
 			}}
 		>
 			{children}

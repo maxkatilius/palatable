@@ -77,7 +77,7 @@ const Settings = () => {
 							console.log("filters changed!");
 						}}
 					>
-						<div className="form-element">
+						<div className="flex-between">
 							<label htmlFor="pastel">Pastel</label>
 							<input
 								type="radio"
@@ -98,7 +98,7 @@ const Settings = () => {
 					</form>
 				</div>
 				<div
-					className={`settings-item settings-mode ${settingsStatus}`}
+					className={`settings-item settings-mode flex-between ${settingsStatus}`}
 				>
 					<label htmlFor="select-mode">
 						Change the palette type!

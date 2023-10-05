@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 import { useColorContext } from "../context/ColorContext";
 
@@ -6,6 +7,7 @@ import Color from "../components/Color";
 import GeneratorFooter from "../components/GeneratorFooter";
 import CopyModal from "../components/Modals/CopyModal";
 import SaveModal from "../components/Modals/SaveModal";
+import SaveDisabledModal from "../components/Modals/SaveDisabledModal";
 
 const Generator = () => {
 	const {
@@ -14,10 +16,13 @@ const Generator = () => {
 		count,
 		colors,
 		setColors,
-		isModalVisible,
+		isCopyModalVisible,
 		isSaveModalVisible,
+		isSaveDisabledModalVisible,
+		setIsSaveDisabledModalVisible,
 		generatePalette,
 		lockedColors,
+		resetPalette,
 	} = useColorContext();
 
 	const colorEls = colors.map((color) => {
@@ -30,7 +35,18 @@ const Generator = () => {
 		localStorage.setItem(paletteId, { ...lockedColors });
 	};
 
-	// UseEffects
+	const location = useLocation();
+
+	React.useEffect(() => {
+		console.log("Pathname changed to:", location.pathname);
+		if (location.pathname === "/") {
+			resetPalette();
+			// setColors((prevColors) =>
+			// 	prevColors.map((color) => ({ ...color, isLocked: false }))
+			// );
+			// generatePalette();
+		}
+	}, [location.pathname]);
 
 	// This useEffect adds an event listener to the whole document
 	// so that when the user hits the spacebar, it triggers palette generation
@@ -54,12 +70,17 @@ const Generator = () => {
 	}, [seedColor, mode, count, generatePalette]); // Include generatePalette as a dependency
 
 	return (
-		<section className="flex-col">
+		<section className="generator flex-col">
 			<div className="generator-container flex-col">
 				{colorEls}
-				{isModalVisible && <CopyModal />}
+				{isCopyModalVisible && <CopyModal />}
 				{isSaveModalVisible && (
 					<SaveModal onClose={() => setIsSaveModalVisible(false)} />
+				)}
+				{isSaveDisabledModalVisible && (
+					<SaveDisabledModal
+						onClose={() => setIsSaveDisabledModalVisible(false)}
+					/>
 				)}
 			</div>
 			<GeneratorFooter />

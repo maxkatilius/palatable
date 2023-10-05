@@ -4,7 +4,11 @@ import { useColorContext } from "../../context/ColorContext";
 import { BiSave } from "react-icons/bi";
 
 const SaveBtn = () => {
-	const { setIsSaveModalVisible, lockedColors } = useColorContext();
+	const {
+		setIsSaveModalVisible,
+		setIsSaveDisabledModalVisible,
+		lockedColors,
+	} = useColorContext();
 
 	return (
 		<BiSave
@@ -12,6 +16,11 @@ const SaveBtn = () => {
 			onClick={() => {
 				if (lockedColors.length) {
 					setIsSaveModalVisible(true);
+				} else {
+					setIsSaveDisabledModalVisible(true);
+					setTimeout(() => {
+						setIsSaveDisabledModalVisible(false); // auto-hide modal after 2 seconds
+					}, 2000);
 				}
 			}}
 		/>

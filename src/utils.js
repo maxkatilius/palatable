@@ -194,6 +194,10 @@ export function getLuminance(h, s, l) {
   return luminance;
 }
 
+export function getContrastingTextColor(h, s, l) {
+  const luminance = getLuminance(h / 360, s / 100, l / 100);
+  return luminance > 0.5 ? "#030202" : "#F0F0F0";
+}
 
 /*********************
 *** Event Handlers ***
@@ -211,7 +215,12 @@ export function copyToClipboard(text) {
 **************************/
 
 const createColor = (hue, saturation, lightness) => {
-  const hexValue = hslToHex(hue, saturation, lightness);
+  const hexValue = hslToHex(hue, saturation, lightness)
+  const textColor = getContrastingTextColor(
+		hue,
+		saturation,
+		lightness
+	);
   return {
     id: nanoid(),
     hsl: {
@@ -221,6 +230,7 @@ const createColor = (hue, saturation, lightness) => {
     },
     hex: hexValue,
     name: findClosestColorName(hexValue),
+    textColor: textColor,
     isLocked: false
   };
 };
