@@ -1,28 +1,25 @@
+Pages:
+-rather than trending palettes, have popular palettes. - spring, summer, autumn, winter, moods? 
+
 - add a undo button for individual colors / whole palette
 
 -make paletteGenerating functions more DRY / dynamic
 
-default nice palettes
+Settings:
+- filters - add filters to the color schemes including: pastel, vibrant..., grayscale
 
-save palettes
+Dark and light mode?
 
-make pastel / vibrant effects to apply on top of other palettes
-
-more modes? spring, autumn, summer, winter,
-
-make variation customizable / on / off
-
-dark and light mode
+Make it responsive
 
 update color names issues - 0101 0001 etc...
 
-maybe add in a useRef to see if its the first render and if so populate the unlocked colors and colors array
-
 make all components controlled
 
-websafe colors
+websafe colors filter / palettes?
 
-in generator footer - add little biuttons section for undo redo reset save
+Functionality:
+- add little buttons in footer section for undo redo color remove and palette remove or palette generate? 
 
 
 Code Reusability:
@@ -31,13 +28,6 @@ Code Reusability:
     consider creating helper functions. For example, functions to 
     clamp values within a range, or randomize within a range, can 
     be defined once and then reused.
-
-Color Naming:
-
-    Right now, each color is given a generic name of "name". Depending 
-    on the purpose of your app, you might consider implementing a color 
-    naming function. This function could provide a meaningful name 
-    based on the HSL values, or simply generate a random name for fun.
 
 Logging:
 
@@ -61,8 +51,6 @@ Hue Normalization:
 Enhancements:
 
     For more advanced functionality, you might also consider adding:
-        A color locking mechanism, so users can lock certain colors 
-        they like while re-randomizing others.
         Functions to export the palette in different formats (e.g., 
         as CSS variables, a downloadable image, etc.)
         Ability to generate gradients based on two or more colors 
