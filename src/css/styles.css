@@ -163,7 +163,7 @@ header h1 span {
     position: fixed;
     inset: 0 0 0 0%;
     padding: 8em 2em;
-    gap: 3em;
+    gap: 2.4em;
 
     background-color: hsla(0, 0%, 5%, 0.6);
     backdrop-filter: blur(0.4rem);
@@ -865,7 +865,7 @@ section .color-container:first-child .add-color-overlay {
     max-width: 600px;
     height: auto;
     object-fit: cover;
-    object-position: center;
+    object-position: 30%;
 }
 
 /*****************

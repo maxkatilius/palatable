@@ -6,6 +6,12 @@ import persistenceOfMemory from './assets/images/persistence-of-memory.jpg'
 import waterLillies from './assets/images/water-lillies.jpg'
 import theScream from './assets/images/the-scream.jpg'
 import cafeTerraceAtNight from './assets/images/cafe-terrace-at-night.jpg'
+import monaLisa from './assets/images/mona-lisa.jpg'
+import sonOfMan from './assets/images/son-of-man.jpg'
+import creationOfAdam from './assets/images/creation-of-adam.jpg'
+import lesDemoiselles from './assets/images/les-demoiselles.jpg'
+
+
 
 
 export const famousPalettes = [
@@ -34,6 +40,12 @@ export const famousPalettes = [
         imgUrl: starryNight,
     },
     {
+        name: "Creation of Adam",
+        artist: "Michaelangelo",
+        colors: ["#42819F", "#86AA7D", "#CBB396", "#555234", "#4D280F"],
+        imgUrl: creationOfAdam,
+    },
+    {
         name: "Persistence of Memory",
         artist: "Salvador Dali",
         colors: ["#40798C", "#BCA455", "#BFB37F", "#805730", "#514A2E"],
@@ -56,5 +68,23 @@ export const famousPalettes = [
         artist: "Vincent Van Gogh",
         colors: ["#F2D527", "#F0BB18", "#3C43A1", "#101B69", "#0A0829"],
         imgUrl: cafeTerraceAtNight,
+    },
+    {
+        name: "Mona Lisa",
+        artist: "Leonardo da Vinci",
+        colors: ["#C8B272", "#A88B4C", "#A0A584", "#697153", "#43362A"],
+        imgUrl: monaLisa,
+    },
+    {
+        name: "Les Demoiselles d'Avignon",
+        artist: "Pablo Picasso",
+        colors: ["#CD6C74", "#566C7D", "#DD9D91", "#A1544B", "#D5898D"],
+        imgUrl: lesDemoiselles,
+    },
+    {
+        name: "The Son of Man",
+        artist: "Rene Magritte",
+        colors: ["#B60614", "#3A282F", "#909018", "#E3BFA1", "#EE833E"],
+        imgUrl: sonOfMan,
     },
 ]
