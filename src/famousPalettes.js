@@ -54,7 +54,7 @@ export const famousPalettes = [
     {
         name: "Cafe Terrace at Night",
         artist: "Vincent Van Gogh",
-        colors: ["#f2d527", "#f0bb18", "#3c43a1", "#101b69", "#0a0829"],
+        colors: ["#F2D527", "#F0BB18", "#3C43A1", "#101B69", "#0A0829"],
         imgUrl: cafeTerraceAtNight,
     },
 ]

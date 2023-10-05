@@ -8,6 +8,7 @@ import { generateColors } from "../utils";
 const Color = ({ color }) => {
 	const {
 		setIsCopyModalVisible,
+		count,
 		setCount,
 		setColors,
 		colors,
@@ -35,11 +36,15 @@ const Color = ({ color }) => {
 		setColors(newColorsArray);
 	};
 
+	let closeDisabled = false;
+
 	const removeColor = (colorId) => {
-		setCount((prevCount) => prevCount - 1);
-		setColors((prevColors) =>
-			prevColors.filter((prevColor) => prevColor.id !== colorId)
-		);
+		if (count > 1) {
+			setCount((prevCount) => prevCount - 1);
+			setColors((prevColors) =>
+				prevColors.filter((prevColor) => prevColor.id !== colorId)
+			);
+		}
 	};
 
 	const lockColor = (id) => {
