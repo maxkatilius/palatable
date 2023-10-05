@@ -837,12 +837,12 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .famous-palette-container {
-    padding: 1em 0em 1.2em 0;
+    gap: 0.8em;
+    margin-bottom: 1em;
     width: 100%;
 }
 
 .famous-palette-info {
-    margin-right: 0.9em;
     width: 100%;
 }
 
