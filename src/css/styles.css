@@ -50,7 +50,7 @@ section,
 }
 
 section {
-    padding: 0.8em 2em;
+    padding: 1.2em;
 }
 
 section h1 {
@@ -706,6 +706,10 @@ section .color-container:first-child .add-color-overlay {
     font-size: 1.2rem;
 }
 
+.saved-palettes {
+    padding: 1em;
+}
+
 .saved-palette {
     position: relative;
     padding: 1em 0;
@@ -819,6 +823,9 @@ section .color-container:first-child .add-color-overlay {
 /*****************
 ***** Famous ******
 ******************/
+.famous {
+    padding: 1.2em;
+}
 
 .famous h1 {
     font-family: "Croissant One";
@@ -830,7 +837,7 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .famous-palette-container {
-    padding: 1em 0.6em 1.2em 0;
+    padding: 1em 0em 1.2em 0;
     width: 100%;
 }
 
@@ -861,11 +868,11 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .famous-palette-container img {
-    width: 8em;
+    width: 10em;
     max-width: 600px;
     height: auto;
     object-fit: cover;
-    object-position: 30%;
+    object-position: 25%;
 }
 
 /*****************

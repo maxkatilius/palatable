@@ -119,7 +119,7 @@ const MyPalettes = () => {
 		<section className="my-palettes flex-col">
 			<h1>My Palettes</h1>
 			<p>Click on a color to copy the hex to your clipboard!</p>
-			{paletteEls}
+			<div className="saved-palettes">{paletteEls}</div>
 		</section>
 	) : (
 		<div className="link--blank-my-palettes">
