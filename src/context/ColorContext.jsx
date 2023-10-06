@@ -21,7 +21,7 @@ const ColorContextProvider = ({ children }) => {
 		lightness: randomLightness,
 		hex: randomHex,
 	});
-	const [mode, setMode] = React.useState("Vibrant");
+	const [mode, setMode] = React.useState("Random");
 	const [count, setCount] = React.useState(5);
 	const [colors, setColors] = React.useState([]);
 	const [lockedColors, setLockedColors] = React.useState(

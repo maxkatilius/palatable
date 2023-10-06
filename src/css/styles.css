@@ -63,7 +63,7 @@ section h1 {
 ******************/
 
 header {
-    padding: 1em 1em 0.8em 0.8em;
+    padding: 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -235,7 +235,7 @@ header h1 span {
 
 .color-container {
     position: relative;
-    padding: 1.2em;
+    padding: 0.8em;
     align-items: center;
     flex-grow: 1;
 }
@@ -249,7 +249,7 @@ header h1 span {
 .color-text h2 {
     font-family: 'Poppins', 'sans-serif';
     font-style: italic;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     letter-spacing: 0.05rem;
 }
 
@@ -416,6 +416,8 @@ section .color-container:first-child .add-color-overlay {
     display: none;
 }
 
+/* Footer */
+
 .generator-footer { 
     padding: 0.6em;
     align-items: center;
@@ -434,7 +436,8 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .generate-btn {
-    padding: 0.8em 1em;
+    padding: 1.1em;
+    margin-left: 0.5em;
     font-weight: 500;
 }
 
@@ -444,7 +447,7 @@ section .color-container:first-child .add-color-overlay {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.8rem;
+    font-size: 3rem;
     color: #161D27;
     background-color: transparent;
 }
@@ -458,20 +461,20 @@ section .color-container:first-child .add-color-overlay {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 4em;
-    width: 4em;
+    height: 4.2em;
+    width: 4.2em;
     cursor: pointer;
-    transition: transform 1000ms cubic-bezier(.72, .57, .25, 2);
+    transition: transform 800ms cubic-bezier(.72, .57, .25, 2);
 }
 
 .settings-icon-container.open {
-    transform: rotate(120deg) scale(1.5);
+    transform: rotate(120deg) scale(1.4);
 }
 
 .settings-icon {
     z-index: 101;
     
-    font-size: 2.7rem;
+    font-size: 2.6rem;
     color: #161D27;
 }
 
@@ -491,7 +494,7 @@ section .color-container:first-child .add-color-overlay {
     
     position: fixed;
     inset: 0 0 0 0%;
-    gap: 3em;
+    gap: 3.3em;
 
     padding: 2em;
     color: #DBD4D3;
@@ -523,7 +526,7 @@ section .color-container:first-child .add-color-overlay {
 .settings-item {
     z-index: 101;
     width: 100%;
-    align-items: center;
+    gap: 1em;
     font-weight: bold;
     letter-spacing: 0.05rem;
     opacity: 0;
@@ -532,27 +535,62 @@ section .color-container:first-child .add-color-overlay {
     transition: opacity 600ms ease-in, transform 600ms ease-in;
 }
 
-.settings label {
-    width: 40%;
+.settings-item > label {
+    font-family: "Bungee";
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.settings-item form {
+    display: grid;
+    grid-template: 1fr 1fr 1fr 1fr 1fr 1fr / 1fr 1fr;
+    gap: 0.6em;
+}
+
+.form-element label {
+    margin-right: auto;
     font-size: 1.2rem;
 }
 
+input[type="radio"] {
+    margin-right: 1em;
+}
+
+#none {
+    opacity: 0;
+}
+
+.settings-seed {
+    position: relative;
+}
+
+input[type="color"] {
+    width: 100%;
+    height: 3em;
+    border: none;
+}
+
+.settings-seed p {
+    position: absolute;
+    font-size: 1.2rem;
+    letter-spacing: 0.075rem;
+    top: 63%;
+    left: 2%;
+}
+
 .settings-mode select {
-    width: 40%;
-    padding: 1em;
+    padding: 0.7em;
 
     background-color: #DBD4D3;
     text-align: center;
     font-weight: bold;
+    font-size: 1.05rem;
     letter-spacing: 0.05rem;
 
     border: none;
     border-radius: 1em;
 }  
-
-.settings-item form {
-    width: 30%;
-}
 
 /* Settings Transitions */
 
@@ -561,16 +599,17 @@ section .color-container:first-child .add-color-overlay {
     transform: translateY(0);
 }
 
+.settings.open .settings-mode {
+    transition-duration: 600ms;
+    transition-delay: 550ms;
+}
 .settings.open .settings-seed {
-    transition-delay: 300ms;
+    transition-duration: 600ms;
+    transition-delay: 400ms;
 }
 
 .settings.open .settings-form {
-    transition-delay: 500ms;
-}
-
-.settings.open .settings-mode {
-    transition-delay: 700ms;
+    transition-duration: 900ms;
 }
 
 /**************
@@ -829,21 +868,26 @@ section .color-container:first-child .add-color-overlay {
 
 .famous h1 {
     font-family: "Croissant One";
-    margin-bottom: 0.6em;
 }
 
 .famous p {
-    margin-bottom: 1em;
+    margin: 0.2em 0 1.2em 0;
 }
 
 .famous-palette-container {
+    display: flex;
+    align-items: stretch;
     gap: 0.8em;
     margin-bottom: 2em;
     width: 100%;
 }
 
 .famous-palette-info {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    flex-grow: 1;
+    min-height: 0;
 }
 
 .famous-palette-info h3 {
@@ -857,12 +901,12 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .famous-palette-colors {
+    margin-top: auto;
     gap: 0.6em;
 }
 
 .famous-palette-color {
-    font-weight: bold;
-    padding: 0.1em 0.2em;
+    padding: 0.2em;
     font-size: 0.8rem;
     letter-spacing: 0.1em;
 }
@@ -879,6 +923,9 @@ section .color-container:first-child .add-color-overlay {
 **** Trending ****
 ******************/
 
-.trending-placeholder {
-    margin-top: 5em;
+.trending {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

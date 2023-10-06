@@ -2,8 +2,8 @@ import React from "react";
 
 const Trending = () => {
 	return (
-		<section>
-			<h1 className="trending-placeholder">Coming soon...</h1>
+		<section className="trending">
+			<h1>Coming soon...</h1>
 		</section>
 	);
 };

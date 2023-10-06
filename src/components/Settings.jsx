@@ -2,7 +2,7 @@ import React from "react";
 import { FiSettings } from "react-icons/fi";
 import { useColorContext } from "../context/ColorContext";
 import { useOverlayContext } from "../context/OverlayContext";
-import { hexToHSL } from "../utils";
+import { hexToHSL, getContrastingTextColor } from "../utils";
 
 const Settings = () => {
 	const { settingsOpen, setSettingsOpen } = useOverlayContext();
@@ -11,6 +11,8 @@ const Settings = () => {
 	const [selectedSeedColor, setSelectedSeedColor] = React.useState(
 		seedColor.hex
 	);
+
+	const [textColor, setTextColor] = React.useState("#FFFFFF");
 
 	React.useEffect(() => {
 		setSelectedSeedColor(seedColor.hex);
@@ -40,6 +42,7 @@ const Settings = () => {
 		const hexColor = e.target.value;
 		setSelectedSeedColor(hexColor);
 		const [h, s, l] = hexToHSL(hexColor);
+		setTextColor(getContrastingTextColor(h, s, l));
 		setSeedColor({ hue: h, saturation: s, lightness: l, hex: hexColor });
 	};
 
@@ -57,9 +60,132 @@ const Settings = () => {
 			>
 				<h1>Settings</h1>
 				<div
-					className={`settings-item settings-seed ${settingsStatus}`}
+					className={`settings-item settings-form flex-col ${settingsStatus}`}
 				>
-					<label htmlFor="seed-color">Change the seed color!</label>
+					<label htmlFor="form-filters">Filters</label>
+					<form
+						name="form-filters"
+						onChange={() => {
+							console.log("filters changed!");
+						}}
+					>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="light"
+								name="filter"
+								value="light"
+							/>
+							<label htmlFor="light">Light</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="dark"
+								name="filter"
+								value="dark"
+							/>
+							<label htmlFor="dark">Dark</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="cool"
+								name="filter"
+								value="cool"
+							/>
+							<label htmlFor="cool">Cool</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="warm"
+								name="filter"
+								value="warm"
+							/>
+							<label htmlFor="warm">Warm</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="vibrant"
+								name="filter"
+								value="Vibrant"
+							/>
+							<label htmlFor="vibrant">Vibrant</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="muted"
+								name="filter"
+								value="muted"
+							/>
+							<label htmlFor="muted">Muted</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="pastel"
+								name="filter"
+								value="Pastel"
+							/>
+							<label htmlFor="pastel">Pastel</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="rich"
+								name="filter"
+								value="rich"
+							/>
+							<label htmlFor="rich">Rich</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="natural"
+								name="filter"
+								value="natural"
+							/>
+							<label htmlFor="natural">Natural</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="metallic"
+								name="filter"
+								value="metallic"
+							/>
+							<label htmlFor="metallic">Metallic</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="retro"
+								name="filter"
+								value="retro"
+							/>
+							<label htmlFor="retro">Retro</label>
+						</div>
+						<div className="flex-between form-element">
+							<input
+								type="radio"
+								id="none"
+								name="filter"
+								value="none"
+							/>
+							<label htmlFor="none">None</label>
+						</div>
+					</form>
+				</div>
+				<div
+					className={`settings-item settings-seed flex-col ${settingsStatus}`}
+				>
+					<label htmlFor="seed-color">Seed color</label>
+					<p style={{ color: textColor }}>
+						{selectedSeedColor.toUpperCase()}
+					</p>
 					<input
 						name="seed-color"
 						type="color"
@@ -68,41 +194,9 @@ const Settings = () => {
 					/>
 				</div>
 				<div
-					className={`settings-item settings-form ${settingsStatus}`}
+					className={`settings-item settings-mode flex-col ${settingsStatus}`}
 				>
-					<label htmlFor="form-filters">Add filters!</label>
-					<form
-						name="form-filters"
-						onChange={() => {
-							console.log("filters changed!");
-						}}
-					>
-						<div className="flex-between">
-							<label htmlFor="pastel">Pastel</label>
-							<input
-								type="radio"
-								id="pastel"
-								name="filter"
-								value="Pastel"
-							/>
-						</div>
-						<div className="form-element">
-							<label htmlFor="vibrant">Vibrant</label>
-							<input
-								type="radio"
-								id="vibrant"
-								name="filter"
-								value="Vibrant"
-							/>
-						</div>
-					</form>
-				</div>
-				<div
-					className={`settings-item settings-mode flex-between ${settingsStatus}`}
-				>
-					<label htmlFor="select-mode">
-						Change the palette type!
-					</label>
+					<label htmlFor="select-mode">Palette type</label>
 					<select
 						name="select-mode"
 						className="select-mode"
@@ -114,13 +208,8 @@ const Settings = () => {
 						}}
 					>
 						<option>Random</option>
-						<option>Vibrant</option>
-						<option>Pastel</option>
-						<option>Monochrome</option>
-						<option>Dark Monochrome</option>
-						<option>Light Monochrome</option>
+						<option>Monochromatic</option>
 						<option>Analogous</option>
-						<option>Analogous Complementary</option>
 						<option>Complementary</option>
 						<option>Split Complementary</option>
 						<option>Triadic</option>

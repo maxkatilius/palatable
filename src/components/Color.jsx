@@ -82,9 +82,12 @@ const Color = ({ color }) => {
 				backgroundColor: `hsl(${color.hsl.hue}, ${color.hsl.saturation}%, ${color.hsl.lightness}%)`,
 			}}
 		>
-			<div className="color-details flex-between">
-				<div className="color-text" style={{ color: color.textColor }}>
-					<h2>{color.hex}</h2>
+			<div
+				className="color-details flex-between"
+				style={{ color: color.textColor }}
+			>
+				<div className="color-text">
+					<h2>{color.hex.slice(1)}</h2>
 					<p>{color.name}</p>
 				</div>
 				<div className="color-icons-container">
