@@ -14,7 +14,9 @@ const Settings = () => {
 	);
 	const [selectedFilter, setSelectedFilter] = React.useState(filter);
 
-	const [textColor, setTextColor] = React.useState("#FFFFFF");
+	const [textColor, setTextColor] = React.useState(
+		getContrastingTextColor(seedColor.hex)
+	);
 
 	React.useEffect(() => {
 		setSelectedSeedColor(seedColor.hex);
