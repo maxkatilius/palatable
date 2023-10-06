@@ -28,6 +28,10 @@ const Settings = () => {
 	 *** Event Handlers ***
 	 **********************/
 
+	const handleSettingsInteraction = (e) => {
+		e.stopPropagation(); // Stop the event from propagating up to the settings-overlay div
+	};
+
 	const toggleSettings = () => {
 		setSettingsOpen((prevSettingsOpen) => !prevSettingsOpen);
 	};
@@ -68,6 +72,7 @@ const Settings = () => {
 				<h1>Settings</h1>
 				<div
 					className={`settings-item settings-form flex-col ${settingsStatus}`}
+					onClick={handleSettingsInteraction}
 				>
 					<label htmlFor="form-filters">Filters</label>
 					<form
@@ -188,6 +193,7 @@ const Settings = () => {
 				</div>
 				<div
 					className={`settings-item settings-seed flex-col ${settingsStatus}`}
+					onClick={handleSettingsInteraction}
 				>
 					<label htmlFor="seed-color">Seed color</label>
 					<p style={{ color: textColor }}>
@@ -202,6 +208,7 @@ const Settings = () => {
 				</div>
 				<div
 					className={`settings-item settings-mode flex-col ${settingsStatus}`}
+					onClick={handleSettingsInteraction}
 				>
 					<label htmlFor="select-mode">Palette type</label>
 					<select
