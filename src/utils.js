@@ -10,6 +10,23 @@ function randomNumBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+export function shuffleArray(array) {
+    let currentIndex = array.length, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+}
+
+
 /***********************
 ***** Color Naming *****
 ************************/
@@ -249,7 +266,7 @@ export const generateColors = (seedColor, mode, count, filter) => {
     } else if (filter !== "None") { // If filter is "None", we won't modify colors
         console.error(`${filter} is not an accepted filter!`);
     }
-    return colors;
+    return shuffleArray(colors);
 };
 
 export const getRandomColors = (hsl, count) => {
@@ -407,7 +424,7 @@ export const getMonochromaticColors = (hsl, count) => {
   const variationRange = 20 
 
   for (let i = 0; i < count; i++) {
-    const hueVariation = randomNumBetween(-12, 12); 
+    const hueVariation = randomNumBetween(-8, 8); 
     const saturationVariation = randomNumBetween(-variationRange, variationRange);
     const lightnessVariation = randomNumBetween(-variationRange, variationRange);
 
