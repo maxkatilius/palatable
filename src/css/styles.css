@@ -494,7 +494,7 @@ section .color-container:first-child .add-color-overlay {
     
     position: fixed;
     inset: 0 0 0 0%;
-    gap: 3.3em;
+    gap: 3em;
 
     padding: 2em;
     color: #DBD4D3;
