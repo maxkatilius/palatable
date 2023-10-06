@@ -13,6 +13,7 @@ const Color = ({ color }) => {
 		setColors,
 		colors,
 		mode,
+		filter,
 		seedColor,
 	} = useColorContext();
 	const isLocked = color.isLocked;
@@ -26,7 +27,7 @@ const Color = ({ color }) => {
 
 	const addColor = (colorId) => {
 		setCount((prevCount) => prevCount + 1);
-		const newColor = generateColors(seedColor, mode, 1)[0];
+		const newColor = generateColors(seedColor, mode, 1, filter)[0];
 		const index = colors.findIndex((col) => col.id === colorId);
 		const newColorsArray = [
 			...colors.slice(0, index),
@@ -48,7 +49,6 @@ const Color = ({ color }) => {
 	};
 
 	const lockColor = (id) => {
-		console.log("Color locked!");
 		setColors((prevColors) =>
 			prevColors.map((prevColor) => {
 				return prevColor.id === id
@@ -62,7 +62,6 @@ const Color = ({ color }) => {
 	};
 
 	const unlockColor = (id) => {
-		console.log("Color unlocked!");
 		setColors((prevColors) =>
 			prevColors.map((prevColor) => {
 				return prevColor.id === id

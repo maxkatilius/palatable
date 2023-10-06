@@ -6,11 +6,13 @@ import { hexToHSL, getContrastingTextColor } from "../utils";
 
 const Settings = () => {
 	const { settingsOpen, setSettingsOpen } = useOverlayContext();
-	const { mode, setMode, seedColor, setSeedColor } = useColorContext();
+	const { mode, setMode, seedColor, setSeedColor, filter, setFilter } =
+		useColorContext();
 
 	const [selectedSeedColor, setSelectedSeedColor] = React.useState(
 		seedColor.hex
 	);
+	const [selectedFilter, setSelectedFilter] = React.useState(filter);
 
 	const [textColor, setTextColor] = React.useState("#FFFFFF");
 
@@ -35,6 +37,11 @@ const Settings = () => {
 		// This puts the mode in a corresponding format to the functions that use the mode
 		const modeToStr = e.target.value.split(" ").join("");
 		setMode(modeToStr);
+	};
+
+	const handleFilterChange = (e) => {
+		e.stopPropagation();
+		setFilter(e.target.value);
 	};
 
 	const handleSeedColorChange = (e) => {
@@ -65,8 +72,8 @@ const Settings = () => {
 					<label htmlFor="form-filters">Filters</label>
 					<form
 						name="form-filters"
-						onChange={() => {
-							console.log("filters changed!");
+						onChange={(e) => {
+							handleFilterChange(e);
 						}}
 					>
 						<div className="flex-between form-element">
@@ -74,7 +81,7 @@ const Settings = () => {
 								type="radio"
 								id="light"
 								name="filter"
-								value="light"
+								value="Light"
 							/>
 							<label htmlFor="light">Light</label>
 						</div>
@@ -83,7 +90,7 @@ const Settings = () => {
 								type="radio"
 								id="dark"
 								name="filter"
-								value="dark"
+								value="Dark"
 							/>
 							<label htmlFor="dark">Dark</label>
 						</div>
@@ -92,7 +99,7 @@ const Settings = () => {
 								type="radio"
 								id="cool"
 								name="filter"
-								value="cool"
+								value="Cool"
 							/>
 							<label htmlFor="cool">Cool</label>
 						</div>
@@ -101,7 +108,7 @@ const Settings = () => {
 								type="radio"
 								id="warm"
 								name="filter"
-								value="warm"
+								value="Warm"
 							/>
 							<label htmlFor="warm">Warm</label>
 						</div>
@@ -119,7 +126,7 @@ const Settings = () => {
 								type="radio"
 								id="muted"
 								name="filter"
-								value="muted"
+								value="Muted"
 							/>
 							<label htmlFor="muted">Muted</label>
 						</div>
@@ -146,7 +153,7 @@ const Settings = () => {
 								type="radio"
 								id="natural"
 								name="filter"
-								value="natural"
+								value="Natural"
 							/>
 							<label htmlFor="natural">Natural</label>
 						</div>
@@ -155,7 +162,7 @@ const Settings = () => {
 								type="radio"
 								id="metallic"
 								name="filter"
-								value="metallic"
+								value="Metallic"
 							/>
 							<label htmlFor="metallic">Metallic</label>
 						</div>
@@ -164,7 +171,7 @@ const Settings = () => {
 								type="radio"
 								id="retro"
 								name="filter"
-								value="retro"
+								value="Retro"
 							/>
 							<label htmlFor="retro">Retro</label>
 						</div>
@@ -173,7 +180,7 @@ const Settings = () => {
 								type="radio"
 								id="none"
 								name="filter"
-								value="none"
+								value="None"
 							/>
 							<label htmlFor="none">None</label>
 						</div>
@@ -202,7 +209,6 @@ const Settings = () => {
 						className="select-mode"
 						value={selectedMode}
 						onChange={(e) => {
-							e.stopPropagation(); // Stop the event from propagating up to the parent div
 							setSelectedMode(e.target.value);
 							handleModeChange(e); // you can still call this function to handle other logic
 						}}

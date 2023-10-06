@@ -30,7 +30,6 @@ const Generator = () => {
 	});
 
 	const savePalette = (data) => {
-		console.log(lockedColors);
 		const paletteId = nanoid();
 		localStorage.setItem(paletteId, { ...lockedColors });
 	};
@@ -38,7 +37,6 @@ const Generator = () => {
 	const location = useLocation();
 
 	React.useEffect(() => {
-		console.log("Pathname changed to:", location.pathname);
 		if (location.pathname === "/") {
 			resetPalette();
 			// setColors((prevColors) =>

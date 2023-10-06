@@ -22,6 +22,7 @@ const ColorContextProvider = ({ children }) => {
 		hex: randomHex,
 	});
 	const [mode, setMode] = React.useState("Random");
+	const [filter, setFilter] = React.useState("None");
 	const [count, setCount] = React.useState(5);
 	const [colors, setColors] = React.useState([]);
 	const [lockedColors, setLockedColors] = React.useState(
@@ -49,7 +50,8 @@ const ColorContextProvider = ({ children }) => {
 					lightness: randomLightness,
 				},
 				mode,
-				count
+				count,
+				filter
 			)
 		);
 		setLockedColors([]);
@@ -59,7 +61,8 @@ const ColorContextProvider = ({ children }) => {
 		const newColors = generateColors(
 			seedColor,
 			mode,
-			count - lockedColors.length
+			count - lockedColors.length,
+			filter
 		);
 		setColors([...lockedColors, ...newColors]);
 	};
@@ -68,7 +71,7 @@ const ColorContextProvider = ({ children }) => {
 
 	// Initially populate the colors array
 	React.useEffect(() => {
-		setColors(generateColors(seedColor, mode, count));
+		setColors(generateColors(seedColor, mode, count, filter));
 	}, []);
 
 	// UseEffect for to update the unlocked and locked colors state whenever colors is changed and update lastColorId
@@ -87,6 +90,8 @@ const ColorContextProvider = ({ children }) => {
 				setSeedColor,
 				mode,
 				setMode,
+				filter,
+				setFilter,
 				count,
 				setCount,
 				colors,

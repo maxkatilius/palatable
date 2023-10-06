@@ -21,7 +21,6 @@ const SaveModal = () => {
 	};
 
 	const handleSave = () => {
-		console.log(lockedColors);
 		const paletteId = nanoid();
 		const newPalette = {
 			id: paletteId,

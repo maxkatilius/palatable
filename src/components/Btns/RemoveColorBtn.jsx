@@ -16,8 +16,6 @@ const RemoveColorBtn = () => {
 		<BiMinus
 			className="btn remove-color-btn"
 			onClick={() => {
-				console.log("color removed!");
-				console.log(lastColorId);
 				if (lastColorId !== null) removeColor(lastColorId);
 			}}
 		/>

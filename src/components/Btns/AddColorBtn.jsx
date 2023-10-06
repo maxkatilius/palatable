@@ -4,12 +4,19 @@ import { useColorContext } from "../../context/ColorContext";
 import { generateColors } from "../../utils";
 
 const AddColorBtn = () => {
-	const { seedColor, mode, setCount, colors, setColors, lastColorId } =
-		useColorContext();
+	const {
+		seedColor,
+		mode,
+		filter,
+		setCount,
+		colors,
+		setColors,
+		lastColorId,
+	} = useColorContext();
 
 	const addColor = (colorId) => {
 		setCount((prevCount) => prevCount + 1);
-		const newColor = generateColors(seedColor, mode, 1)[0];
+		const newColor = generateColors(seedColor, mode, 1, filter)[0];
 		const index = colors.findIndex((col) => col.id === colorId);
 		const newColorsArray = [
 			...colors.slice(0, index),
