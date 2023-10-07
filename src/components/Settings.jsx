@@ -198,10 +198,15 @@ const Settings = () => {
 					onClick={handleSettingsInteraction}
 				>
 					<label htmlFor="seed-color">Seed color</label>
-					<p style={{ color: textColor }}>
-						{selectedSeedColor.toUpperCase()}
-					</p>
+					<label
+						htmlFor="colorInput"
+						id="hexLabel"
+						style={{ color: textColor }}
+					>
+						{selectedSeedColor.slice(1).toUpperCase()}
+					</label>
 					<input
+						id="colorInput"
 						name="seed-color"
 						type="color"
 						value={selectedSeedColor}

@@ -509,10 +509,14 @@ const colorFunctions = {
 const filterFunctions = {
     Light: (color) => {
         color.hsl.lightness = Math.min(color.hsl.lightness + 30, 90);
+        color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+        color.name = findClosestColorName(color.hex);
         return color;
     },
     Dark: (color) => {
         color.hsl.lightness = Math.max(color.hsl.lightness - 30, 10);
+        color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+        color.name = findClosestColorName(color.hex);
         return color;
     },
     Cool: (color) => {
@@ -527,6 +531,8 @@ const filterFunctions = {
         color.hsl.saturation = randomNumBetween(MIN_SATURATION, MAX_SATURATION);
         color.hsl.lightness = randomNumBetween(MIN_LIGHTNESS, MAX_LIGHTNESS);
         
+        color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+        color.name = findClosestColorName(color.hex);
         return color;
     },
     Warm: (color) => {
@@ -541,24 +547,34 @@ const filterFunctions = {
         color.hsl.saturation = randomNumBetween(MIN_SATURATION, MAX_SATURATION);
         color.hsl.lightness = randomNumBetween(MIN_LIGHTNESS, MAX_LIGHTNESS);
         
+        color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+        color.name = findClosestColorName(color.hex);
         return color;
     },
     Vibrant: (color) => {
       console.log(color)
         color.hsl.saturation = Math.min(Math.max(color.hsl.saturation + 20, 70), 100);
+        color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+        color.name = findClosestColorName(color.hex);
         return color;
     },
     Muted: (color) => {
         color.hsl.saturation -= 20;
+        color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+        color.name = findClosestColorName(color.hex);
         return color;
     },
     Pastel: (color) => {
         color.hsl.saturation = Math.min(Math.max(color.hsl.saturation - 30, 20), 50);
         color.hsl.lightness = Math.min(Math.max(color.hsl.lightness + 30, 70), 90);
+        color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+        color.name = findClosestColorName(color.hex);
         return color;
       },
     Rich: (color) => {
         color.hsl.saturation += 35;
+        color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+        color.name = findClosestColorName(color.hex);
         return color;
     },
     Natural: (color) => {
@@ -571,12 +587,17 @@ const filterFunctions = {
           // Adjust lightness to be more towards a middle value (50) if it's too dark or too light
           color.hsl.lightness = color.hsl.lightness < 25 ? color.hsl.lightness + 15 : color.hsl.lightness > 75 ? color.hsl.lightness - 15 : color.hsl.lightness;
 
+          color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+          color.name = findClosestColorName(color.hex);
           return color;
+
       },
 
       Metallic: (color) => {
           color.hsl.saturation = Math.max(0, color.hsl.saturation - 30);
           color.hsl.lightness = Math.min(100, color.hsl.lightness + 15);
+          color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+         color.name = findClosestColorName(color.hex);
           return color;
       },
 
@@ -590,6 +611,8 @@ const filterFunctions = {
           // Adjust lightness if it's too dark or too light
           color.hsl.lightness = color.hsl.lightness < 25 ? color.hsl.lightness + 10 : color.hsl.lightness > 75 ? color.hsl.lightness - 10 : color.hsl.lightness;
 
+          color.hex = hslToHex(color.hsl.hue, color.hsl.saturation, color.hsl.lightness);
+          color.name = findClosestColorName(color.hex);
           return color;
       }
 };

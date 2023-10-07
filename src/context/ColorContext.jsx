@@ -42,6 +42,9 @@ const ColorContextProvider = ({ children }) => {
 	// Helper functions
 
 	const resetPalette = () => {
+		setMode("Random");
+		setCount(5);
+		setFilter("None");
 		setColors(
 			generateColors(
 				{

@@ -365,9 +365,9 @@ header h1 span {
 .add-color-overlay {
     position: absolute;
     top: 0%;
-    bottom: 0%;
-    right: 45%;
-    left: 45%;
+    bottom: 30%;
+    right: 40%;
+    left: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -388,7 +388,10 @@ header h1 span {
 
 /* needs work - removed some code at some point accidentally */
 .add-color {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 100ms ease-in;
 }
 
 .add-color:hover {
@@ -405,11 +408,8 @@ header h1 span {
     width: 1.1em;
     border-radius: 50%;
     font-weight: bold;
-    transition: background-color 300ms ease-in-out;
-}
-
-.add-color span:hover {
     background-color: rgb(230, 230, 230);
+    transition: background-color 300ms ease-in-out;
 }
 
 section .color-container:first-child .add-color-overlay {
@@ -574,12 +574,15 @@ input[type="color"] {
     cursor: pointer;
 }
 
-.settings-seed p {
+#hexLabel { 
     position: absolute;
     font-size: 1.2rem;
-    letter-spacing: 0.075rem;
-    top: 63%;
+    font-weight: lighter;
+    font-style: italic;
+    letter-spacing: 0.06rem;
+    top: 62%;
     left: 2%;
+    cursor: pointer;
 }
 
 .settings-mode select {

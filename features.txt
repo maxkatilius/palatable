@@ -1,6 +1,6 @@
-RANDOMISE ARRAY ORDER
+hexcode size on my palettes - overflow
 
-control randomness???
+control variation???
 
 look at TK naming function 
 Pages:
@@ -11,7 +11,7 @@ Pages:
 -make paletteGenerating functions more DRY / dynamic
 
 Settings:
-- filters - add filters to the color schemes including: pastel, vibrant..., grayscale
+grayscale?
 
 Dark and light mode?
 
