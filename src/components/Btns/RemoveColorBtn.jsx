@@ -1,5 +1,5 @@
 import React from "react";
-import { BiMinus } from "react-icons/bi";
+import { FiMinus } from "react-icons/fi";
 import { useColorContext } from "../../context/ColorContext";
 
 const RemoveColorBtn = () => {
@@ -13,8 +13,8 @@ const RemoveColorBtn = () => {
 	};
 
 	return (
-		<BiMinus
-			className="btn remove-color-btn"
+		<FiMinus
+			className="icon remove-color-icon"
 			onClick={() => {
 				if (lastColorId !== null) removeColor(lastColorId);
 			}}

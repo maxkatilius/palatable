@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useColorContext } from "../context/ColorContext";
 
 import Color from "../components/Color";
-import GeneratorFooter from "../components/GeneratorFooter";
+import GeneratorControls from "../components/GeneratorControls.jsx";
 import CopyModal from "../components/Modals/CopyModal";
 import SaveModal from "../components/Modals/SaveModal";
 import SaveDisabledModal from "../components/Modals/SaveDisabledModal";
@@ -25,6 +25,10 @@ const Generator = () => {
 		resetPalette,
 	} = useColorContext();
 
+	React.useEffect(() => {
+		console.log("hello");
+	}, [colors]);
+
 	const colorEls = colors.map((color) => {
 		return <Color key={color.id} color={color} setColors={setColors} />;
 	});
@@ -39,10 +43,6 @@ const Generator = () => {
 	React.useEffect(() => {
 		if (location.pathname === "/") {
 			resetPalette();
-			// setColors((prevColors) =>
-			// 	prevColors.map((color) => ({ ...color, isLocked: false }))
-			// );
-			// generatePalette();
 		}
 	}, [location.pathname]);
 
@@ -81,7 +81,7 @@ const Generator = () => {
 					/>
 				)}
 			</div>
-			<GeneratorFooter />
+			<GeneratorControls />
 		</section>
 	);
 };

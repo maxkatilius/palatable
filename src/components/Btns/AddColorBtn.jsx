@@ -1,5 +1,5 @@
 import React from "react";
-import { BiPlus } from "react-icons/bi";
+import { FiPlus } from "react-icons/fi";
 import { useColorContext } from "../../context/ColorContext";
 import { generateColors } from "../../utils";
 
@@ -27,8 +27,8 @@ const AddColorBtn = () => {
 	};
 
 	return (
-		<BiPlus
-			className="btn add-color-btn"
+		<FiPlus
+			className="icon add-color-icon"
 			onClick={() => {
 				console.log("color added!");
 				if (lastColorId !== null) addColor(lastColorId);

@@ -6,9 +6,9 @@ import RemoveColorBtn from "./Btns/RemoveColorBtn";
 import SaveBtn from "./Btns/SaveBtn";
 import GenerateBtn from "./Btns/GenerateBtn";
 
-const GeneratorFooter = () => {
+const GeneratorControls = () => {
 	return (
-		<div className="generator-footer flex-between">
+		<div className="generator-controls flex-between">
 			<Settings />
 			<RemoveColorBtn />
 			<AddColorBtn />
@@ -18,4 +18,4 @@ const GeneratorFooter = () => {
 	);
 };
 
-export default GeneratorFooter;
+export default GeneratorControls;

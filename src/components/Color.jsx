@@ -76,7 +76,7 @@ const Color = ({ color }) => {
 
 	return (
 		<div
-			className="color-container flex-between"
+			className="color-container"
 			style={{
 				backgroundColor: `hsl(${color.hsl.hue}, ${color.hsl.saturation}%, ${color.hsl.lightness}%)`,
 			}}

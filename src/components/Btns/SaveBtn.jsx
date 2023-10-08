@@ -1,7 +1,7 @@
 import React from "react";
 import { useColorContext } from "../../context/ColorContext";
 
-import { BiSave } from "react-icons/bi";
+import { FiSave } from "react-icons/fi";
 
 const SaveBtn = () => {
 	const {
@@ -11,8 +11,8 @@ const SaveBtn = () => {
 	} = useColorContext();
 
 	return (
-		<BiSave
-			className="btn save-btn"
+		<FiSave
+			className="icon save-icon"
 			onClick={() => {
 				if (lockedColors.length) {
 					setIsSaveModalVisible(true);

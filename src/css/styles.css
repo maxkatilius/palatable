@@ -50,7 +50,7 @@ section,
 }
 
 section {
-    padding: 1.2em;
+    padding: 1.3em;
 }
 
 section h1 {
@@ -63,14 +63,12 @@ section h1 {
 ******************/
 
 header {
+    position: relative;
     padding: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 header a {
-    font-family: 'Bungee Shade', 'Quicksand', sans-serif;
+    font-family: 'Bungee Shade', sans-serif;
     font-size: 1.35rem;
     color: #161D27;
     text-decoration: none;
@@ -84,6 +82,20 @@ header h1 span {
 ****** Nav *******
 ******************/
 
+nav {
+    position: absolute;
+    top: 1.5em;
+    right: 1.6em;
+    left: auto;
+    transition: right 550ms ease-out;
+    transition-delay: 150ms;
+}
+
+nav.open {
+    right: calc(100% - 4em - 1.6em);
+    /* Screen width minus nav width (4em) and its right margin (1.6em) */
+}
+
 /***** Hamburger  *****/
 
 .hamburger-container {
@@ -94,13 +106,12 @@ header h1 span {
     justify-content: center;
     align-items: center;
     height: 5em;
-    margin-right: 1.4em;
+    width: 3.2em;
     cursor: pointer;
     transition: all 600ms ease-in-out;
 }
 
 .nav.closed .hamburger-container {
-    margin-right: 0.4em;
     transition-delay: 100ms;
 }
 
@@ -115,7 +126,7 @@ header h1 span {
 .hamburger {
     z-index: 1001;
 
-    width: 3.3em;
+    width: 100%;
     transition: transform 700ms ease-in-out 50ms, background-color 1000ms ease-in-out;
 }
 
@@ -136,10 +147,6 @@ header h1 span {
     bottom: 1.1em;
     transition: opacity 800ms ease-in-out 200ms;
 } 
-
-.nav.open .hamburger-container {
-    transform: translateX(-500%);
-}
  
 .nav.open .hamburger {
     background-color: #DBD4D3;
@@ -164,7 +171,6 @@ header h1 span {
     inset: 0 0 0 0%;
     padding: 8em 2em;
     gap: 2.4em;
-
     background-color: hsla(0, 0%, 5%, 0.6);
     backdrop-filter: blur(0.4rem);
     
@@ -235,6 +241,8 @@ header h1 span {
 
 .color-container {
     position: relative;
+    display: flex;
+    justify-content: center;
     padding: 0.8em;
     align-items: center;
     flex-grow: 1;
@@ -261,20 +269,14 @@ header h1 span {
     icons
 **************/
 
+.icon {
+    cursor: pointer;
+    font-size: 2em;
+}
+
 .color-icons-container {
     display: flex;
     align-items: center;
-}
-
-.icon {
-    cursor: pointer;
-    font-size: 2.1em;
-}
-
-/* X icon */
-
-.x-icon {
-    font-size: 1.9em;
 }
 
 .x-icon-container,
@@ -307,10 +309,10 @@ header h1 span {
 .lock-closed-icon:hover,
 .lock-open-icon:focus,
 .lock-closed-icon:focus {
-    animation: lock-big-jiggle 500ms ease-in-out;
+    animation: big-jiggle 450ms ease-in-out;
 }
 
-@keyframes lock-big-jiggle {
+@keyframes big-jiggle {
     0% {
         transform: rotate(0) scale(1)
     }
@@ -340,7 +342,7 @@ header h1 span {
     }
 }
 
-@keyframes lock-lil-jiggle {
+@keyframes lil-jiggle {
     0% {
         transform: rotate(0) scale(1)
     }
@@ -416,18 +418,18 @@ section .color-container:first-child .add-color-overlay {
     display: none;
 }
 
-/* Footer */
+/* GeneratorControls */
 
-.generator-footer { 
+.generator-controls { 
     padding: 0.6em;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .btn  {
     color: white;
     background-color: #161D27;
     font-size: 1rem;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     border: none;
@@ -436,21 +438,45 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .generate-btn {
-    padding: 1.1em;
-    margin-left: 0.5em;
-    font-weight: 500;
+    padding: 1em;
+    margin-left: 0.3em;
 }
 
-.add-color-btn, 
-.remove-color-btn,
-.save-btn {
+.add-color-icon, 
+.remove-color-icon,
+.save-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2.7rem;
     color: #161D27;
     background-color: transparent;
 }
+
+.add-color-icon,
+.remove-color-icon,
+.save-icon,
+.generate-btn {
+    transition: transform 150ms ease-in-out;
+}
+
+.add-color-icon:hover,
+.add-color-icon:focus,
+.add-color-icon:active,
+.save-icon:hover,
+.save-icon:focus
+.save-color-icon:active
+.generate-btn:hover,
+.generate-btn:active {
+    transform: scale(1.15);
+}
+
+.remove-color-icon:hover,
+.remove-color-icon:focus
+.remove-color-icon:active {
+    transform: scale(0.85)
+}
+
 
 /***** Settings *****/
 
@@ -458,11 +484,11 @@ section .color-container:first-child .add-color-overlay {
     z-index: 101;
 
     position: relative;
-    display: flex;
+    display: flex; 
     justify-content: center;
     align-items: center;
-    height: 4.2em;
-    width: 4.2em;
+    height: 4.4em;
+    width: 4.4em;
     cursor: pointer;
     transition: transform 800ms cubic-bezier(.72, .57, .25, 2);
 }
@@ -474,7 +500,7 @@ section .color-container:first-child .add-color-overlay {
 .settings-icon {
     z-index: 101;
     
-    font-size: 2.6rem;
+    font-size: 3rem;
     color: #161D27;
 }
 
@@ -524,7 +550,7 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .settings-items {
-    margin: auto 0;
+    margin-top: 4em;
     gap: 4em;
 }
 
@@ -541,10 +567,10 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .settings-item > label {
-    font-family: "Bungee";
-    font-size: 1.4rem;
+    font-family: 'Croissant One', sans-serif;
+    font-size: 1.6rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.075em;
 }
 
 .settings-item form {
@@ -580,12 +606,13 @@ input[type="color"] {
 }
 
 #hexLabel { 
+    font-family: "Quicksand", sans-serif;
     position: absolute;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: ligther;
-    letter-spacing: 0.06rem;
-    top: 62%;
-    left: 2%;
+    letter-spacing: 0.08rem;
+    top: 67%;
+    left: 3%;
     cursor: pointer;
 }
 
@@ -756,10 +783,6 @@ input[type="color"] {
     font-size: 1.2rem;
 }
 
-.saved-palettes {
-    padding: 1em;
-}
-
 .saved-palette {
     position: relative;
     padding: 1em 0;
@@ -873,9 +896,7 @@ input[type="color"] {
 /*****************
 ***** Famous ******
 ******************/
-.famous {
-    padding: 1.2em;
-}
+
 
 .famous h1 {
     font-family: "Croissant One";
@@ -888,7 +909,7 @@ input[type="color"] {
 .famous-palette-container {
     display: flex;
     align-items: stretch;
-    gap: 0.8em;
+    gap: 1.1em;
     margin-bottom: 2em;
     width: 100%;
 }
@@ -913,8 +934,8 @@ input[type="color"] {
 
 .famous-palette-colors {
     margin-top: auto;
-    gap: 0.65em;
-    max-width: 14em;
+    gap: 0.7em;
+    max-width: 22em;
 }
 
 .famous-palette-color {
@@ -928,7 +949,7 @@ input[type="color"] {
     max-width: 600px;
     height: auto;
     object-fit: cover;
-    object-position: 25%;
+    object-position: 35%;
 }
 
 /*****************
@@ -953,17 +974,158 @@ input[type="color"] {
 
 /* For portrait tablets */
 @media screen and (min-width: 600px) {
+    html {
+        font-size: 1.1rem;
+    }
 
+    section {
+        padding: 2em;
+    }
+
+    header {
+        padding: 1.3em 1.7em;
+        border: 1px solid #AAAAAA;
+        }
+    nav {
+        top: 1.8em;
+        right: 3em;
+    }
+    nav.open {
+        right: calc(100% - 4em - 2em);
+    }
+    .hamburger-container {
+        height: 5.5em;
+    }
+    .hamburger,
+    .hamburger::before,
+    .hamburger::after {
+        height: 0.4em;
+    }
+    .nav--links {
+        padding: 10em 3em;
+        gap: 4em;
+    }
+
+
+    .generator-container {
+        flex-direction: row;
+    }
+    .generator-controls {
+        padding: 0.6em 1.2em;
+        order: -1;
+    }
+    .remove-color-icon {
+        margin-right: -0.5em;
+    }
+
+
+    .color-details {
+        flex-direction: column;
+        height: 100%;
+        padding: 1em 0;
+    }
+
+    .color-icons-container {
+        font-size: 1.1rem;
+        flex-direction: column;
+        order: -1;
+        gap: 0.8em;
+    }
+    .color-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 1rem;
+        width: 5em;
+    }
+    .color-text h2 {
+        order: 1;
+        margin-top: 0.8em;
+        font-size: 1.2rem;
+    }
+
+    .add-color-overlay {
+        top: 50%;
+        bottom: 30%;
+        right: 100%;
+        left:0%;
+
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+    .add-color span {
+        font-size: 3rem;
+    }
+    .famous p {
+        font-size: 1.3rem;
+        margin: 0.4em 0 2em 0;
+    }
+
+
+    .famous-palette-info h3 {
+        font-size: 1.5rem;
+    }
+    .famous-palette-info p {
+        font-size: 1.2rem; 
+        letter-spacing: 0.1em;
+    } 
+    .famous-palette-container {
+        gap: 4em;
+        margin-bottom: 3em;
+    }
+
+    .famous-palette-colors {
+        margin-top: auto;
+        gap: 1.1em;
+    }
+    
+    .famous-palette-color {
+        padding: 0.2em;
+        font-size: 1.1rem;
+        letter-spacing: 0.1em;
+    }
+    
+    .famous-palette-container img {
+        width: 13em;
+        /* height: auto; */
+        /* object-fit: contain;
+        object-position: 30%; */
+    }
 }
 
 /* For landscape tablets */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-
 }
 
 /* For small laptops */ 
-@media screen and (min-width: 1024px) and (max-width: 1279px) {
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+    html {
+        font-size: 1.4rem;
+    }
 
+    nav {
+        top: 1.7em;
+        right: 3em;
+    }
+
+    .hamburger-container {
+        transition-delay: 50ms;
+    }
+
+    .nav--links {
+        padding: 9em 3.3em;
+        gap: 4em;
+    }
+
+    .nav--links a {
+        font-size: 2.8rem;
+    }
+
+    .remove-color-icon {
+        margin-right: -1.5em;
+    }
 }
 
 /* For large laptops to desktops */

@@ -9,20 +9,30 @@ const Settings = () => {
 	const { mode, setMode, seedColor, setSeedColor, filter, setFilter } =
 		useColorContext();
 
-	const [selectedSeedColor, setSelectedSeedColor] = React.useState(
-		seedColor.hex
-	);
-	const [selectedFilter, setSelectedFilter] = React.useState(filter);
+	const [seedColorHex, setSeedColorHex] = React.useState(seedColor.hex);
 
 	const [textColor, setTextColor] = React.useState(
-		getContrastingTextColor(seedColor.hex)
+		getContrastingTextColor(
+			seedColor.hue,
+			seedColor.saturation,
+			seedColor.lightness
+		)
 	);
-
-	React.useEffect(() => {
-		setSelectedSeedColor(seedColor.hex);
-	}, [seedColor]);
-
 	const [selectedMode, setSelectedMode] = React.useState(mode);
+
+	// Resets the settings values to resePalette() states
+	React.useEffect(() => {
+		setSeedColorHex(seedColor.hex);
+		setSelectedMode(mode);
+		console.log(seedColor.hex);
+		setTextColor(
+			getContrastingTextColor(
+				seedColor.hue,
+				seedColor.saturation,
+				seedColor.lightness
+			)
+		);
+	}, [seedColor, mode, filter]);
 
 	const settingsStatus = settingsOpen ? "open" : "closed";
 
@@ -53,15 +63,11 @@ const Settings = () => {
 	const handleSeedColorChange = (e) => {
 		e.stopPropagation(); // Stop the event from propagating up to the parent div
 		const hexColor = e.target.value;
-		setSelectedSeedColor(hexColor);
+		setSeedColorHex(hexColor);
 		const [h, s, l] = hexToHSL(hexColor);
 		setTextColor(getContrastingTextColor(h, s, l));
 		setSeedColor({ hue: h, saturation: s, lightness: l, hex: hexColor });
 	};
-
-	// React.useEffect(() => {
-	// 	setTextColor(getContrastingTextColor(selectedSeedColor)); // <--- This ensures text color contrast on initial render
-	// }, [seedColor]);
 
 	return (
 		<div className={`settings ${settingsStatus}`}>
@@ -190,13 +196,13 @@ const Settings = () => {
 							id="hexLabel"
 							style={{ color: textColor }}
 						>
-							{selectedSeedColor.slice(1).toUpperCase()}
+							{seedColorHex.slice(1).toUpperCase()}
 						</label>
 						<input
 							id="colorInput"
 							name="seed-color"
 							type="color"
-							value={selectedSeedColor}
+							value={seedColorHex}
 							onChange={handleSeedColorChange}
 						/>
 					</div>
@@ -216,9 +222,9 @@ const Settings = () => {
 						>
 							<option>Random</option>
 							<option>Monochromatic</option>
-							<option>Analogous</option>
 							<option>Complementary</option>
 							<option>Split Complementary</option>
+							<option>Analogous</option>
 							<option>Triadic</option>
 							<option>Tetradic</option>
 						</select>
