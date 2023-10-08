@@ -551,7 +551,7 @@ section .color-container:first-child .add-color-overlay {
 
 .settings-items {
     margin-top: 4em;
-    gap: 4em;
+    gap: 3em;
 }
 
 .settings-item {
@@ -984,7 +984,8 @@ input[type="color"] {
 
     header {
         padding: 1.3em 1.7em;
-        border: 1px solid #AAAAAA;
+        border-bottom: 2px solid #161D27;
+        box-shadow: 0 3px 4px -2px rgba(0, 0, 0, 0.2);
         }
     nav {
         top: 1.8em;
@@ -1017,7 +1018,6 @@ input[type="color"] {
     .remove-color-icon {
         margin-right: -0.5em;
     }
-
 
     .color-details {
         flex-direction: column;
@@ -1095,12 +1095,7 @@ input[type="color"] {
     }
 }
 
-/* For landscape tablets */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-}
-
-/* For small laptops */ 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+@media screen and (min-width: 768px) {
     html {
         font-size: 1.4rem;
     }
