@@ -2,6 +2,8 @@ hexcode size on my palettes - overflow
 
 control variation???
 
+dragging colors and changing array order
+
 look at TK naming function 
 Pages:
 -rather than trending palettes, have popular palettes. - spring, summer, autumn, winter, moods? 

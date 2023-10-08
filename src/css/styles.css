@@ -494,7 +494,6 @@ section .color-container:first-child .add-color-overlay {
     
     position: fixed;
     inset: 0 0 0 0%;
-    gap: 3em;
 
     padding: 2em;
     color: #DBD4D3;
@@ -521,6 +520,12 @@ section .color-container:first-child .add-color-overlay {
 
 .settings-overlay.open h1 {
     transform: translateY(0%);
+    cursor: pointer;
+}
+
+.settings-items {
+    margin: auto 0;
+    gap: 4em;
 }
 
 .settings-item {
@@ -530,7 +535,7 @@ section .color-container:first-child .add-color-overlay {
     font-weight: bold;
     letter-spacing: 0.05rem;
     opacity: 0;
-
+    
     transform: translateY(200%);
     transition: opacity 600ms ease-in, transform 600ms ease-in;
 }
@@ -544,7 +549,7 @@ section .color-container:first-child .add-color-overlay {
 
 .settings-item form {
     display: grid;
-    grid-template: 1fr 1fr 1fr 1fr 1fr 1fr / 1fr 1fr;
+    grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr;
     gap: 0.6em;
 }
 
@@ -576,9 +581,8 @@ input[type="color"] {
 
 #hexLabel { 
     position: absolute;
-    font-size: 1.2rem;
-    font-weight: lighter;
-    font-style: italic;
+    font-size: 1.15rem;
+    font-weight: ligther;
     letter-spacing: 0.06rem;
     top: 62%;
     left: 2%;
@@ -587,7 +591,7 @@ input[type="color"] {
 
 .settings-mode select {
     padding: 0.7em;
-
+    
     background-color: #DBD4D3;
     text-align: center;
     font-weight: bold;
@@ -909,7 +913,8 @@ input[type="color"] {
 
 .famous-palette-colors {
     margin-top: auto;
-    gap: 0.6em;
+    gap: 0.65em;
+    max-width: 14em;
 }
 
 .famous-palette-color {
@@ -935,4 +940,33 @@ input[type="color"] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+/******************
+** MEDIA QUEIRES **
+******************/
+
+/* For smaller phone screens */
+@media screen and (min-width: 375px) and (max-width: 400px) {
+
+}
+
+/* For portrait tablets */
+@media screen and (min-width: 600px) {
+
+}
+
+/* For landscape tablets */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* For small laptops */ 
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+
+}
+
+/* For large laptops to desktops */
+@media screen and (min-width: 1280px) {
+
 }
