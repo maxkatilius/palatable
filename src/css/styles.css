@@ -901,6 +901,7 @@ input[type="color"] {
 }
 
 .famous-subheading {
+    font-size: 1.1rem;
     margin: 0.2em 0 1.2em 0;
 }
 
@@ -925,7 +926,8 @@ input[type="color"] {
 }
 
 .famous-palette-info p {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
+    margin: 0.2em 0 1.2em 0;
     text-transform: uppercase;
     letter-spacing: 0.03rem;
 }
@@ -965,12 +967,12 @@ input[type="color"] {
 ** MEDIA QUEIRES **
 ******************/
 
-/* For smaller phone screens */
 @media screen and (min-width: 375px) and (max-width: 400px) {
-
+    html {
+        font-size: 0.9rem;
+    }
 }
 
-/* For portrait tablets */
 @media screen and (min-width: 600px) {
     html {
         font-size: 1.1rem;
@@ -1106,9 +1108,6 @@ input[type="color"] {
     
     .famous-palette-container img {
         width: 13em;
-        /* height: auto; */
-        /* object-fit: contain;
-        object-position: 30%; */
     }
 }
 
@@ -1142,9 +1141,4 @@ input[type="color"] {
     .settings-overlay h1 {
         margin: 0 auto 0 auto;
     }
-}
-
-/* For large laptops to desktops */
-@media screen and (min-width: 1280px) {
-
 }
