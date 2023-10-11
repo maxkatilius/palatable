@@ -812,8 +812,8 @@ input[type="color"] {
 
 .unsave-palette-icon {
     position: absolute;
-    top: 2%;
-    right: 2%;
+    top: 0.2em;
+    right: 0.2em;
     opacity: 0.95;
     
     font-size: 2rem;
