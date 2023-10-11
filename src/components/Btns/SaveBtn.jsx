@@ -19,7 +19,7 @@ const SaveBtn = () => {
 				} else {
 					setIsSaveDisabledModalVisible(true);
 					setTimeout(() => {
-						setIsSaveDisabledModalVisible(false); // auto-hide modal after 2 seconds
+						setIsSaveDisabledModalVisible(false);
 					}, 2000);
 				}
 			}}

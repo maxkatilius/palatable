@@ -15,8 +15,6 @@ const SaveModal = () => {
 			randomPaletteNames[
 				Math.floor(Math.random() * randomPaletteNames.length)
 			];
-		// const number = localStorage.length;
-		// console.log(number);
 		return `${randomPaletteName}...`;
 	};
 
@@ -61,7 +59,7 @@ const SaveModal = () => {
 	return (
 		<div
 			className={`modal-container save-modal-container ${
-				isSaveModalVisible ? "slide-in" : "slide-out"
+				isSaveModalVisible ? "slide-in" : ""
 			}`}
 		>
 			<div className="save-modal-content flex-col">

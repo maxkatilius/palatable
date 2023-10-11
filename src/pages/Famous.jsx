@@ -30,7 +30,6 @@ const Famous = () => {
 						}, 2000);
 					}}
 				>
-					{isCopyModalVisible && <CopyModal />}
 					{hex}
 				</div>
 			);
@@ -54,8 +53,11 @@ const Famous = () => {
 
 	return (
 		<section className="famous flex-col">
+			{isCopyModalVisible && <CopyModal />}
 			<h1>Famous Palettes</h1>
-			<p>Get a little inspiration from the pros...</p>
+			<p className="famous-subheading">
+				Get a little inspiration from the pros...
+			</p>
 			{famousPaletteEls}
 		</section>
 	);

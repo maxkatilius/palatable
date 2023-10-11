@@ -1,5 +1,5 @@
 import React from "react";
-import { copyToClipboard, getContrastingTextColor } from "../utils";
+import { copyToClipboard } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 import { useColorContext } from "../context/ColorContext";
@@ -21,7 +21,7 @@ const Color = ({ color }) => {
 		copyToClipboard(`${color.hex.slice(1)}`);
 		setIsCopyModalVisible(true);
 		setTimeout(() => {
-			setIsCopyModalVisible(false); // auto-hide modal after 2 seconds
+			setIsCopyModalVisible(false);
 		}, 2000);
 	};
 
@@ -36,8 +36,6 @@ const Color = ({ color }) => {
 		];
 		setColors(newColorsArray);
 	};
-
-	let closeDisabled = false;
 
 	const removeColor = (colorId) => {
 		if (count > 1) {

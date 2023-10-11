@@ -30,7 +30,6 @@ const AddColorBtn = () => {
 		<FiPlus
 			className="icon add-color-icon"
 			onClick={() => {
-				console.log("color added!");
 				if (lastColorId !== null) addColor(lastColorId);
 			}}
 		/>

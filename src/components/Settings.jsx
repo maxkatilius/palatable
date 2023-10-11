@@ -50,8 +50,7 @@ const Settings = () => {
 	};
 
 	const handleModeChange = (e) => {
-		e.stopPropagation(); // Stop the event from propagating up to the parent div
-		// This puts the mode in a corresponding format to the functions that use the mode
+		e.stopPropagation();
 		const modeToStr = e.target.value.split(" ").join("");
 		setMode(modeToStr);
 	};
@@ -62,7 +61,7 @@ const Settings = () => {
 	};
 
 	const handleSeedColorChange = (e) => {
-		e.stopPropagation(); // Stop the event from propagating up to the parent div
+		e.stopPropagation();
 		const hexColor = e.target.value;
 		setSeedColorHex(hexColor);
 		const [h, s, l] = hexToHSL(hexColor);
@@ -219,8 +218,8 @@ const Settings = () => {
 							className="select-mode"
 							value={selectedMode}
 							onChange={(e) => {
-								setSelectedMode(e.target.value);
-								handleModeChange(e); // you can still call this function to handle other logic
+								// setSelectedMode(e.target.value);
+								handleModeChange(e);
 							}}
 						>
 							<option>Random</option>
