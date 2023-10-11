@@ -549,6 +549,15 @@ section .color-container:first-child .add-color-overlay {
     cursor: pointer;
 }
 
+.settings-close {
+    display: none;
+    position: absolute;
+    font-size: 2rem;
+    top: 2em;
+    right: 1em;
+    cursor: pointer;
+}
+
 .settings-items {
     margin-top: 3em;
     gap: 3em;
@@ -1058,12 +1067,29 @@ input[type="color"] {
     .add-color span {
         font-size: 3rem;
     }
+
+    .settings-icon-container, 
+    .settings-icon {
+        z-index: 99;
+    }
+
+    .settings-icon-container.open {
+        transform: rotate(120deg);
+    }
+
+    .settings-overlay h1 {
+        margin-right: 1.3em;
+    }
+
+    .settings-close {
+        display: block;
+    }
+
+
     .famous p {
         font-size: 1.3rem;
         margin: 0.4em 0 2em 0;
     }
-
-
     .famous-palette-info h3 {
         font-size: 1.5rem;
     }

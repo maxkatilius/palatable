@@ -3,6 +3,7 @@ import { FiSettings } from "react-icons/fi";
 import { useColorContext } from "../context/ColorContext";
 import { useOverlayContext } from "../context/OverlayContext";
 import { hexToHSL, getContrastingTextColor } from "../utils";
+import { VscChromeClose } from "react-icons/vsc";
 
 const Settings = () => {
 	const { settingsOpen, setSettingsOpen } = useOverlayContext();
@@ -82,6 +83,8 @@ const Settings = () => {
 				onClick={toggleSettings}
 			>
 				<h1>Settings</h1>
+				<VscChromeClose className="settings-close" />
+
 				<div className="settings-items flex-col">
 					<div
 						className={`settings-item settings-form flex-col ${settingsStatus}`}
