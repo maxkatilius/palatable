@@ -7,6 +7,7 @@ Possible features to add:
 - add a undo/redo button for individual colors / whole palette
 - dark and light mode
 - websafe colors filter / palettes?
+- add in sliders to control the HSL values of each color.
 
 Pages:
 -rather than trending palettes, have popular palettes. - spring, summer, autumn, winter, moods? 

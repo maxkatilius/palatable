@@ -68,8 +68,8 @@ header {
 }
 
 header a {
-    font-family: 'Bungee Shade', sans-serif;
     font-size: 1.35rem;
+    font-family: 'Bungee Shade', sans-serif;
     color: #161D27;
     text-decoration: none;
 }
@@ -1123,6 +1123,7 @@ input[type="color"] {
     }
 
     .hamburger-container {
+        transition: all 1000ms ease-in-out;  
         transition-delay: 50ms;
     }
 
@@ -1141,5 +1142,85 @@ input[type="color"] {
 
     .settings-overlay h1 {
         margin: 0 auto 0 auto;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    section:not(.generator) {
+        width: 70%;
+        margin: auto auto;
+    }
+
+    section {
+        padding: 1em;
+    }
+
+    section h1 {
+        font-size: 1.8rem;
+    }
+
+    header {
+        padding: 0.8em;
+    }
+    header, 
+    header a {
+        font-size: 0.8rem;
+        
+    }
+    nav {
+        top: 0.8em;
+        right: 2em;
+    }
+    .hamburger-container {
+        height: 4.8em;
+        transition: all 1000ms ease-in-out;
+    }
+
+    .hamburger, 
+    .hamburger::before,
+    .hamburger::after {
+        height: 0.3em;
+    }
+
+    .nav--links {
+        padding: 7em 3em;
+    }
+
+    .settings-icon,
+    .add-color-icon,
+    .remove-color-icon,
+    .save-icon {
+        font-size: 2rem;
+    }
+
+    .generator-controls {
+        padding: 0.3em 1.2em;
+    }
+
+    .generate-btn {
+        padding: 0.7em;
+        font-size: 0.95rem;
+    }
+
+    .settings-icon-container {
+        height: 3em;
+        width: 3em;
+        cursor: pointer;
+        transition: transform 800ms cubic-bezier(.72, .57, .25, 2);
+    }
+
+    .settings-items {
+        margin-top: 0.5em;
+        gap: 1em;
+        width: 60%;
+        margin: auto auto;
+    }
+    .settings-item>label {
+        font-size: 1.2rem;
+    }
+
+    .my-palettes p {
+        font-size: 1rem;
+        margin: 0.4em 0;
     }
 }
