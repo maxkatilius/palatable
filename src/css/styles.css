@@ -1160,11 +1160,11 @@ input[type="color"] {
     }
 
     header {
-        padding: 0.8em;
+        padding: 0.8em 1.1em;
     }
     header, 
     header a {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         
     }
     nav {
