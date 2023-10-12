@@ -801,13 +801,13 @@ input[type="color"] {
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    cursor: pointer;
 }
 
 .saved-palette-color p {
     font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 0.5em;
-    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 0.8em;
 }
 
 .unsave-palette-icon {

@@ -1,5 +1,5 @@
 CSS issues:
-- hexcode size on saved palettes is overflowing if too many colors are in one palette
+...
 
 Possible features to add:
 - allow the user to control variation of palette generation
