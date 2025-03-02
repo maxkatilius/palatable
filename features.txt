@@ -1,5 +1,5 @@
 CSS issues:
-...
+- on large screens - save modal needs adjusting, and famous palettes could have a smaller width
 
 Possible features to add:
 - allow the user to control variation of palette generation

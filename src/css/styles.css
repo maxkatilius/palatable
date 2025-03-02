@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Croissant+One&family=Quicksand:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&family=Quicksand:wght@400;500;600&family=M+PLUS+Rounded+1c:wght@300;400;500;600&display=swap');
 
 * {
     margin: 0;
@@ -64,18 +64,20 @@ section h1 {
 
 header {
     position: relative;
-    padding: 1em;
+    padding: 1.15em 1em;
 }
 
 header a {
-    font-size: 1.35rem;
-    font-family: 'Bungee Shade', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
     color: #161D27;
     text-decoration: none;
 }
 
-header h1 span {
-    display: block;
+header h1 {
+    font-weight: inherit;
 }
 
 /*****************
@@ -85,8 +87,8 @@ header h1 span {
 nav {
     position: absolute;
     top: 1.5em;
-    right: 1.6em;
-    left: auto;
+    right: 1.5em;
+    width: max-content;
     transition: right 550ms ease-out;
     transition-delay: 150ms;
 }
@@ -101,24 +103,26 @@ nav.open {
 .hamburger-container {
     z-index: 1001;
     
-    position: relative;
+    /* border: 1px solid red; */
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5em;
-    width: 3.2em;
+    right: 100%;
+    height: 2.4em;
+    width: 2.4em;
     cursor: pointer;
     transition: all 600ms ease-in-out;
 }
 
 .nav.closed .hamburger-container {
-    transition-delay: 100ms;
+    transition-delay: 80ms;
 }
 
 .hamburger,
 .hamburger::before,
 .hamburger::after {
-    height: 0.3em;
+    height: 0.15em;
     background-color: #2e3949;
     border-radius: 1em;
 }
@@ -127,7 +131,7 @@ nav.open {
     z-index: 1001;
 
     width: 100%;
-    transition: transform 700ms ease-in-out 50ms, background-color 1000ms ease-in-out;
+    transition: transform 800ms ease-in-out 20ms, background-color 800ms ease-in-out;
 }
 
 .hamburger:before,
@@ -136,15 +140,17 @@ nav.open {
     position: absolute;
     width: 100%;
     opacity: 1;
-    transition: transform 700ms ease-in-out 50ms, background-color 800ms ease-in-out 100ms;
+    transition: transform 800ms ease-in-out 20ms, background-color 800ms ease-in-out 100ms;
 }
 
 .hamburger:before {
-    top: 1.1em;
+    /* top: 2.1em; */
+    transform: translateY(1em);
+    transition: top 800ms ease-in-out 20ms,;
 }
 
 .hamburger:after {
-    bottom: 1.1em;
+    transform: translateY(-1em);
     transition: opacity 800ms ease-in-out 200ms;
 } 
  
@@ -155,12 +161,12 @@ nav.open {
 
 .nav.open .hamburger:before {
     background-color: #DBD4D3;
-    transform: rotate(90deg) translateX(-1em);
+    transform: rotate(90deg);
 }
 
 .nav.open .hamburger:after {
     opacity: 0;
-    transition: opacity 800ms ease-in-out;
+    transition: opacity 400ms ease-in-out;
 }
 
 /***** Nav Links Overlay *****/
@@ -169,7 +175,7 @@ nav.open {
     z-index: 1000;
     position: fixed;
     inset: 0 0 0 0%;
-    padding: 8em 3em;
+    padding: 6em 3em;
     gap: 2.4em;
     background-color: hsla(0, 0%, 5%, 0.6);
     backdrop-filter: blur(0.4rem);
@@ -184,11 +190,11 @@ nav.open {
 }
 
 .nav--links a {
-    font-size: 2.5rem;
-    font-family: 'Bungee Shade', sans-serif;
-    font-weight: 600;
+    font-size: 2rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 300;
     text-decoration: none;
-    letter-spacing: 0.15rem;
+    letter-spacing: 0.2rem;
     color: #DBD4D3;
     transition: transform 800ms ease-out;
     transform: translateX(100%);
@@ -520,12 +526,13 @@ section .color-container:first-child .add-color-overlay {
     
     position: fixed;
     inset: 0 0 0 0%;
-
+    
     padding: 2em;
     color: #DBD4D3;
     background-color: hsla(0, 0%, 5%, 0.65);
     backdrop-filter: blur(0.4rem);
-
+    
+    
     transform: translateY(100%);
     transition: transform 600ms ease-in 100ms;
 }
@@ -536,9 +543,10 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .settings-overlay h1 {
-    font-family: 'Bungee Shade', 'Quicksand', sans-serif;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 400;
     margin: 0 auto 0 auto;
-    font-size: 3.5rem;
+    font-size: 3rem;
     letter-spacing: 0.1rem;
     transform: translateY(200%);
     transition: transform 900ms ease-out 100ms;
@@ -567,7 +575,6 @@ section .color-container:first-child .add-color-overlay {
     z-index: 101;
     width: 100%;
     gap: 1em;
-    font-weight: bold;
     letter-spacing: 0.05rem;
     opacity: 0;
     
@@ -576,7 +583,7 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .settings-item > label {
-    font-family: 'Croissant One', sans-serif;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 1.6rem;
     text-transform: uppercase;
     letter-spacing: 0.075em;
@@ -766,10 +773,10 @@ input[type="color"] {
         transform: translateX(8%);
     }
     85% {
-        tranform: translateX(5%);
+        transform: translateX(5%);
     }
     100% {
-        tranform: translateX(0);
+        transform: translateX(0);
     }
 }
 
@@ -968,115 +975,31 @@ input[type="color"] {
 ** MEDIA QUEIRES **
 ******************/
 
-@media screen and (min-width: 375px) and (max-width: 400px) {
-    html {
-        font-size: 0.9rem;
-    }
-}
-
 @media screen and (min-width: 600px) {
+
+
     html {
         font-size: 1.1rem;
     }
-
+    
     section {
         padding: 2em;
     }
 
     header {
         padding: 1.3em 1.7em;
-        border-bottom: 2px solid #161D27;
         box-shadow: 0 3px 4px -2px rgba(0, 0, 0, 0.2);
         }
-    nav {
-        top: 1.8em;
-        right: 3em;
+        
+        nav {
+            top: 1.8em;
+            right: 2em;
     }
-    nav.open {
-        right: calc(100% - 4em - 2em);
-    }
-    .hamburger-container {
-        height: 5.5em;
-    }
-    .hamburger,
-    .hamburger::before,
-    .hamburger::after {
-        height: 0.4em;
-    }
+    
     .nav--links {
-        padding: 10em 3em;
+        padding: 7em 3em;
         gap: 4em;
     }
-
-
-    .generator-container {
-        flex-direction: row;
-    }
-    .generator-controls {
-        padding: 0.6em 1.2em;
-        order: -1;
-    }
-    .remove-color-icon {
-        margin-right: -0.5em;
-    }
-
-    .color-details {
-        flex-direction: column;
-        height: 100%;
-        padding: 1em 0;
-    }
-
-    .color-icons-container {
-        font-size: 1.1rem;
-        flex-direction: column;
-        order: -1;
-        gap: 0.8em;
-    }
-    .color-text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 1rem;
-        width: 5em;
-    }
-    .color-text h2 {
-        order: 1;
-        margin-top: 0.8em;
-        font-size: 1.2rem;
-    }
-
-    .add-color-overlay {
-        top: 50%;
-        bottom: 30%;
-        right: 100%;
-        left:0%;
-
-        transform: translateY(-50%);
-        pointer-events: none;
-    }
-    .add-color span {
-        font-size: 3rem;
-    }
-
-    .settings-icon-container, 
-    .settings-icon {
-        z-index: 99;
-    }
-
-    .settings-icon-container.open {
-        transform: rotate(120deg);
-    }
-
-    .settings-overlay h1 {
-        margin-right: 1.5em;
-    }
-
-    .settings-close {
-        display: block;
-    }
-
 
     .famous-subheading, 
     .famous-palette-info p {
@@ -1091,20 +1014,21 @@ input[type="color"] {
         font-size: 1.2rem; 
         letter-spacing: 0.1em;
     } 
+
     .famous-palette-container {
-        gap: 4em;
-        margin-bottom: 3em;
+        gap: 2.2em;
+        margin-bottom: 2em;
     }
 
     .famous-palette-colors {
         margin-top: auto;
-        gap: 1.1em;
+        gap: 0.8em;
     }
     
     .famous-palette-color {
         padding: 0.2em;
-        font-size: 1.1rem;
-        letter-spacing: 0.1em;
+        font-size: 1rem;
+        letter-spacing: 0.125em;
     }
     
     .famous-palette-container img {
@@ -1113,27 +1037,24 @@ input[type="color"] {
 }
 
 @media screen and (min-width: 768px) {
+
+
     html {
         font-size: 1.4rem;
     }
 
     nav {
-        top: 1.7em;
-        right: 3em;
-    }
-
-    .hamburger-container {
-        transition: all 1000ms ease-in-out;  
-        transition-delay: 50ms;
+        top: 1.8em;
+        right: 2em;
     }
 
     .nav--links {
-        padding: 9em 3.3em;
+        padding: 7em 3.3em;
         gap: 4em;
     }
 
     .nav--links a {
-        font-size: 2.8rem;
+        font-size: 2.3rem;
     }
 
     .remove-color-icon {
@@ -1142,64 +1063,138 @@ input[type="color"] {
 
     .settings-overlay h1 {
         margin: 0 auto 0 auto;
+        font-weight: lighter;
+        letter-spacing: 0.15em;
+        text-align: center;
+        text-transform: uppercase;
     }
+
+    
 }
 
 @media screen and (min-width: 1024px) {
-    section:not(.generator) {
+    /* section:not(.generator) {
         width: 70%;
         margin: auto auto;
-    }
+    } */
 
-    section {
+    /* section {
         padding: 1em;
-    }
+    } */
 
-    section h1 {
+    /* section h1 {
         font-size: 1.8rem;
-    }
+    } */
 
     header {
-        padding: 0.8em 1.1em;
+        padding: 0.95em 1.5em;
     }
+    
     header, 
     header a {
-        font-size: 0.9rem;
+        font-size: 1.1rem;
+        font-weight: 400;
         
     }
+
     nav {
-        top: 0.8em;
-        right: 2em;
-    }
-    .hamburger-container {
-        height: 4.8em;
-        transition: all 1000ms ease-in-out;
+        top: 1.2em;
+        right: 1.4em;
     }
 
     .hamburger, 
     .hamburger::before,
     .hamburger::after {
-        height: 0.3em;
+        height: 0.15em;
     }
 
     .nav--links {
-        padding: 7em 3em;
+        padding: 5.5em 3em;
+    }
+    .generator-container {
+        flex-direction: row;
+    }
+
+    .generator-controls {
+        padding: 0.6em 1.2em;
+        order: -1;
+    }
+
+    .remove-color-icon {
+        margin-right: -0.35em;
+    }
+
+    .color-details {
+        flex-direction: column;
+        height: 100%;
+        padding: 1em 0;
+    }
+
+    .color-icons-container {
+        font-size: 1.1rem;
+        flex-direction: column;
+        order: -1;
+        gap: 0.8em;
+    }
+
+    .color-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 1.25rem;
+        font-weight: lighter;
+        width: 5em;
+    }
+
+    .color-text h2 {
+        order: 1;
+        margin-top: 0.8em;
+        font-size: 1.4rem;
+    }
+
+    .add-color-overlay {
+        top: 50%;
+        bottom: 30%;
+        right: 100%;
+        left:0%;
+
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .add-color span {
+        font-size: 3rem;
+    }
+
+    .settings-icon-container, 
+    .settings-icon {
+        z-index: 99;
+    }
+
+    .settings-icon-container.open {
+        transform: rotate(120deg);
+    }
+
+    .settings-close {
+        display: block;
+        position: absolute; 
+        top: 0.8em; 
+        right: 0.8em;  
     }
 
     .settings-icon,
     .add-color-icon,
     .remove-color-icon,
     .save-icon {
-        font-size: 2rem;
-    }
-
-    .generator-controls {
-        padding: 0.3em 1.2em;
+        font-size: 2.2rem;
     }
 
     .generate-btn {
-        padding: 0.7em;
+        padding: 0.8em;
         font-size: 0.95rem;
+        letter-spacing: 0.2em;
     }
 
     .settings-icon-container {
@@ -1212,12 +1207,14 @@ input[type="color"] {
     .settings-items {
         margin-top: 0.5em;
         gap: 1em;
-        width: 60%;
+        width: 70%;
         margin: auto auto;
     }
     .settings-item>label {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
+
+    
 
     .my-palettes p {
         font-size: 1rem;

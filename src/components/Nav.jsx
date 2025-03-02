@@ -29,7 +29,7 @@ const Nav = () => {
 						toggleNav();
 					}}
 				>
-					palette Generator
+					Palette Generator
 				</Link>
 				<Link
 					to="/my-palettes"

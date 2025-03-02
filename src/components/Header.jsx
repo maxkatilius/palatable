@@ -7,7 +7,7 @@ const Header = () => {
 		<header>
 			<Link to="/">
 				<h1>
-					Palette <span>Palooza</span>
+					palatable
 				</h1>
 			</Link>
 			<Nav />

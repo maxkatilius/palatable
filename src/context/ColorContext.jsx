@@ -77,7 +77,7 @@ const ColorContextProvider = ({ children }) => {
 		setColors(generateColors(seedColor, mode, count, filter));
 	}, []);
 
-	// UseEffect for to update the unlocked and locked colors state whenever colors is changed and update lastColorId
+	// UseEffect to update the unlocked and locked colors state whenever colors is changed and update lastColorId
 	React.useEffect(() => {
 		setUnLockedColors(colors.filter((color) => !color.isLocked));
 		setLockedColors(colors.filter((color) => color.isLocked));
