@@ -58,7 +58,7 @@ const Famous = () => {
 			<p className="famous-subheading">
 				Get a little inspiration from the pros...
 			</p>
-			{famousPaletteEls}
+			<div className="famous-palettes">{famousPaletteEls}</div>
 		</section>
 	);
 };

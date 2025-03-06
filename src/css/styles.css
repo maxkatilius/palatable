@@ -1211,18 +1211,72 @@ input[type="color"] {
 
 @media screen and (min-width: 1281px) {
     html {
+        font-size: 1.3rem;
+    }
+
+    .save-modal-content input {
+        font-size: 1.5rem;
+    }
+    
+    .save-modal-content textarea {
+        height: 3em;
         font-size: 1rem;
     }
 
+    .save-palette-btn {
+        padding: 0.6em 0;
+        font-size: 1.3rem;
+        letter-spacing: 0.2rem;
+    }
+
     .famous {
-        border: 1px solid red;
         flex-wrap: wrap;
     }
-
+    
+    .famous-subheading {
+        font-size: 1.1rem;
+        margin: 0 0 1em 0;
+    }
+    
     .famous-palette-container {
-        width: 40%;
-        border: 1px solid blue;
-
+        gap: 2em;
+        margin-bottom: 1em;
+        width: 45%;
+    }
+    
+    .famous-palette-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .famous-palette-info p {
+        font-size: 0.9rem;
+        margin-top: 0.2em;
+    }
+    
+    .famous-palette-color {
+        font-size: 0.8rem;
+    }
+    
+    .famous-palettes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4em;
     }
 
+    .famous-palette-container img {
+        width: 10em;
+    }
+
+    .saved-palettes {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 3em;
+    }
+
+    .saved-palette-color p {
+        font-weight: lighter;
+        font-size: 1rem;
+        padding: 0.5em;
+    }
 }
