@@ -1,6 +1,7 @@
 import React from "react";
 import { copyToClipboard } from "../utils";
 import { BiSolidLockOpenAlt, BiSolidLockAlt, BiCopy } from "react-icons/bi";
+import { GoPlus } from "react-icons/go";
 import { VscChromeClose } from "react-icons/vsc";
 import { useColorContext } from "../context/ColorContext";
 import { generateColors } from "../utils";
@@ -124,7 +125,7 @@ const Color = ({ color }) => {
 							addColor(color.id);
 						}}
 					>
-						<span>+</span>
+						<GoPlus className="add-color-icon" />
 					</div>
 				</div>
 			</div>

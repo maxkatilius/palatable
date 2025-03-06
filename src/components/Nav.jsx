@@ -21,7 +21,13 @@ const Nav = () => {
 					className={`hamburger ${settingsOpen ? "behind" : ""}`}
 				></div>
 			</div>
-			<div className="nav--links flex-col">
+			<div
+				className="nav--links flex-col"
+				onClick={() => {
+					e.stopPropagation();
+					toggleNav();
+				}}
+			>
 				<Link
 					to="/"
 					className="nav--generator"
