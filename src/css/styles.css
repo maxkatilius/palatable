@@ -1211,10 +1211,18 @@ input[type="color"] {
 
 @media screen and (min-width: 1281px) {
     html {
-        font-size: 2rem;
+        font-size: 1rem;
     }
 
-    section {
-        padding: 2em 6em;
+    .famous {
+        border: 1px solid red;
+        flex-wrap: wrap;
     }
+
+    .famous-palette-container {
+        width: 40%;
+        border: 1px solid blue;
+
+    }
+
 }
