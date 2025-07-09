@@ -69,3 +69,6 @@ Colorblindness Filters:
         Integration with Image Upload:
 
     Enable users to upload an image, and then extract a palette from it. This can be achieved using libraries or APIs that can extract dominant colors from images.
+
+
+test
