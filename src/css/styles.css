@@ -93,15 +93,15 @@ header h1 {
 
 nav {
     position: absolute;
-    top: 2em;
-    right: 1.75em;
+    top: 1em;
+    right: 1em;
     width: max-content;
     transition: right 550ms ease-out;
     transition-delay: 150ms;
 }
 
 nav.open {
-    right: calc(100% - 4em);
+    right: calc(100% - 5em);
 }
 
 /***** Hamburger  *****/
@@ -113,10 +113,11 @@ nav.open {
     justify-content: center;
     align-items: center;
     right: 100%;
-    height: 1.4em;
-    width: 2.2em;
+    height: 3em;
+    width: 3em;
     cursor: pointer;
     transition: all 600ms ease-in-out;
+    /* background-color: red; */
 }
 
 .nav.closed .hamburger-container {
@@ -447,7 +448,7 @@ section .color-container:first-child .add-color-overlay {
 .generator-icons {
     display: flex;
     align-items: center;
-    gap: 1.6em;
+    gap: 1em;
     width: 100%;
 }
 
@@ -997,10 +998,9 @@ input[type="color"] {
     header {
         padding: 0.9em 1.3em;
     }
-        
-    nav {
-        top: 1.8em;
-        right: 2em;
+
+    nav.open {
+        right: calc(100% - 5rem);
     }
     
     .nav--links {
@@ -1055,11 +1055,6 @@ input[type="color"] {
         font-size: 1.4rem;
     }
 
-    nav {
-        top: 1.8em;
-        right: 2em;
-    }
-
     .nav--links {
         padding: 6em 2em;
         gap: 4em;
@@ -1106,27 +1101,12 @@ input[type="color"] {
     }
 
     nav {
-        top: 1.6em;
-        right: 1.6em;
+        top: 0.6em;
+        right: 1.4em;
     }
-    
+
     .hamburger-container {
-        height: 0.8em;
-        width: 2em;
-    }
-
-    .hamburger, 
-    .hamburger::before,
-    .hamburger::after {
-        height: 0.15em;
-    }
-
-    .hamburger:before {
-        transform: translateY(0.7em);
-    }
-
-    .hamburger:after {
-        transform: translateY(-0.7em);
+        width: 2.4em;
     }
 
     .nav--links {
