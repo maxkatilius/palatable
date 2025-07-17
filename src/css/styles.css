@@ -400,7 +400,6 @@ nav.open {
     opacity: 1;
 }
 
-/* needs work - removed some code at some point accidentally */
 .add-color {
     display: flex;
     justify-content: center;
@@ -425,6 +424,12 @@ nav.open {
     height: 1em;
     width: 1em;
     font-weight: bold;
+    transition: opacity 0.2s ease;
+}
+
+.icon.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 section .color-container:first-child .add-color-overlay {

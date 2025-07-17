@@ -11,9 +11,15 @@ const AddColorBtn = () => {
 		colors,
 		setColors,
 		lastColorId,
+		count,
 	} = useColorContext();
 
+	const MAX_COLORS = 8;
+	const isDisabled = count >= MAX_COLORS;
+
 	const addColor = (colorId) => {
+		if (isDisabled) return;
+
 		setCount((prevCount) => prevCount + 1);
 		const newColor = generateColors(seedColor, mode, 1, filter)[0];
 		const index = colors.findIndex((col) => col.id === colorId);
@@ -27,9 +33,9 @@ const AddColorBtn = () => {
 
 	return (
 		<FiPlus
-			className="icon add-color-icon"
+			className={`icon add-color-icon ${isDisabled ? "disabled" : ""}`}
 			onClick={() => {
-				if (lastColorId !== null) addColor(lastColorId);
+				if (!isDisabled && lastColorId !== null) addColor(lastColorId);
 			}}
 		/>
 	);

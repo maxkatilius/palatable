@@ -2,9 +2,14 @@ import { FiMinus } from "react-icons/fi";
 import { useColorContext } from "../../context/ColorContext";
 
 const RemoveColorBtn = () => {
-	const { setCount, setColors, lastColorId } = useColorContext();
+	const { count, setCount, setColors, lastColorId } = useColorContext();
+
+	const MIN_COLORS = 1;
+	const isDisabled = count <= MIN_COLORS;
 
 	const removeColor = (colorId) => {
+		if (isDisabled) return;
+
 		setCount((prevCount) => prevCount - 1);
 		setColors((prevColors) =>
 			prevColors.filter((prevColor) => prevColor.id !== colorId)
@@ -13,9 +18,10 @@ const RemoveColorBtn = () => {
 
 	return (
 		<FiMinus
-			className="icon remove-color-icon"
+			className={`icon remove-color-icon ${isDisabled ? "disabled" : ""}`}
 			onClick={() => {
-				if (lastColorId !== null) removeColor(lastColorId);
+				if (!isDisabled && lastColorId !== null)
+					removeColor(lastColorId);
 			}}
 		/>
 	);
