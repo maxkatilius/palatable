@@ -297,11 +297,12 @@ nav.open {
     align-items: center;
     padding: 0.5em;
     border-radius: 50%;
-    transition: background-color 300ms;
+    transition: all 300ms ease-in-out;
 }
 
 .x-icon-container:hover,
 .copy-icon-container:hover {
+    padding: 0.7em;
     background-color: rgba(0, 0, 0, 0.25);
 }
 
@@ -919,7 +920,7 @@ input[type="color"] {
 .famous-palette-container {
     display: flex;
     align-items: stretch;
-    gap: 1.1em;
+    gap: 2em;
     margin-bottom: 2em;
     width: 100%;
 }
@@ -956,8 +957,8 @@ input[type="color"] {
 }
 
 .famous-palette-container img {
-    width: 10em;
-    max-width: 600px;
+    min-width: 10em;
+    width: 60%;
     height: auto;
     object-fit: cover;
     object-position: 35%;
@@ -985,7 +986,7 @@ input[type="color"] {
     }
     
     section {
-        padding: 2em;
+        padding: 1em 2em;
     }
 
     header {
@@ -1023,13 +1024,13 @@ input[type="color"] {
     } 
 
     .famous-palette-container {
-        gap: 2.2em;
+        gap: 3em;
         margin-bottom: 2em;
     }
 
     .famous-palette-colors {
         margin-top: auto;
-        gap: 0.8em;
+        gap: 1em;
     }
     
     .famous-palette-color {
@@ -1039,7 +1040,7 @@ input[type="color"] {
     }
     
     .famous-palette-container img {
-        width: 13em;
+        width: 70%;
     }
 }
 
@@ -1073,6 +1074,14 @@ input[type="color"] {
         letter-spacing: 0.15em;
         text-align: center;
         text-transform: uppercase;
+    }
+
+    .famous-palette-container {
+        gap: 2em;
+    }
+
+    .famous-palette-container img {
+        width: 80%;
     }
 
 }
@@ -1233,11 +1242,46 @@ input[type="color"] {
         font-size: 1rem;
         margin: 0.4em 0;
     }
+    
+    .famous-palette-container {
+        gap: 0;
+        margin-bottom: 3em;
+    }
+
+    .famous-palette-info {
+        width: 100%;
+    }
+    
+    .famous-subheading,
+    .famous-palette-info p {
+        font-size: 1.4rem;
+    }
+
+    .famous-palette-info p {
+        font-size: 1.2rem;
+    }
+
+    .famous-palette-colors {
+        gap: 1.1em;
+        max-width: 70%;
+    }
+
+    .famous-palette-color {
+        font-size: 1.1rem;
+    }
+
+    .famous-palette-container img {
+        width: 50%;
+    }
 }
 
 @media screen and (min-width: 1281px) {
     html {
         font-size: 1.3rem;
+    }
+
+    section {
+        padding: 2em;
     }
 
     .save-modal-content input {
@@ -1255,13 +1299,17 @@ input[type="color"] {
         letter-spacing: 0.2rem;
     }
 
+    section.famous {
+        margin-top: -1em;
+    }
+
     .famous {
         flex-wrap: wrap;
     }
     
     .famous-subheading {
         font-size: 1.1rem;
-        margin: 0 0 1em 0;
+        margin: 0 0 2em 0;
     }
     
     .famous-palette-container {
@@ -1277,6 +1325,11 @@ input[type="color"] {
     .famous-palette-info p {
         font-size: 0.9rem;
         margin-top: 0.2em;
+    }
+    
+    .famous-palette-colors {
+        gap: 0.9em;
+        max-width: 100%;
     }
     
     .famous-palette-color {

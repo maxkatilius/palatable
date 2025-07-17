@@ -39,7 +39,7 @@ const MyPalettes = () => {
 			div.style.flexDirection = "column";
 			div.style.justifyContent = "flex-end";
 			div.style.alignItems = "center";
-			div.style.height = "8em";
+			div.style.height = "6em";
 		});
 
 		const hexTexts = clone.querySelectorAll("p");
@@ -53,6 +53,7 @@ const MyPalettes = () => {
 		// Capture image
 		const canvas = await html2canvas(clone, {
 			backgroundColor: null,
+			scale: 2,
 		});
 		const imgURL = canvas.toDataURL("image/png");
 
@@ -79,6 +80,9 @@ const MyPalettes = () => {
 	};
 
 	const paletteEls = savedPalettes.map((palette) => {
+		const closeIconStyle = {
+			color: palette.colors[palette.colors.length - 1].textColor,
+		};
 		return (
 			<div key={palette.id} className="saved-palette">
 				<div
@@ -117,6 +121,7 @@ const MyPalettes = () => {
 						onClick={() => {
 							unsavePalette(palette.id);
 						}}
+						style={closeIconStyle}
 					/>
 				</div>
 
