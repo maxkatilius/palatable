@@ -31,6 +31,10 @@ body {
     justify-content: space-between;
 }
 
+.behind {
+    z-index: -1;
+}
+
 /*****************
 ***** Layout *****
 ******************/
@@ -65,10 +69,12 @@ section h1 {
 header {
     position: relative;
     padding: 1.15em 1em;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
-header a {
-    font-size: 1.2rem;
+header a { 
+    font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0.1rem;
     font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -87,7 +93,7 @@ header h1 {
 
 nav {
     position: absolute;
-    top: 1.75em;
+    top: 2em;
     right: 1.75em;
     width: max-content;
     transition: right 550ms ease-out;
@@ -95,22 +101,19 @@ nav {
 }
 
 nav.open {
-    right: calc(100% - 4em - 1.6em);
-    /* Screen width minus nav width (4em) and its right margin (1.6em) */
+    right: calc(100% - 4em);
 }
 
 /***** Hamburger  *****/
 
 .hamburger-container {
-    z-index: 1001;
-    
-    /* border: 1px solid red; */
+    z-index: 101;    
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     right: 100%;
-    height: 2.2em;
+    height: 1.4em;
     width: 2.2em;
     cursor: pointer;
     transition: all 600ms ease-in-out;
@@ -129,7 +132,7 @@ nav.open {
 }
 
 .hamburger {
-    z-index: 1001;
+    z-index: 101;
 
     width: 100%;
     transition: transform 800ms ease-in-out 20ms, background-color 800ms ease-in-out;
@@ -145,7 +148,6 @@ nav.open {
 }
 
 .hamburger:before {
-    /* top: 2.1em; */
     transform: translateY(0.9em);
     transition: top 800ms ease-in-out 20ms,;
 }
@@ -173,11 +175,11 @@ nav.open {
 /***** Nav Links Overlay *****/
 
 .nav--links {
-    z-index: 1000;
+    z-index: 100;
     position: fixed;
     inset: 0 0 0 0%;
-    padding: 6em 3em;
-    gap: 2.4em;
+    padding: 6em 2em;
+    gap: 4em;
     background-color: hsla(0, 0%, 5%, 0.6);
     backdrop-filter: blur(0.4rem);
     
@@ -193,7 +195,7 @@ nav.open {
 .nav--links a {
     font-size: 2rem;
     font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     text-decoration: none;
     letter-spacing: 0.2rem;
     color: #DBD4D3;
@@ -233,9 +235,7 @@ nav.open {
     transition-delay: 0ms;
 } 
 
-.behind {
-    z-index: -1;
-}
+
 
 
 /*****************
@@ -244,6 +244,10 @@ nav.open {
 
 .generator {
     padding: 0;
+}
+
+.generator-container {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .color-container {
@@ -429,14 +433,22 @@ section .color-container:first-child .add-color-overlay {
 /* GeneratorControls */
 
 .generator-controls { 
-    padding: 0.6em;
+    padding: 0.5em 0.6em;
     align-items: center;
+    box-shadow: 0 20px 6px -4px rgba(0, 0, 0, 0.3);
+}
+
+.generator-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.6em;
+    width: 100%;
 }
 
 .btn  {
     color: white;
     background-color: #161D27;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
@@ -456,47 +468,35 @@ section .color-container:first-child .add-color-overlay {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.7rem;
+    font-size: 2.4rem;
     color: #161D27;
     background-color: transparent;
 }
 
-.add-color-icon,
-.remove-color-icon,
-.save-icon,
+.icon,
 .generate-btn {
     transition: transform 150ms ease-in-out;
 }
 
-.add-color-icon:hover,
-.add-color-icon:focus,
-.add-color-icon:active,
-.save-icon:hover,
-.save-icon:focus
-.save-color-icon:active
+.icon:hover,
+.icon:focus,
+.icon:active,
 .generate-btn:hover,
 .generate-btn:active {
-    transform: scale(1.15);
+    transform: scale(1.1);
 }
-
-.remove-color-icon:hover,
-.remove-color-icon:focus
-.remove-color-icon:active {
-    transform: scale(0.85)
-}
-
 
 /***** Settings *****/
 
 .settings-icon-container {
-    z-index: 101;
+    z-index: 11;
 
     position: relative;
     display: flex; 
     justify-content: center;
     align-items: center;
-    height: 4.4em;
-    width: 4.4em;
+    height: 3.6em;
+    width: 3.6em;
     cursor: pointer;
     transition: transform 800ms cubic-bezier(.72, .57, .25, 2);
 }
@@ -506,9 +506,9 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .settings-icon {
-    z-index: 101;
+    z-index: 11;
     
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: #161D27;
 }
 
@@ -524,7 +524,7 @@ section .color-container:first-child .add-color-overlay {
 /***** settings selectors overlay *****/
 
 .settings-overlay {
-    z-index: 100;
+    z-index: 10;
     
     position: fixed;
     inset: 0 0 0 0%;
@@ -574,7 +574,7 @@ section .color-container:first-child .add-color-overlay {
 }
 
 .settings-item {
-    z-index: 101;
+    z-index: 11;
     width: 100%;
     gap: 1em;
     letter-spacing: 0.05rem;
@@ -606,10 +606,6 @@ section .color-container:first-child .add-color-overlay {
 input[type="radio"] {
     margin-right: 1em;
     cursor: pointer;
-}
-
-#none {
-    opacity: 0;
 }
 
 .settings-seed {
@@ -735,8 +731,8 @@ input[type="color"] {
 
 .cancel-save-icon {
     position: absolute;
-    right: 0.6em;
-    top: 0.6em;
+    right: 0.8em;
+    top: 0.7em;
 }
 
 .palette-preview {
@@ -752,14 +748,19 @@ input[type="color"] {
     height: 100%;
 }
 
+.save-modal-content {
+    gap: 1em;
+}
+
 .save-modal-content input {
-    margin: 0.2em 0;
+    padding: 0.4em;
     font-size: 1.1rem;
     font-weight: bold;
 }
 
 .save-modal-content textarea {
-    margin: 1em 0 1.4em 0;
+    padding: 0.4em;
+    font-size: 1rem;
 }
 
 .save-palette-btn {
@@ -973,12 +974,11 @@ input[type="color"] {
     align-items: center;
 }
 
-/******************
-** MEDIA QUEIRES **
-******************/
+/********************
+*** Media Queries ***
+********************/
 
 @media screen and (min-width: 600px) {
-
 
     html {
         font-size: 1.1rem;
@@ -989,19 +989,23 @@ input[type="color"] {
     }
 
     header {
-        padding: 1.3em 1.7em;
-        box-shadow: 0 3px 4px -2px rgba(0, 0, 0, 0.2);
-        }
+        padding: 0.9em 1.3em;
+    }
         
-        nav {
-            top: 1.8em;
-            right: 2em;
+    nav {
+        top: 1.8em;
+        right: 2em;
     }
     
     .nav--links {
-        padding: 7em 3em;
+        padding: 6em 2em;
         gap: 4em;
         overflow-y: scroll;
+    }
+
+    .generate-btn {
+        margin-right: 0.5em;
+        font-size: 0.95rem;
     }
 
     .famous-subheading, 
@@ -1041,7 +1045,6 @@ input[type="color"] {
 
 @media screen and (min-width: 768px) {
 
-
     html {
         font-size: 1.4rem;
     }
@@ -1052,16 +1055,16 @@ input[type="color"] {
     }
 
     .nav--links {
-        padding: 7em 3.3em;
+        padding: 6em 2em;
         gap: 4em;
     }
 
     .nav--links a {
-        font-size: 2.3rem;
+        font-size: 2rem;
     }
 
-    .remove-color-icon {
-        margin-right: -1.2em;
+    .generator-icons {
+        gap: 2em;
     }
 
     .settings-overlay h1 {
@@ -1072,25 +1075,30 @@ input[type="color"] {
         text-transform: uppercase;
     }
 
-    
 }
 
 @media screen and (min-width: 1024px) {
 
     header {
-        padding: 0.95em 1.5em;
+        padding: 0.6em 1.2em;
+        box-shadow: none;
+        border-bottom: 1px solid lightgrey;
     }
     
     header, 
     header a {
         font-size: 1.1rem;
         font-weight: 400;
-        
     }
 
     nav {
-        top: 1.2em;
-        right: 1.4em;
+        top: 1.6em;
+        right: 1.6em;
+    }
+    
+    .hamburger-container {
+        height: 0.8em;
+        width: 2em;
     }
 
     .hamburger, 
@@ -1099,8 +1107,16 @@ input[type="color"] {
         height: 0.15em;
     }
 
+    .hamburger:before {
+        transform: translateY(0.7em);
+    }
+
+    .hamburger:after {
+        transform: translateY(-0.7em);
+    }
+
     .nav--links {
-        padding: 5.5em 3em;
+        padding: 5em 2em;
     }
     .generator-container {
         flex-direction: row;
@@ -1109,6 +1125,7 @@ input[type="color"] {
     .generator-controls {
         padding: 0.6em 1.2em;
         order: -1;
+        box-shadow: 0 3px 1\px -2px rgba(0, 0, 0, 0.2);
     }
 
     .remove-color-icon {
@@ -1157,7 +1174,7 @@ input[type="color"] {
 
     .settings-icon-container, 
     .settings-icon {
-        z-index: 99;
+        z-index: 11;
     }
 
     .settings-icon-container.open {
@@ -1200,6 +1217,16 @@ input[type="color"] {
 
     .settings-item>label {
         font-size: 1.4rem;
+    }
+
+    .save-modal-container {
+        left: 25%;
+        right: 25%;
+        bottom: 25%;
+    }
+
+    .palette-preview {
+        height: 13em;
     }
 
     .my-palettes p {

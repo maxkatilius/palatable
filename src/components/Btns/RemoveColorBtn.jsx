@@ -1,4 +1,3 @@
-import React from "react";
 import { FiMinus } from "react-icons/fi";
 import { useColorContext } from "../../context/ColorContext";
 

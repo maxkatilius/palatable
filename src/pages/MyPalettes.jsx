@@ -22,19 +22,48 @@ const MyPalettes = () => {
 	const { isCopyModalVisible, setIsCopyModalVisible } = useColorContext();
 
 	const downloadPaletteImage = async (paletteName) => {
-		const paletteElement = document.getElementById(
-			`palette-${paletteName}`
-		);
+		const original = document.getElementById(`palette-${paletteName}`);
+		if (!original) return;
 
-		if (paletteElement) {
-			const canvas = await html2canvas(paletteElement);
-			const imgURL = canvas.toDataURL("image/png");
+		// Clone the element
+		const clone = original.cloneNode(true);
+		clone.style.borderRadius = "0";
+		clone.style.position = "absolute";
+		clone.style.top = "-9999px";
+		clone.style.left = "-9999px";
+		document.body.appendChild(clone);
 
-			const link = document.createElement("a");
-			link.href = imgURL;
-			link.download = `${paletteName}.png`;
-			link.click();
-		}
+		const swatchDivs = clone.querySelectorAll(".saved-palette-color");
+		swatchDivs.forEach((div) => {
+			div.style.display = "flex";
+			div.style.flexDirection = "column";
+			div.style.justifyContent = "flex-end";
+			div.style.alignItems = "center";
+			div.style.height = "8em";
+		});
+
+		const hexTexts = clone.querySelectorAll("p");
+		hexTexts.forEach((p) => {
+			p.style.fontSize = "0.4rem";
+			p.style.margin = "0";
+			p.style.padding = "1em";
+			p.style.letterSpacing = "0.03rem";
+		});
+
+		// Capture image
+		const canvas = await html2canvas(clone, {
+			backgroundColor: null,
+		});
+		const imgURL = canvas.toDataURL("image/png");
+
+		// Clean up
+		document.body.removeChild(clone);
+
+		// Trigger download
+		const link = document.createElement("a");
+		link.href = imgURL;
+		link.download = `${paletteName}.png`;
+		link.click();
 	};
 
 	const unsavePalette = (paletteId) => {

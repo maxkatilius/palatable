@@ -56,6 +56,10 @@ const SaveModal = () => {
 		});
 	};
 
+	const closeIconStyle = {
+		color: lockedColors[lockedColors.length - 1].textColor,
+	};
+
 	return (
 		<div
 			className={`modal-container save-modal-container ${
@@ -65,6 +69,7 @@ const SaveModal = () => {
 			<div className="save-modal-content flex-col">
 				<VscChromeClose
 					className="icon cancel-save-icon"
+					style={closeIconStyle}
 					onClick={() => {
 						setIsSaveModalVisible(false);
 					}}

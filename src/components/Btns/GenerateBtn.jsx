@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useColorContext } from "../../context/ColorContext";
 
 const GenerateBtn = () => {

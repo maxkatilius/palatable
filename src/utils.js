@@ -84,8 +84,6 @@ const findClosestColorName = (hexValue) => {
 //   return hexNames[closestColor];
 // };
 
-
-
 const Chroma = (colorInput) => {
     if (!chroma.valid(colorInput)) {
       console.log("invalid")

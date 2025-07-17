@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useColorContext } from "../context/ColorContext";
 import { famousPalettes } from "../famousPalettes";
 
@@ -46,7 +44,7 @@ const Famous = () => {
 						{colorEls}
 					</div>
 				</div>
-				<img src={palette.imgUrl} />
+				<img src={palette.imgUrl} loading="lazy" />
 			</div>
 		);
 	});

@@ -6,7 +6,7 @@ import { hexToHSL, getContrastingTextColor } from "../utils";
 import { VscChromeClose } from "react-icons/vsc";
 
 const Settings = () => {
-	const { settingsOpen, setSettingsOpen } = useOverlayContext();
+	const { settingsOpen, setSettingsOpen, navOpen } = useOverlayContext();
 	const { mode, setMode, seedColor, setSeedColor, filter, setFilter } =
 		useColorContext();
 
@@ -73,6 +73,7 @@ const Settings = () => {
 		<div className={`settings ${settingsStatus}`}>
 			<div
 				className={`settings-icon-container ${settingsStatus}`}
+				style={{ zIndex: navOpen ? 0 : 11 }}
 				onClick={toggleSettings}
 			>
 				<FiSettings className={`settings-icon ${settingsStatus}`} />

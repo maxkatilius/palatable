@@ -1,5 +1,3 @@
-import React from "react";
-
 import Settings from "./Settings";
 import AddColorBtn from "./Btns/AddColorBtn";
 import RemoveColorBtn from "./Btns/RemoveColorBtn";
@@ -9,10 +7,12 @@ import GenerateBtn from "./Btns/GenerateBtn";
 const GeneratorControls = () => {
 	return (
 		<div className="generator-controls flex-between">
-			<Settings />
-			<RemoveColorBtn />
-			<AddColorBtn />
-			<SaveBtn />
+			<div className="generator-icons">
+				<Settings />
+				<AddColorBtn />
+				<RemoveColorBtn />
+				<SaveBtn />
+			</div>
 			<GenerateBtn />
 		</div>
 	);
